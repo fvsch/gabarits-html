@@ -4,176 +4,188 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-
-/* --- COULEURS --- */
-
-/* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
-   uniquement les couleurs de fond (propriétés background) et les couleurs
-   du texte (propriété color).
-   Pour modifier la disposition des blocs, voir plus bas dans la feuille de
-   styles la partie «positionnement». */
+/*
+	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond (propriétés background-color)
+	et les couleurs du texte (propriété color).
+ */
 
 /* Général */
+
 html {
-	color: #F0E39E;
-	background: #2C2F22;
+	color: #f0e39e;
+	background-color: #2c2f22;
 }
+
+/* On utilise l'élément body comme conteneur principal de la page, et on limite
+sa largeur maximale. Ce style n'est nécessaire que sur des écrans suffisament
+larges. Sur des écrans plus étroits, les blocs de contenus peuvent prendre
+toute la largeur et toucher les bords de l'écran. */
+@media (width >= 500px) {
+	body {
+		/* Ici on souhaite une largeur maximale de 760px pour les blocs de contenu
+		de la page, mais le body a aussi un padding de 20px à gauche et à droite,
+		donc on a besoin d'une largeur maximale text-decoration:
+		760 + 20 + 20 = 800px. */
+		max-width: 800px;
+		/* Réserve un espace entre les bords de la fenêtre et le contenu. */
+		padding: 20px;
+	}
+
+	/* On aligne le conteneur horizontalement avec les marges automatiques.
+	En utilisant la valeur 'auto' d'un seul côté (pour 'margin-left' ou
+	'margin-right' uniquement), cette valeur va prendre 100% de la largeur
+	restante dans la page (une fois le 'max-width' appliqué).
+
+	1. 'margin-left: auto': 100% de l'espace restant appliqué comme marge
+		à gauche, ce qui aligne tout le contenu à droite;
+	2. 'margin-right: auto': 100% de l'espace restant appliqué comme marge
+		à droite, ce qui aligne tout le contenu à gauche;
+	3. 'margin-left: auto; margin-right: auto': l'espace restant est partagé
+		entre les marges de gauche et de droite, ce qui centre le contenu.
+	*/
+	body.alignement-gauche {
+		margin-left: 0;
+		margin-right: auto;
+	}
+	body.alignement-droite {
+		margin-left: auto;
+		margin-right: 0;
+	}
+}
+
 a {
-	color: #FF6533;
+	color: #ff6533;
 }
-a:hover, a:focus {
-	color: #FF4C00;
+
+a:hover,
+a:focus {
+	color: #ff4c00;
 }
+
 strong {
-	color: #A1B55D;
-}
-
-/* Navigation */
-#navigation {
-	background: #181A12;
-}
-#navigation a {
-	color: #FF6533;
-}
-#navigation a:hover, #navigation a:focus {
-	background: #000000;
-}
-
-/* Contenu principal */
-#contenu {
-	color: #363B29;
-	background: #cbd888;
-}
-#contenu a {
-	color: #332510;
-}
-#contenu a:hover, #contenu a:focus {
-	color: #6E5122;
-}
-#contenu strong {
-	color: #181A12;
-}
-
-/* Pied de page */
-#pied {
-	color: #E6A948;
-	background: #181A12;
-}
-
-
-/* --- POSITIONNEMENT --- */
-
-/* Page */
-body {
-	padding: 15px 0 25px 0;
-}
-#global {
-	width: 750px;
-	margin-left: 20px;
-	margin-right: auto; /* Voir -> Note 1 ci-dessous */
+	color: #a1b55d;
 }
 
 /* En-tête */
+
 #entete {
-	padding: 15px 20px 10px 0;
+	/* Pour la mise en page de cet en-tête avec "flexbox",
+	voir les explications dans modele01.css */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
 }
+
+@media (width >= 500px) {
+	#entete {
+		flex-direction: row;
+		align-items: center;
+		padding-inline: 0;
+	}
+}
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+}
+
 #entete h1 {
 	margin: 0;
-}
-#entete h1 img {
-	float: left;
-	margin: 7px 20px 10px 0;
-}
-#entete .sous-titre {
-	margin: 4px 0 15px 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 500px) {
+		font-size: 2.4rem;
+	}
 }
 
-/* Menu de navigation */
-#navigation {
-	padding: 12px 15px;
+#entete p {
+	margin: 4px 0;
 }
+
+/* Navigation */
+
+#navigation {
+	background-color: #181a12;
+}
+
 #navigation ul {
-	width: 100%; /* -> 2 */
-	overflow: hidden; /* -> 2 */
+	/* Pour la mise en page de ce menu avec "flexbox",
+	voir les explications dans modele01.css */
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
 	margin: 0;
-	padding: 0;
+	padding: 12px 10px;
+	gap: 4px;
 	list-style: none;
 }
-#navigation li.gauche {
-	float: left; /* -> 3 */
-	margin-right: 10px;
-	font-size: 1.4em;
-	font-style: italic;
-}
-#navigation li.droite {
-	float: right; /* -> 3 */
-	margin-right: 0;
-	margin-left: 10px;
-	padding: 3px 0;
-}
-#navigation a {
-	padding: 6px;
-	line-height: 1.5;
-	font-size: .9em;
-	text-decoration: none;
+
+#navigation li.marge-droite {
+	/* Les enfants d'un conteneur en 'display: flex' peuvent utiliser les marges
+	automatiques pour créer des espaces dynamiques entre eux. Ici, si on utilise
+	la classe "marge-droite" sur un seul <li>, tous les <li> qui suivront seront
+	poussés vers la droite. Cela permet de séparer la liste de liens en deux
+	groupes. */
+	margin-right: auto;
 }
 
-/* Contenu */
-#contenu {
-	padding: 10px 20px;
-}
-#contenu > :first-child {
-	margin-top: 10px;
-}
-#contenu p, #contenu li {
+#navigation a {
+	display: block;
+	padding: 6px 10px;
+	border-radius: 4px;
 	line-height: 1.5;
+	text-decoration: none;
+	color: #ff6533;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Contenu principal */
+
+#contenu {
+	padding: 20px;
+	color: #363b29;
+	background-color: #cbd888;
+}
+
+#contenu > :first-child {
+	margin-top: 0;
+}
+
+#contenu p,
+#contenu li {
+	line-height: 1.5;
+}
+
+#contenu a {
+	color: #332510;
+}
+
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
+}
+
+#contenu strong {
+	color: #181a12;
 }
 
 /* Pied de page */
+
 #pied {
 	padding: 15px 20px;
-	font-size: .85em;
+	font-size: 0.85em;
+	color: #e6a948;
+	background-color: #181a12;
 }
+
 #pied p {
-	margin: .5em 0;
+	margin: 0.5em 0;
 }
-#copyright {
-	text-align: left;
-	font-size: 1em;
-}
-
-
-/* --- NOTES ---
-
-1.	Le conteneur a une largeur fixe (750px), une marge à gauche de 20px pour
-	créer un retrait esthétique, et un margin-right qui a pour valeur "auto".
-	Ce dernier point n'est pas nécessaire pour placer le conteneur à gauche
-	de la page; ce sera en effet le comportement «normal» de tout bloc.
-	Si on souhaite placer ce conteneur à droite, par contre, on pourra utiliser
-	un margin-left avec la valeur "auto", et un margin-right à 20px (ou zéro,
-	ou autre valeur autre que "auto").
-
-2.	On utilise ici la déclaration "overflow: hidden" pour empêcher le
-	dépassement des éléments flottants. On utilise aussi un "width: 100%" pour
-	corriger le même problème... dans Internet Explorer 6, qui n'appliquera
-	pas correctement le "overflow: hidden".
-	En savoir plus sur ce sujet:
-	https://www.alsacreations.com/article/lire/7-depassement-flottants-css.html
-
-3.	Dans le gabarit 01, nous utilisions "display: inline" pour placer les
-	différents items du menu à l'horizontale. Ici, on va utiliser une autre
-	possibilité: la propriété CSS "float".
-	Quels sont les avantages de la propriété "float"? Eh bien, on va pouvoir
-	placer une partie des items du menu à gauche, et une autre partie à droite,
-	ce qui est utile quand on veut réaliser un menu avec des éléments
-	d'importance diverse (on mettra alors les éléments les plus importants à
-	gauche, et les éléments secondaires à droite).
-	Contrairement à des éléments en "display: inline", nous pouvons donner une
-	largeur fixe à nos LI. Nous pouvons aussi jouer plus facilement sur la
-	hauteur des LI, que ce soit via la propriété "padding" ou la propriété
-	"height".
-	Par contre, on ne pourra pas centrer horizontalement des éléments
-	flottants. Si on doit centrer les éléments d'un menu, on utilisera
-	plutôt "display: inline".
-
-*/
