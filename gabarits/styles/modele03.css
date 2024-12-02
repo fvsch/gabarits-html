@@ -4,173 +4,193 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-
-/* --- COULEURS --- */
-
-/* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
-   uniquement les couleurs de fond (propriétés background) et les couleurs
-   du texte (propriété color).
-   Pour modifier la disposition des blocs, voir plus bas dans la feuille de
-   styles la partie «positionnement». */
+/*
+	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond (propriétés background-color)
+	et les couleurs du texte (propriété color).
+*/
 
 /* Général */
+
 html {
-	color: #F0E39E;
-	background: #2C2F22;
-}
-a {
-	color: #FF6533;
-}
-a:hover, a:focus {
-	color: #FF4C00;
-}
-strong {
-	color: #A1B55D;
+	color: #f0e39e;
+	background: #2c2f22;
 }
 
-/* Page */
-#global {
-	background: #181A12;
-}
-
-/* Navigation */
-#navigation {
-	background: #181A12;
-}
-#navigation a {
-	color: #FF6533;
-}
-#navigation a:hover, #navigation a:focus {
-	background: #000000;
-}
-
-/* Contenu principal */
-#contenu {
-	color: #363B29;
-	background: #cbd888;
-}
-#contenu a {
-	color: #332510;
-}
-#contenu a:hover, #contenu a:focus {
-	color: #6E5122;
-}
-#contenu strong {
-	color: #181A12;
-}
-
-/* Pied de page */
-#pied {
-	color: #E6A948;
-}
-
-
-/* --- POSITIONNEMENT --- */
-
-/* Page */
-html, body {
-	height: 100%; /* Voir -> Note 1 ci-dessous */
-}
 body {
-	padding: 0;
+	/* On utilise l'élément <body> comme le conteneur principal de la page,
+	et on utilise le mode de mise en page en grille ("CSS Grid") pour gérer
+	les espaces à l'intérieur de ce conteneur. En particulier, ce qui nous
+	intéresse ici c'est de s'assurer que le contenu principal aura une hauteur
+	dynamique qui va remplir 100% de l'espace vertical disponible.
+	On crée donc une grille CSS avec une seule colonne et 4 lignes.
+	Chaque ligne a une hauteur automatique ('auto'), sauf la troisième qui a une
+	hauteur de '1fr' (une fraction de l'espace disponible). */
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto 1fr auto;
+
+	/* Ce n'est pas indispensable ici, mais pour mieux controler l'insertion
+	des blocs de contenu (enfants de <body>) dans la grille, on peut nommer
+	les différentes zones de la grille. Ici on donne un nom à 4 zones
+	correspondant à nos 4 lignes de contenu. On pourra spécifier dans quelle
+	zone un contenu doit s'insérer avec la propriété CSS 'grid-area'. */
+	grid-template-areas: "entete" "navigation" "contenu" "pied";
+
+	/* L'unité CSS 'vh' représente 1% de la hauteur de la zone de visualisation
+	du navigateur ("viewport"). Donc '100vh' représente 100% de cette hauteur. */
+	min-height: 100vh;
+
+	/* Largeur maximale, et centrage horizontal avec les marges automatiques */
+	max-width: 760px;
+	margin-inline: auto;
+
+	/* Dans certains cas de figures, en particulier sur les navigateurs mobiles
+	dont l'interface change lorsque l'on fait défiler une page, la hauteur de la
+	zone de visualisation du navigateur ("viewport") peut changer. Ces
+	navigateurs traitent alors '100vh' comme la plus petite hauteur possible.
+	Cela pose un problème lorsqu'un contenu a une hauteur fixée à '100vh': cette
+	hauteur peut être plus courte que l'espace disponible dans certains cas.
+	Pour répondre à ce problème, les spécifications CSS ont créé l'unité 'dvh'
+	("dynamic viewport height"), qui n'est pas fixe mais se met à jour lorsque
+	l'interface du navigateur change.
+
+	Il vaut donc mieux utiliser 'min-height: 100dvh' que 'min-height: 100vh'
+	pour un résultat exact. Ici, pour gérer le cas de figure où un ancien
+	navigateur ne connait pas la nouvelle unité 'dvh', on utilise la règle
+	CSS '@supports', qui permet d'appliquer un style lorsque la déclaration CSS
+	entre parenthèses est comprise par le navigateur.
+	*/
+	@supports (min-height: 100dvh) {
+		min-height: 100dvh;
+	}
 }
-#global {
-	min-height: 100%; /* -> 1 */
-	width: 750px;
-	overflow: hidden; /* -> 2 */
-	margin-left: auto;
-	margin-right: auto; /* -> 3 */
+
+a {
+	color: #ff6533;
+}
+
+a:hover,
+a:focus {
+	color: #ff4c00;
+}
+
+strong {
+	color: #a1b55d;
 }
 
 /* En-tête */
+
 #entete {
-	padding: 15px 20px 10px 20px;
+	/* Pour la mise en page de cet en-tête avec "flexbox",
+	voir les explications dans modele01.css */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+
+	@media (width >= 500px) {
+		flex-direction: row;
+		align-items: center;
+		padding-inline: 0;
+	}
 }
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+}
+
 #entete h1 {
 	margin: 0;
-}
-#entete h1 img {
-	float: left;
-	margin: 7px 20px 10px 0;
-}
-#entete .sous-titre {
-	margin: 4px 0 15px 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 500px) {
+		font-size: 2.4rem;
+	}
 }
 
-/* Menu de navigation */
+/* Navigation */
+
 #navigation {
-	padding: 12px 15px;
+	grid-area: navigation;
+	background-color: #181a12;
 }
+
 #navigation ul {
+	/* Pour la mise en page de ce menu avec "flexbox",
+	voir les explications dans modele01.css */
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	/* La proprité justify-content permet de centrer horizontalement
+	les enfants de ce conteneur. */
+	justify-content: center;
 	margin: 0;
+	padding: 12px 10px;
+	gap: 4px;
 	list-style: none;
+}
+
+#navigation a {
+	display: block;
+	padding: 6px 10px;
+	border-radius: 4px;
+	line-height: 1.5;
+	text-decoration: none;
+	color: #ff6533;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Contenu principal */
+
+#contenu {
+	grid-area: contenu;
+	padding: 20px;
+	color: #363b29;
+	background: #cbd888;
+}
+
+#contenu details > summary {
+	cursor: pointer;
+	text-decoration-line: underline;
+	text-decoration-style: dashed;
 	text-align: center;
 }
-#navigation li {
-	display: inline;
-}
-#navigation a {
-	padding: 6px;
+
+#contenu p,
+#contenu li {
 	line-height: 1.5;
-	font-size: .9em;
-	text-decoration: none;
 }
 
-/* Contenu */
-#contenu {
-	padding: 10px 20px;
+#contenu a {
+	color: #332510;
 }
-#contenu > :first-child {
-	margin-top: 10px;
+
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
 }
-#contenu p, #contenu li {
-	line-height: 1.5;
+
+#contenu strong {
+	color: #181a12;
 }
 
 /* Pied de page */
+
 #pied {
+	grid-area: pied;
 	padding: 15px 20px;
-	font-size: .85em;
+	font-size: 0.85em;
+	color: #e6a948;
 }
+
 #pied p {
-	margin: .5em 0;
+	margin: 0.5em 0;
 }
-#copyright {
-	text-align: left;
-	font-size: 1em;
-}
-
-
-/* --- NOTES ---
-
-1.	Pour pouvoir utiliser une hauteur (height) ou une hauteur minimale
-	(min-height) sur un bloc, il faut que sont parent direct ait lui-même une
-	hauteur déterminée (donc toute valeur de height sauf "auto": hauteur en
-	pixels, em, autres unités...).
-	Si la hauteur du parent est en pourcentage, elle se réfère alors à la
-	hauteur du «grand-père», et ainsi de suite.
-	Ainsi, pour pouvoir utiliser un "min-height: 100%" sur div#contenu, il nous
-	faut:
-	- un parent (body) en "height: 100%";
-	- le parent de body également en "height: 100%".
-
-2.	Il faut éviter que les marges des enfants de div#global ne se transmettent
-	à leur parent. Notamment, le margin-top du premier enfant (ici, div#entete),
-	et le margin-bottom du dernier enfant (ici, div#pied).
-	On évite ce problème grâce à la propriété CSS overflow, qui bloque la
-	fusion des marges. En savoir plus sur la fusion des marges:
-	https://www.alsacreations.com/article/lire/629-fusion-des-marges.html
-
-3.	Les marges automatiques à gauche et à droite permettent de centrer notre
-	bloc div#global, et donc tout le site.
-	Pour aligner div#global à gauche, on fera:
-		margin-left: 0;
-		margin-rigth: auto;
-	Pour aligner div#global à droite, on fera:
-		margin-left: auto;
-		margin-right: 0;
-	Pour aligner div#global à droite avec un retrait (à droite) de 100px:
-		margin-left: auto;
-		margin-right: 100px;
-
-*/
