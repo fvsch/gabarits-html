@@ -4,28 +4,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 01: largeur fluide, contenu sur toute la largeur
+		Gabarit 01: largeur fluide, contenu centré
 	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
 	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele01.css" media="screen">
 </head>
-
 <body>
-<div id="global">
 
 <header id="entete">
-	<h1>
+	<div class="centre">
 		<img alt="" width="60" height="60" src="picto/01.png">
-		Gabarit 01
-	</h1>
-	<p class="sous-titre">
-		<strong>Caractéristiques:</strong> largeur fluide, contenu sur toute la largeur, en-tête, contenu et pied de page.
-	</p>
+		<div>
+			<h1>Gabarit 01</h1>
+			<p><strong>Caractéristiques:</strong> largeur fluide, contenu centré. En-tête, menu, contenu principal et pied de page.</p>
+		</div>
+	</div>
 </header>
 
 <nav id="navigation">
-	<ul>
+	<ul class="centre">
 		<li><a href="index.html">Introduction</a></li>
 		<li><a href="liste.html">Tous les gabarits</a></li>
 		<li><a href="utiliser.html">Guide d’utilisation</a></li>
@@ -33,74 +33,58 @@
 </nav>
 
 <main id="contenu">
-	<h2>À propos du gabarit 01</h2>
-	<h3>Code HTML et CSS</h3>
-	<p>Ce gabarit est structuré de la manière suivante:</p>
-	<pre><code>&lt;div id="global">
-	&lt;header id="entete">...&lt;/header>
-	&lt;nav id="navigation">...&lt;/nav>
-	&lt;main id="contenu">...&lt;/main>
-	&lt;footer id="pied">...&lt;/footer>
-&lt;/div></code></pre>
-	<p>Il est mis en forme par deux feuilles de styles:</p>
-	<ol>
-		<li><a href="styles/base.css">base.css</a> (mise en forme minimale
-		du texte, commune à tous les gabarits)</li>
-		<li><strong><a href="styles/modele01.css">modele01.css</a></strong>,
-		qui contient tous les styles propres à ce gabarit, et que nous vous
-		invitons à consulter.</li>
-	</ol>
-	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
-	d'affichage de la source de votre navigateur web (ex: «Affichage >
-	Code source de la page»).</p>
-	<h3>À noter</h3>
-	<p>Ce gabarit est très simple, et ne devrait pas nécessiter moult
-	explications. Deux points sont à noter tout de même:</p>
-	<ol>
-		<li>
-			<p>Le menu de navigation est <strong>horizontal</strong>,
-			alors que nous avons utilisé une liste non ordonnée (élément
-			HTML <code>ul</code>)pour le coder (voir le code HTML).
-			Comment se fait-ce?<br>
-			Ici, on obtient cette disposition grâce à la déclaration CSS
-			<code>display: inline;</code>, appliquée aux items de liste
-			(éléments HTML <code>li</code>).
-			</p>
-		</li>
-		<li>
-			<p>Le principal <strong>problème</strong> de ce gabarit, mis
-			à part son aspect très frustre, c'est que l'on place tout le
-			contenu dans un bloc qui prend 100% de la largeur de la
-			fenêtre du navigateur (avec 20px de padding à gauche et à
-			droite). Pour les petites résolutions (appareils mobiles,
-			écrans en 800&times;600&hellip;), c'est très bien, voire
-			même idéal. Mais en 1024&times;768 et pour les résolutions
-			supérieures, cela peut donner des choses illisibles avec des
-			<strong>lignes de texte interminables</strong>!</p>
-			<p>D'ailleurs, il est probable que vous soyez arrivé au même
-			constat rien qu'en tentant de lire ces explications sur votre
-			propre écran!</p>
-			<p>Ce problème est moins fort dans le cas d'un design sur deux
-			ou trois colonnes. Et, dans tous les cas, on peut l'éviter en
-			travaillant avec une <strong>largeur fixe</strong> (par
-			exemple 750px ou 900px), ou encore avec une <strong>largeur
-			fluide «intelligente»</strong> (voir les gabarits qui portent
-			cette mention).</p>
-		</li>
-	</ol>
+	<div class="centre">
+		<h2>À propos du gabarit 01</h2>
+		<h3>Code HTML et CSS</h3>
+		<p>Ce gabarit est structuré de la manière suivante:</p>
+		<pre><code>&lt;header id="entete">
+	&lt;div class="centre">...&lt;/div>
+&lt;/header>
+
+&lt;nav id="navigation">
+	&lt;ul class="centre">...&lt;/ul>
+&lt;/nav>
+
+&lt;main id="contenu">
+	&lt;div class="centre">...&lt;/div>
+&lt;/main>
+
+&lt;footer id="pied">
+	&lt;div class="centre">...&lt;/div>
+&lt;/footer>
+</code></pre>
+		<p>
+			Il est mis en forme par deux feuilles de styles:
+		</p>
+		<ol>
+			<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits)</li>
+			<li><strong><a href="styles/modele01.css">modele01.css</a></strong>, qui contient tous les styles propres à ce gabarit, et que nous vous invitons à consulter.</li>
+		</ol>
+		<p>
+			Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).
+		</p>
+		<h3>À noter</h3>
+		<ol>
+			<li>
+				<p>Le menu de navigation est <strong>horizontal</strong>, alors que nous avons utilisé une liste non ordonnée (élément HTML <code>ul</code>)pour le coder (voir le code HTML). Comment se fait-ce? On obtient cette disposition grâce à la déclaration CSS <code>display: flex</code>. </p>
+			</li>
+			<li>
+				<p>Le design de ce gabarit utilise des blocs prenant toute la largeur de la page. Cependant, sur un écran un peu large, cela peut donner <strong>des lignes de texte extrêmement longues</strong> et difficiles à lire.</p>
+				<p>Pour éviter ce problème, on limite la largeur du contenu dans chaque bloc à une valeur maximale (avec la propriété CSS <code>max-width</code>). À noter qu’afin d’avoir le rendu souhaité avec des blocs de couleur sur toute la largeur de la page, et un contenu centré dans chaque bloc, on a besoin de rajouter un élément dans chaque bloc juste pour gérer le centrage du contenu. On a donc ajouté un élément <code>&lt;div class="centre">…&lt;/div></code>, sauf dans le cas où on a pu réutiliser un élément déjà présent (<code>&lt;ul class="centre">…&lt;/ul></code>).</p>
+			</li>
+		</ol>
+	</div>
 </main>
 
 <footer id="pied">
-	<p id="copyright">
-		Mise en page © 2008
-		<a href="https://www.elephorm.com">Elephorm</a> et
-		<a href="https://www.alsacreations.com">Alsacréations</a>
-	</p>
-	<p>Le contenu de mon pied de page. Nulla tincidunt tincidunt mi.
-	Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum
-	augue, et ultricies lacus lorem varius purus. Curabitur eu amet.</p>
+	<div class="centre">
+		<p>Le contenu de mon pied de page.</p>
+		<p>
+			Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+			Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
+		</p>
+	</div>
 </footer>
 
-</div>
 </body>
 </html>

@@ -6,93 +6,215 @@
 
 /* --- STYLES DE BASE POUR LE TEXTE ET LES PRINCIPAUX ÉLÉMENTS --- */
 
-/* Page */
-html {
-	font-size: 100%; /* Voir -> Note 1 à la fin de la feuille de styles. */
-	tab-size: 4;
-	color: black;
-	background: white;
+/* Modèle de boite */
+
+* {
+	/* Par défaut, CSS considère que les propriétés 'width' et 'height'
+	correspondent à la largeur et à la hauteur du contenu d'un élément.
+	L'espace interne (padding) et les borders (border-width) sont ajoutées
+	en plus. En pratique, c'est souvent peu intuitif, et on préfèrera que les
+	propriétés 'width' et 'height' correspondent à une dimension complète de
+	l'élément, bordure et padding compris. Heureusement, on peut modifier le
+	mode de calcul grâce à la propriété 'box-sizing'. */
+	box-sizing: border-box;
 }
+
+/* Page */
+
+html {
+	/* Quand on modifie la couleur de texte ou la couleur de fond d'une page,
+	il est préférable de préciser ces deux couleurs à la fois. Si on ne le fait
+	pas, on peut se retrouver dans une situation où une de ces couleurs est
+	définie par nos styles, et l'autre par les préférences du navigateur ou de
+	l'utilisateur. Par exemple, on peut définir une couleur de texte noire, mais
+	si le style par défaut était d'avoir du texte blanc sur fond noir, on aura
+	comme résultat: du texte noir sur fond noir, ce qui est illisible. */
+	color: black;
+	background-color: white;
+}
+
 body {
+	/* Par défaut, les navigateurs ont une marge de 8px pour l'élément BODY.
+	C'est ce qui évite que le texte ne soit complètement collé aux bords de la
+	zone de visualisation du navigateur lorsqu'on affiche une page «brute»,
+	sans mise en forme. Ici, on annule cette marge, afin de pouvoir réaliser
+	des mises en page avec des blocs allant d'un bord à l'autre de l'écran.
+	Attention: pour une bonne lisibilité, il faudra bien penser à prévoir des
+	espaces à l'intérieur des blocs de contenu (par exemple avec la propriété
+	'padding'). */
 	margin: 0;
-	padding: 10px 20px; /* Note -> 2 */
-	font-family: Verdana, Bitstream Vera Sans, sans-serif; /* 3 */
-	font-size: 0.875em; /* -> 4 */
-	line-height: 1.25; /* -> 5 */
+
+	/* En CSS, on peut préciser la police de charactères de trois façons:
+	- un nom de famille générique, tel que 'serif', 'sans-serif' et 'monospace';
+	- un nom de famille courant, qui doit être pré-installé sur l'ordinateur
+	  de l'utilisateur (par exemple Arial, Verdana, Georgia…);
+	- ou enfin, un nom de famille qui sera défini dans la feuille de styles avec
+	  une règle '@font-face' et un lien vers un ou plusieurs fichiers de fontes
+	  (en général au format '.woff' ou '.woff2').
+
+	Dans tous les cas, il est recommandé de préciser une liste de valeurs de
+	substitution. Ici, on souhaite affichier du Verdana (police installée par
+	défaut sur Windows et macOS, mais pas toujours sur Linux, iOS ou Android),
+	puis si besoin du Bitstream Vera Sans (disponible sur certaines versions de
+	Linux et de macOS), et enfin on précise un nom générique, ici 'sans-serif',
+	afin que le navigateur utilise sa propre configuration.
+
+	Ces gabarits ne proposent pas d'exemples de fichiers de fontes avec
+	'@font-face', et utilise uniquement des polices système et génériques.
+
+	Voici une liste de quelques familles de polices définies avec 'font-family'
+	que vous pouvez utiliser:
+
+	font-family: Verdana, Bitstream Vera Sans, sans-serif;
+	font-family: Arial, Liberation Sans, sans-serif;
+	font-family: Georgia, Bitstream Vera Serif, serif;
+	font-family: Times New Roman, Liberation Serif, serif;
+	font-family: Menlo, Consolas, Bitstream Vera Mono, monospace;
+	*/
+	font-family:
+		Verdana,
+		Bitstream Vera Sans,
+		sans-serif;
+
+	/* Taille du texte de base de la page. Dépend de la taille du texte par
+	défaut du navigateur (en général fixée à 16px, mais peut être différente si
+	l'utilisateur l'a ajustée, en particulier si il/elle a des problèmes de vue).
+	On utilise l'unité 'rem', qui correspond à la taille du texte de l'élément
+	racine (html), qui elle-même dépend des réglages par défaut de l'utilisateur.
+	Ici, 0.875rem correspond à 14px dans le cas courant. (À noter: utiliser une
+	valeur qui correspond à un nombre rond en pixels n'est pas indispensable.
+	Cela peut être utile avec certaines polices optimisées pour l'affichage
+	sur écran de basse résolution, comme les polices Arial ou Verdana. Mais en
+	2024 c'est une technique un peu désuète. Donc n'hésitez pas à utiser 0.9rem,
+	1.3rem ou toute valeur qui donne le résultat souhaité.) */
+	font-size: 0.875rem;
+
+	/* Hauteur de ligne, exprimée comme un ratio (sans unité) ou en pourcentage.
+	À adapter en fonction de la fonte choisie, et des besoins particuliers
+	(lignes de texte longues ou courtes, titre ou corps de texte, etc.).
+	En général pour le corps de texte, une hauteur de ligne de 1.5 ou 150% est
+	appropriée. Pour les titres, on utisera souvent une hauteur de ligne un peu
+	plus serrée, par exemple entre 1.2 et 1.4. */
+	line-height: 1.35;
 }
 
 /* Titres */
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	margin: 1em 0 0.5em 0; /* -> 6 */
+	/* En général, les styles par défaut des navigateurs font que les marges
+	en haut et en bas des titres sont identiques. Ici, en diminuant la marge
+	du bas, on cherche à rapprocher le titre du contenu qu'il introduit. */
+	margin-top: 1em;
+	margin-bottom: 0.5em;
 }
+
 h1,
 h2 {
 	font-family:
 		Georgia,
 		Bitstream Vera Serif,
 		serif;
-	font-weight: normal; /* -> 7 */
+	/* Les styles par défaut des navigateurs mettent les titres en gras.
+	Si on souhaite passer à des caractères «normaux», on doit utiliser: */
+	font-weight: normal;
 }
+
 h1 {
-	font-size: 3em; /* -> 8 */
+	/* Pour un élément avec 'font-size: 2.5rem', la taille du texte sera 2,5 fois
+	la taille du texte de l'élément racine (html). Dans le cas courant, cela
+	donnera une taille de texte de 40px (16px * 2.5).
+
+	À noter: on peut aussi définir une taille de texte relative à la taille du
+	texte de l'élément parent (plutôt que de l'élément racine), avec l'unité 'em'
+	à la place de 'rem', ou en pourcentage: 'font-size: 250%'. Cela peut avoir
+	quelques avantages, mais en général utiliser l'unité 'rem' est plus simple
+	car il y a moins d'éléments à prendre en compte dans les calculs. */
+	font-size: 2.5em;
 	font-style: italic;
 }
+
 h2 {
 	font-size: 1.8em;
 }
+
 h3 {
 	font-size: 1.2em;
 }
-h4 {
+
+h4,
+h5,
+h6 {
 	font-size: 1em;
 }
 
 /* Listes */
+
 ul,
 ol {
-	margin: 0.75em 0 0.75em 24px;
-	padding: 0; /* -> 9 */
+	/* Par défaut, les listes UL et OL ont un retrait à gauche qui peut être,
+	suivant les navigateurs:
+	- un padding-left de 40px;
+	- ou bien un margin-left de 40px.
+	On met tout le monde d'accord avec une marge à gauche, et pas de padding. */
+	margin-block: 0.75em;
+	/*  On en profite pour introduire les propriétés de mise en page qui
+	dépendent de la direction du texte. Ici, on en utilise deux:
+	- 'margin-block' définit les marges verticales (haut et bas);
+	- 'margin-inline' définit les marges horizontales (gauche et droite).
+	Ces propriétés acceptent une valeur (pour les deux côtés) ou deux
+	valeurs (une pour chaque côté). À noter que leur signification peut changer
+	en fonction de la direction de mise en page du texte. Par exemple:
+	- pour du texte qui se lit de gauche à droite (par exemple Anglais ou Français),
+	  'margin-inline: 24px 0' correspond à 'margin-left: 24px; margin-right: 0;'
+	- pour du texte qui se lit de droite à gauche (par exemple Arabe ou Hébreu),
+	  'margin-inline: 24px 0' correspond à 'margin-right: 24px; margin-left: 0;'
+	*/
+	margin-inline: 24px 0;
+	padding-inline: 0;
 }
+
 ul {
 	list-style: square;
 }
-li {
-	margin: 0;
-	padding: 0;
-}
 
 /* Paragraphes */
+
 p {
 	margin: 0.75em 0;
 }
+
 li p,
 blockquote p {
 	margin: 0.5em 0;
 }
 
 /* Citations */
+
 blockquote,
 q {
-	font-size: 1.1em;
+	font-size: 110%;
 	font-style: italic;
 	font-family:
 		Georgia,
 		Bitstream Vera Serif,
 		serif;
 }
+
 blockquote {
 	margin: 0.75em 0 0.75em 24px;
 }
+
 cite {
 	font-style: italic;
 }
 
 /* Liens */
+
 a {
 	color: mediumblue;
 	text-decoration: underline;
@@ -101,20 +223,19 @@ a:hover,
 a:focus {
 	color: crimson;
 }
-a img {
-	border: none; /* -> 10 */
-}
 
 /* Divers éléments de type en-ligne */
+
 em {
 	font-style: italic;
 }
+
 strong {
 	font-weight: bold;
 	color: dimgray;
 }
 
-/* --- STYLES POUR CERTAINS CONTENUS DES GABARITS --- */
+/* Blocs de code */
 
 pre,
 code {
@@ -125,69 +246,17 @@ code {
 		Bitstream Vera Mono,
 		monospace;
 }
+
 pre {
-	width: 90%;
-	overflow: auto;
-	overflow-y: hidden;
 	margin: 0.75em 0;
 	padding: 12px;
-	background: #eee;
+	white-space: pre-wrap;
+	tab-size: 4;
 	color: #555;
+	background-color: #eee;
 }
+
 pre strong {
 	font-weight: normal;
 	color: black;
 }
-
-/* --- NOTES ---
-
-1. Ce "font-size: 100%" est normalement inutile. On l'utilise uniquement
-	pour éviter un bug de redimensionnement du texte dans Internet Explorer.
-
-2. Par défaut, les navigateurs ont une marge de 6px pour l'élément BODY.
-	C'est ce qui évite que le texte ne soit complètement collé aux bords de la
-	zone de visualisation du navigateur lorsqu'on affiche une page «brute»,
-	sans mise en forme. Mais ce retrait de 6px est un peu faible: on le renforce
-	donc. Notez bien que les feuilles de styles des gabarits pourront augmenter
-	ce retrait, ou bien l'annuler.
-
-3. Voici quelques exemples de collections cohérentes de fontes (propriété
-	CSS "font-family"):
-	font-family: Verdana, Bitstream Vera Sans, sans-serif;
-	font-family: Arial, Liberation Sans, sans-serif;
-	font-family: Georgia, Bitstream Vera Serif, serif;
-	font-family: Times New Roman, Liberation Serif, serif;
-	font-family: Menlo, Consolas, Bitstream Vera Mono, monospace;
-
-4. Taille du texte de base de la page. Dépend de la taille du texte par
-	défaut du navigateur (souvent 16px), et des réglages de l'utilisateur.
-	À adapter en fonction de la fonte choisie, et du rendu souhaité.
-
-5. Hauteur de ligne. À adapter en fonction de la fonte choisie, et des
-	besoins particuliers (lignes de texte longues ou courtes, titre ou
-	corps de texte…).
-
-6. En général, les styles par défaut des navigateurs font que les marges
-	en haut et en bas des titres sont équivalentes. Ici, en diminuant la
-	marge du bas, on cherche à rapprocher le titre du contenu qu'il introduit.
-
-7. Les styles par défaut des navigateurs mettent les titres en gras.
-	Si on souhaite passer à des caractères «normaux», on doit utiliser
-	font-size: normal.
-
-8. Pour un élément en "font-size: 3em", la taille du texte sera le triple de
-	la taille du texte de l'élément parent.
-	À noter: on aurait pu écrire "font-size: 300%" pour le même résultat.
-
-9. Par défaut, les listes UL et OL ont un retrait à gauche qui peut être,
-	suivant les navigateurs:
-	- un padding-left de 40px;
-	- ou bien un margin-left de 40px.
-	On met tout le monde d'accord avec une marge à gauche de 24px, et pas
-	de padding.
-
-10. Les navigateurs donnent souvent aux images placées dans des liens
-	une bordure disgracieuse. On annule ce style souvent gênant en appliquant
-	un "border: none" aux images qui se trouvent à l'intérieur d'un lien.
-
-*/
