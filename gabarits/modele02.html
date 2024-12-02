@@ -4,30 +4,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 02: conteneur global aligné à gauche, largeur fixe 750px
+		Gabarit 02: conteneur global aligné à gauche, largeur fixe
 	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
 	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele02.css" media="screen">
 </head>
-
-<body>
-<div id="global">
+<body class="alignement-gauche">
 
 <header id="entete">
-	<h1>
-		<img alt="" width="60" height="60" src="picto/02.png">
-		Gabarit 02
-	</h1>
-	<p class="sous-titre">
-		<strong>Caractéristiques:</strong> conteneur global aligné à gauche, largeur fixe 750px
-	</p>
+	<img alt="" width="60" height="60" src="picto/02.png">
+	<div>
+		<h1>Gabarit 02</h1>
+		<p><strong>Caractéristiques:</strong> conteneur global aligné à gauche, largeur fixe</p>
+	</div>
 </header>
 
 <nav id="navigation">
 	<ul>
 		<li><a href="index.html">Introduction</a></li>
-		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li class="marge-droite"><a href="liste.html">Tous les gabarits</a></li>
 		<li><a href="utiliser.html">Guide d’utilisation</a></li>
 	</ul>
 </nav>
@@ -35,14 +33,19 @@
 <main id="contenu">
 	<h2>À propos du gabarit 02</h2>
 	<h3>Code HTML et CSS</h3>
-	<p>Ce gabarit est structuré de la manière suivante:</p>
-<pre><code>&lt;div id="global">
+	<p>
+		Ce gabarit est structuré de la manière suivante:
+	</p>
+<pre><code>&lt;body>
 	&lt;header id="entete">...&lt;/header>
 	&lt;nav id="navigation">...&lt;/nav>
 	&lt;main id="contenu">...&lt;/main>
 	&lt;footer id="pied">...&lt;/footer>
-&lt;/div></code></pre>
-	<p>Il est mis en forme par deux feuilles de styles:</p>
+&lt;/body>
+</code></pre>
+	<p>
+		Il est mis en forme par deux feuilles de styles:
+	</p>
 	<ol>
 		<li><a href="styles/base.css">base.css</a> (mise en forme minimale
 		du texte, commune à tous les gabarits)</li>
@@ -50,48 +53,30 @@
 		qui contient tous les styles propres à ce gabarit, et que nous vous
 		invitons à consulter.</li>
 	</ol>
-	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
-	d'affichage de la source de votre navigateur web (ex: «Affichage >
-	Code source de la page»).</p>
+	<p>
+		Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).
+	</p>
 	<h3>À noter</h3>
 	<ol>
 		<li>
-			<p>Le conteneur global (<code>div#global</code>) a une largeur
-			fixe de 750px. Nous n'avons pas besoin de propriétés
-			spécifiques pour <strong>le placer à gauche de la page</strong>:
-			ce sera en effet son comportement par défaut.</p>
+			<p>Le conteneur global (<code>body</code>) a une largeur maximale de 760px (800px en comptant le <code>padding</code>). Nous n'avons pas besoin de propriétés spécifiques pour <strong>le placer à gauche de la page</strong>: ce sera en effet son comportement par défaut.</p>
 		</li>
 		<li>
-			<p>La <strong>largeur fixe</strong> résoud le problème du
-			gabarit 01 avec les lignes de texte trop longues pour les
-			grandes résolutions d'écran. Par contre, sur un très grand
-			écran un site de 750px de large peut sembler étriqué. Le revers
-			de la médaille, en quelques sortes.</p>
+			<p>La <strong>largeur maximale</strong> résoud le problème mentionné dans le gabarit 01 avec les lignes de texte trop longues pour les grandes résolutions d'écran. Par contre, sur un très grand écran, un site de 760px de large peut sembler étriqué.</p>
 		</li>
 		<li>
-			<p>Nous avons à nouveau un <strong>menu de navigation
-			horizontal</strong>, mais cette fois il est réalisé grâce à la
-			propriété CSS <code>float</code>. Nous nous sommes permis
-			quelques <strong>subtilités</strong> pour ce menu, alors
-			n'oubliez pas d'observer le code HTML et le code CSS
-			correspondant!</p>
+			<p>Nous utilisons <a href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox">Flexbox</a> pour la mise en page de l'en-tête et du menu.</p>
 		</li>
 	</ol>
 </main>
 
 <footer id="pied">
+	<p>Le contenu de mon pied de page.</p>
 	<p>
-		Le contenu de mon pied de page. Nulla tincidunt tincidunt mi.
-		Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum
-		augue, et ultricies lacus lorem varius purus. Curabitur eu amet.
-	</p>
-	<p id="copyright">
-		Mise en page © 2008
-		<a href="https://www.elephorm.com">Elephorm</a> et
-		<a href="https://www.alsacreations.com">Alsacréations</a>
+		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
 	</p>
 </footer>
 
-</div>
 </body>
 </html>
