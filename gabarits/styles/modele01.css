@@ -4,157 +4,204 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-
-/* --- COULEURS --- */
-
-/* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
-   uniquement les couleurs de fond (propriétés background) et les couleurs
-   du texte (propriété color).
-   Pour modifier la disposition des blocs, voir plus bas dans la feuille de
-   styles la partie «positionnement». */
+/*
+	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond (propriétés background-color)
+	et les couleurs du texte (propriété color).
+*/
 
 /* Général */
+
 html {
-	color: #F0E39E;
-	background: #181A12; /* Voir -> Note 1 ci-dessous */
+	/* Ceci est une variable CSS, qui peut être réutilisée plusieurs fois dans
+	la feuille de styles via la fonction 'var()'. Les variables CSS s'appliquent
+	sur un ou plusieurs éléments de la page HTML, et elles sont héritées par les
+	descendants de ces éléments. Par convention, on définit les variables que
+	l'on souhaite utiliser n'importe où sur l'élément racine (html). */
+	--largeur-contenu-centre: 860px;
+
+	/* La couleur de fond s'applique sur toute la page. Mais comme plusieurs
+	conteneurs de la page ont leur propre couleur de fond, celle-ci se verra
+	surtout en bas de page. */
+	color: #f0e39e;
+	background-color: #181a12;
 }
+
 a {
-	color: #FF6533;
+	color: #ff6533;
 }
-a:hover, a:focus {
-	color: #FF4C00;
+
+a:hover,
+a:focus {
+	color: #ff4c00;
 }
+
 strong {
-	color: #A1B55D;
+	color: #a1b55d;
+}
+
+/* Mise en page */
+
+.centre {
+	/* On limite la largeur des conteneurs qui portent la classe "centre",
+	et on utilise des marges automatiques à gauche et à droite pour centrer
+	le tout horizontalement. À noter: on utiliser 'max-width' et pas 'width',
+	pour que ces conteneurs puissent prendre une largeur plus réduite sur
+	de petits écrans (tablettes ou smartphones par exemples). */
+	max-width: var(--largeur-contenu-centre);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* En-tête */
+
 #entete {
-	background: #2C2F22;
+	padding: 20px;
+	background-color: #2c2f22;
 }
 
-/* Navigation */
-#navigation {
-	background: #181A12;
-}
-#navigation a {
-	color: #FF6533;
-}
-#navigation a:hover, #navigation a:focus {
-	background: #000000;
-}
-
-/* Contenu principal */
-#contenu {
-	color: #363B29;
-	background: #cbd888;
-}
-#contenu a {
-	color: #332510;
-}
-#contenu a:hover, #contenu a:focus {
-	color: #6E5122;
-}
-#contenu strong {
-	color: #181A12;
+#entete > .centre {
+	/* Pour le contenu de l'en-tête, on souhaite placer l'image à gauche et le
+	texte dans une deuxième colonne. On peut utiliser le mode de rendu CSS
+	"flexbox", avec 'display: flex'. Celui-ci fonctionne en deux directions:
+	soit en colonne ('column', vertical) on en ligne ('row', horizontal).
+	Ici,on commence par définir un style en colonne, qui va disposer les éléments
+	enfants les uns sous les autres verticalement. Le résultat sera presque le
+	même que si on avait utilisé 'display: block', à la nuance près que la
+	propriété 'gap' va rajouter des espaces verticaux entre les éléments.
+	Mais quid de l'affichage en deux colonnes? Eh bien, on va le définir un peu
+	plus loin, dans une condition ciblant les écrans suffisamment larges. */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
-/* Pied de page */
-#pied {
-	color: #E6A948;
+/* On utilise une règle '@media' (ou "media query") pour appliquer un style
+de manière conditionnelle. Ici le style s'appliquera si la largeur de la
+fenêtre du navigateur est égale ou supérieure à 500 pixels. On peut aussi
+écrire cette condition comme: '@media (min-width: 500px)'. */
+@media (width >= 500px) {
+	#entete > .centre {
+		flex-direction: row;
+		align-items: center;
+	}
 }
 
-
-/* --- POSITIONNEMENT --- */
-
-/* Page */
-body {
-	padding: 0; /* -> 2 */
+#entete > .centre > img {
+	display: block;
+	flex-shrink: 0;
 }
 
-/* En-tête */
-#entete {
-	padding: 15px 20px 10px 20px;
-}
 #entete h1 {
 	margin: 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	/* Depuis 2023, il est aussi possible d'imbriquer des règles '@media' ou
+	des sélécteurs CSS à l'intérieur du bloc de déclarations d'un sélecteur
+	parent. Ici, cela nous permet d'éviter de répéter le sélecteur '#entete h1'
+	à l'intérieur de la règle '@media (width > 500px)'.
+
+	Attention cependant, les versions de navigateurs plus anciennes que 2023
+	vont ignorer le code suivant! Cela peut être un problème, sur un ancien
+	navigateur qui n'a pas été mis à jour (par exemple sur vieux smartphone ou
+	une tablette qui ne bénéficie plus de mises à jour système).
+	Vous pouvez vérifier depuis quand une fonctionalité CSS en faisant une
+	recherche sur https://caniuse.com/
+	*/
+	@media (width >= 500px) {
+		font-size: 2.4rem;
+	}
 }
-#entete h1 img {
-	float: left;
-	margin: 7px 20px 10px 0;
-}
-#entete .sous-titre {
-	margin: 4px 0 15px 0;
+
+#entete p {
+	margin: 4px 0;
 }
 
 /* Menu de navigation */
+
 #navigation {
-	padding: 12px 15px;
-}
-#navigation ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-#navigation li {
-	display: inline; /* -> 3 */
-}
-#navigation a {
-	padding: 6px;
-	line-height: 1.5;
-	font-size: .9em;
-	text-decoration: none;
+	padding: 12px;
+	background-color: #181a12;
 }
 
-/* Contenu */
-#contenu {
-	padding: 10px 20px;
+#navigation ul {
+	/* Pour la liste de liens du menu, on va aussi utiliser "flexbox",
+	mais cette fois directement en mode horizontal. Sur les petits écrans,
+	les liens du menu ne tiendront peut-être pas dans la largeur. Dans ce cas,
+	grâce à la déclaration 'flex-wrap: wrap', ils pourront passer à la ligne,
+	au lieu de dépasser de leur conteneur. */
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+	/* Cet élément porte déjà la classe "centre" qui définit une largeur
+	maximum de 'var(--largeur-contenu-centre)'. Cela donne un résultat correct,
+	mais on peut améliorer le résult visuel légèrement. En effet, cette liste
+	contient des liens qui ont un padding horizontal de 10px. Si on souhaite
+	que le texte du premier lien soit aligné verticalement avec l'image de
+	l'en-tête et avec le texte du contenu principal, on peut augmenter légèrement
+	la largeur maximale de la liste de liens, en rajoutant la largeur du padding
+	des liens. C'est aussi l'occasion de montrer la fonction CSS 'calc'! */
+	max-width: calc(var(--largeur-contenu-centre) + 20px);
+	margin: 0 auto;
+	list-style: none;
 }
-#contenu > :first-child {
-	margin-top: 10px;
-}
-#contenu p, #contenu li {
+
+#navigation a {
+	display: block;
+	padding: 6px 10px;
+	border-radius: 4px;
 	line-height: 1.5;
+	text-decoration: none;
+	color: #ff6533;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Contenu principal */
+
+#contenu {
+	padding: 20px;
+	color: #363b29;
+	background-color: #cbd888;
+}
+
+#contenu > .centre > :first-child {
+	margin-top: 0;
+}
+
+#contenu p,
+#contenu li {
+	line-height: 1.5;
+}
+
+#contenu a {
+	color: #332510;
+}
+
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
+}
+
+#contenu strong {
+	color: #181a12;
 }
 
 /* Pied de page */
+
 #pied {
 	padding: 15px 20px;
-	font-size: .85em;
+	color: #e6a948;
 }
+
 #pied p {
-	margin: .5em 0;
+	margin: 0.5em 0;
+	font-size: 0.8rem;
+	line-height: 1.5;
 }
-#pied #copyright {
-	float: right;
-	margin: .5em 0 30px 10%;
-	font-size: 1em;
-}
-
-
-/* --- NOTES ---
-
-1.	Notes que cette couleur de fond n'est apparente qu'en bas de page. Plus
-	haut, elle est masquée: par la couleur de fond de l'en-tête, puis par la
-	couleur de fond du menu, puis par la couleur de fond du contenu. Seul le
-	pied de page laisse apparaitre cette couleur de fond.
-
-2.	Pour ce gabarit, on supprime l'écart entre les «bords» du navigateur et
-	le contenu, en passant le padding de l'élément BODY à zéro.
-	(Voir également la note numéro 2 dans base.css.)
-
-3.	Si les éléments de notre menu se placent horizontalement plutôt que les
-	uns en dessous des autres, c'est parce qu'ils ne sont plus affichés
-	comme des blocs (ce qui est normalement le cas des éléments LI), mais
-	comme des éléments de type en-ligne. On obtient ce comportement avec la
-	propriété "display" et la valeur "inline".
-	Le fait que nos LI se comportent comme un flot unique de texte aura deux
-	conséquences:
-	- on va pouvoir aligner le texte du menu à gauche (c'est le cas ici), à
-	  droite ou encore au centre, en jouant sur la propriété "text-align" du
-	  menu (sur l'élément UL ou sur div#navigation);
-	- certains styles ne pourront pas être appliqués... par exemple, la
-	  propriété "width" ne peut pas être utilisée pour les éléments en
-	  "display: inline".
-
-*/
