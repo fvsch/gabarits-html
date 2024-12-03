@@ -172,7 +172,6 @@ strong {
 	grid-template-areas: "titre description vignette";
 	grid-template-columns: 120px 1fr 60px;
 	gap: 16px;
-	overflow: hidden;
 	margin: 15px 0;
 }
 @media (width < 550px) {
@@ -199,6 +198,10 @@ strong {
 }
 #contenu .liste-gabarits img {
 	display: block;
+	width: 60px;
+	height: 60px;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0006;
 }
 #contenu .liste-gabarits p {
 	grid-area: description;

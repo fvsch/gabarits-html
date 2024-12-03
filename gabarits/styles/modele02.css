@@ -89,6 +89,8 @@ strong {
 #entete img {
 	display: block;
 	flex-shrink: 0;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0008;
 }
 
 #entete h1 {
