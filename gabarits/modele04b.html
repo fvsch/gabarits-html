@@ -4,41 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 04 (variante): minimaliste, menu vertical à droite, largeur fluide
+		Gabarit 04 (variante): menu vertical à droite, largeur fluide
 	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
 	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele04.css" media="screen">
-	<style media="screen">
-	#navigation {
-		float: right; /* On fait flotter le menu à droite plutôt qu'à gauche */
-	}
-	#contenu {
-		margin-left: 0; /* On remet à zéro la marge de gauche du contenu... */
-		margin-right: 20%; /* ... et on utilise la même marge, à droite */
-	}
-	#copyright {
-		margin-left: 0;
-		margin-right: 20%;
-		text-align: left;
-	}
-	</style>
 </head>
-
-<body>
-<div id="global">
+<body class="navigation-droite">
 
 <header id="entete">
-	<h1>
-		<img alt="" width="60" height="60" src="picto/04v.png">
-		Gabarit 04 — variante
-	</h1>
-	<p class="sous-titre">
-		<strong>Caractéristiques:</strong>
-		minimaliste,
-		menu vertical à <em>droite</em>,
-		largeur fluide
-	</p>
+	<img alt="" width="60" height="60" src="picto/04v.png">
+	<div>
+		<h1>Gabarit 04 — variante</h1>
+		<p><strong>Caractéristiques:</strong> menu vertical à gauche, largeur fluide</p>
+	</div>
 </header>
 
 <nav id="navigation">
@@ -52,44 +33,23 @@
 <main id="contenu">
 	<h2>À propos du gabarit 04 (variante)</h2>
 	<h3>Code HTML et CSS</h3>
-	<p>Ce gabarit est une variante du
-	<a href="modele04.html">Gabarit 04</a>. Il a la même structure HTML,
-	et il utilise les mêmes feuilles de style.</p>
-	<p>La seule modification apportée aux styles CSS se trouve dans le
-	code de cette page. La voici:</p>
-<pre><code>&lt;style type="text/css" media="screen">
-#navigation {
-	float: right; /* On fait flotter le menu à droite plutôt qu'à gauche */
-}
-#contenu {
-	margin-left: 0; /* On remet à zéro la marge de gauche du contenu... */
-	margin-right: 20%; /* ... et on utilise la même marge, à droite */
-}
-&lt;/style></code></pre>
-	<p>Passer notre menu à droite est donc un jeu d'enfant.</p>
-
-	<h3>Attention!</h3>
-	<p>Cette variante sert avant tout à illustrer le fonctionnement
-	du positionnement flottant. En pratique, <strong>il est préférable
-	de ne pas placer un <em>menu de navigation</em> tout à droite de la
-	page</strong>.</p>
-	<p>En effet, la plupart des sites web ont un menu de navigation
-	horizontal sur toute la largeur du site, ou un menu de navigation
-	vertical situé <strong>à gauche</strong>. C'est une convention à
-	laquelle les internautes sont habitués. En plaçant votre menu de
-	navigation à droite (ou tout en bas, ou en plein milieu de votre
-	contenu&hellip;), vous prenez le risque d'avoir un menu peu visible,
-	et donc une mise en page inefficace!</p>
+	<p>
+		Ce gabarit est une variante du <a href="modele04.html">Gabarit 04</a>. Il a la même structure HTML, et il utilise les mêmes feuilles de style.
+	</p>
+	<p>
+		La seule modification apportée au code HTML est la classe suivante sur l'élément <code>body</code>:
+	</p>
+<pre><code>&lt;body class="navigation-droite">
+</code></pre>
 </main>
 
 <footer id="pied">
-	<p id="copyright">
-		Mise en page © 2008
-		<a href="https://www.elephorm.com">Elephorm</a> et
-		<a href="https://www.alsacreations.com">Alsacréations</a>
+	<p>Le contenu de mon pied de page.</p>
+	<p>
+		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
 	</p>
 </footer>
 
-</div>
 </body>
 </html>

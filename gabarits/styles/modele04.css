@@ -4,116 +4,278 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-
-/* --- COULEURS --- */
-
-/* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
-   uniquement les couleurs de fond (propriétés background) et les couleurs
-   du texte (propriété color).
-   Pour modifier la disposition des blocs, voir plus bas dans la feuille de
-   styles la partie «positionnement». */
+/*
+	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond (propriétés background-color)
+	et les couleurs du texte (propriété color).
+*/
 
 /* Général */
+
 html {
-	color: #F0E39E;
-	background: #2C2F22;
-}
-a {
-	color: #FF6533;
-}
-a:hover, a:focus {
-	color: #FF4C00;
-}
-strong {
-	color: #A1B55D;
+	/* Ces deux variables CSS nous permettent de gérer l'alignement du contenu
+	de l'en-tête avec les autres blocs de la page.
+	1. Par défaut, sur un petit écran, les principaux blocs de la page (en-tête,
+		navigation, contenu) vont toucher les bords de l'écran, et le padding
+		horizontal du body sera donc de zéro. L'en-tête a donc besoin d'un padding
+		horizontal pour que son contenu ne touche pas les bords directement.
+	2. Sur un écran plus large, tous les blocs de contenu seront affichés en
+		retrait des bords de la page, avec un padding sur le body. Dans ce cas,
+		le padding du header ne sera plus nécessaire, et on pourra le mettre à
+		zéro pour avoir un meilleur alignement visuel.
+	Les lignes suivantes définissent le premier cas de figure. Cherchez un peu
+	plus loin dans la feuille de styles l'endroit où ces deux variables sont
+	redéfinies pour le deuxième cas de figure.
+
+	À noter: le nom des variables CSS est libre, du moment qu'il commence par
+	un double tiret. On aurrait pu les appeller '--espace1' et '--espace2' ou
+	tout autre nom. Mais il vaut mieux choisir des noms explicites pour s'y
+	retrouver dans son propre code!
+	*/
+	--body-padding-inline: 0;
+	--entete-padding-inline: 20px;
+
+	color: #f0e39e;
+	background-color: #2c2f22;
 }
 
-/* Navigation */
-#navigation {
-	background: #181A12;
-}
-#navigation a {
-	color: #FF6533;
-}
-#navigation a:hover, #navigation a:focus {
-	background: #000000;
-}
-
-/* Contenu principal */
-#contenu {
-	color: #363B29;
-	background: #cbd888;
-}
-#contenu a {
-	color: #332510;
-}
-#contenu a:hover, #contenu a:focus {
-	color: #6E5122;
-}
-#contenu strong {
-	color: #181A12;
-}
-
-
-/* --- POSITIONNEMENT --- */
-
-/* Page */
 body {
-	padding: 20px 50px; /* Voir -> Note 1 ci-dessous */
+	/* Nous allons réaliser la mise en page principale avec une grille CSS, et
+	quatre zones nommées ("entete", "navigation", "contenu" et "pied").
+	Par défaut, on commence par définir ces zones et les règles de création des
+	lignes et colonnes. Par convention on commence par les styles les plus
+	simples, qui sont souvent ceux pour les mobiles et autres petits écrans.
+	Ici, on définit une seule colonne de pleine largeur ('1fr'), et quatre
+	zones nommées dans 4 lignes séparées. Les contenus s'afficheront donc
+	les uns sous les autres. */
+	display: grid;
+	grid-template-areas: "entete" "navigation" "contenu" "pied";
+	grid-template-columns: 1fr;
+}
+
+@media (width >= 860px) {
+	html {
+		--body-padding-inline: 40px;
+		--entete-padding-inline: 0;
+	}
+
+	body {
+		/* On limite la largeur totale du conteneur et on le centre
+		horizontalement avec des marges automatiques. */
+		max-width: 1200px;
+		margin-inline: auto;
+		padding-block: 20px;
+		padding-inline: var(--body-padding-inline);
+	}
+
+	/* On continue la définition de notre grille de mise en page, mais cette
+	fois pour les écrans plus larges (860px et plus). */
+	body.navigation-gauche {
+		/* On souhaite une mise en page en deux colonnes, avec une première
+		colonne de largeur fixe une autre de largeur variable: */
+		grid-template-columns: 240px 1fr;
+		/* On rédéfinit aussi nos 4 zones nommées, en gardant les mêmes noms
+		(afin que les contenus placés avec 'grid-area' trouvent automatiquement
+		leur place dans la grille redéfinie).
+		- Chaque chaine de caractères placée entre guillemets correspond à une
+			ligne de la grille.
+		- On remarquera que deux zones sont sont définies comme occupant plusieurs
+			"cellules" de la grille: "entete" sur deux colonnes, et "navigation"
+			sur deux lignes.
+		*/
+		grid-template-areas:
+			/* Première ligne: zone "entete" sur 2 colonnes */
+			"entete entete"
+			/* Deuxième ligne: zone "navigation" sur la première colonne, et "contenu" sur la seconde */
+			"navigation contenu"
+			/* Troisième ligne: zone "navigation" (à nouveau) sur la
+				première colonne, et zone "pied" sur la seconde */
+			"navigation pied";
+		/* On souhaite que chaque ligne prenne la hauteur de son contenu, sauf la
+	 	ligne du milieu ("navigation contenu") qui peut s'étendre en hauteur.
+		Ce sera surtout utile si la navigation est haute et le contenu court. */
+		grid-template-rows: auto 1fr auto;
+
+		/* On ajoute une goutière de 20px entre colonnes uniquement */
+		gap: 0px 20px;
+	}
+
+	/* Style similaire aux lignes ci-dessus, mais avec la zone "navigation"
+	placée à droite */
+	body.navigation-droite {
+		grid-template-columns: 1fr 240px;
+		grid-template-areas:
+			"entete entete"
+			"contenu navigation"
+			"pied navigation";
+		grid-template-rows: auto 1fr auto;
+		gap: 0px 20px;
+	}
+}
+
+a {
+	color: #ff6533;
+}
+
+a:hover,
+a:focus {
+	color: #ff4c00;
+}
+
+strong {
+	color: #a1b55d;
 }
 
 /* En-tête */
+
 #entete {
-	padding: 20px 0;
+	/* Un conteneur peut être à la fois enfant d'une grille CSS… */
+	grid-area: entete;
+
+	/* … et aussi définir une mise en page en grille ou flexbox pour ses
+	propres enfants. (Pour la mise en page de cet en-tête avec "flexbox",
+	voir les explications dans modele01.css.) */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+
+	@media (width >= 500px) {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	@media (width >= 860px) {
+		padding-inline: 0;
+	}
 }
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+}
+
 #entete h1 {
 	margin: 0;
-}
-#entete h1 img {
-	float: left;
-	margin: 7px 20px 10px 0;
-}
-#entete .sous-titre {
-	margin: 4px 0 15px 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 500px) {
+		font-size: 2.4rem;
+	}
 }
 
-/* Menu de navigation */
+#entete p {
+	margin: 4px 0;
+}
+
+/* Navigation */
+
 #navigation {
-	width: 18%;
-	float: left; /* -> 2 */
+	/* Ce conteneur doit être affiché dans la zone "navigation" de la grille
+	CSS parente (définie avec 'grid-template-areas', 'grid-template-columns'
+	et 'grid-template-rows'). */
+	grid-area: navigation;
+
+	/* Pour la mise en page de la liste des liens, nous allons utiliser les
+	"container queries". Pour cela, nous devons définir ce conteneur comme
+	étant l'espace de référence pour les conditions de dimensions (hauteur et
+	largeur) de ses enfants et descendants. Pour cela on utilise la propriété
+	CSS 'container-type'. */
+	container-type: inline-size;
+
+	background-color: #181a12;
 }
+
 #navigation ul {
+	/* Par défaut, on affiche les liens en colonne, c'est à dire les uns sous
+	les autres. (On pourrait réaliser le même affichage avec 'display: block',
+	mais passer directement en Flexbox nous permet de faire varier l'affichage
+	en changeant juste la valeur de 'flex-direction'.) */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	margin: 0;
-	padding: 20px 10px;
+	padding: 16px 10px;
 	list-style: none;
+
+	/* Lorsque l'espace horizontal disponible pour la liste de liens et de au
+	moins 300px, on affiche les liens comme une liste horizontale. */
+	@container (width >= 300px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		padding-block: 10px;
+	}
 }
+
 #navigation a {
 	display: block;
-	height: 1%; /* -> 3 */
-	padding: 6px 6px 6px 10px;
+	padding: 8px 12px;
+	border-radius: 4px;
 	line-height: 1.5;
-	font-size: .9em;
 	text-decoration: none;
+	color: #ff6533;
 }
 
-/* Contenu */
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Contenu principal */
+
 #contenu {
-	margin-left: 20%; /* -> 4 */
-	margin-bottom: 20px;
-	padding: 10px 20px;
+	grid-area: contenu;
+	padding: 20px;
+	color: #363b29;
+	background-color: #cbd888;
 }
+
 #contenu > :first-child {
-	margin-top: 10px;
+	margin-top: 0;
 }
-#contenu p, #contenu li {
+
+#contenu p,
+#contenu li {
 	line-height: 1.5;
 }
 
-/* Mention de paternité */
-#copyright {
-	margin-left: 20%;
+#contenu a {
+	color: #332510;
 }
 
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
+}
+
+#contenu strong {
+	color: #181a12;
+}
+
+#contenu figure img {
+	border-radius: 4px;
+}
+
+#contenu figcaption {
+	font-size: 90%;
+	text-align: center;
+}
+
+/* Pied de page */
+
+#pied {
+	grid-area: pied;
+	padding: 15px 20px;
+	font-size: 0.85em;
+	color: #e6a948;
+	background-color: #181a12;
+}
+
+#pied p {
+	margin: 0.5em 0;
+}
 
 /* --- NOTES ---
 
