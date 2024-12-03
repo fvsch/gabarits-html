@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Gabarit 05: menu vertical et pied de page à gauche, contenu à droite
+	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
+	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
+	<link rel="stylesheet" href="styles/base.css" media="all">
+	<link rel="stylesheet" href="styles/modele05.css" media="screen">
+</head>
+<body>
+
+<header id="entete">
+	<img alt="" width="60" height="60" src="picto/05.svg">
+	<div>
+		<h1>Gabarit 05</h1>
+		<p><strong>Caractéristiques:</strong> menu vertical et pied de page à gauche, contenu à droite</p>
+	</div>
+</header>
+
+<nav id="navigation">
+	<ul>
+		<li><a href="index.html">Introduction</a></li>
+		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li><a href="utiliser.html">Guide d’utilisation</a></li>
+	</ul>
+</nav>
+
+<main id="contenu">
+	<h2>À propos du gabarit 05</h2>
+
+	<h3>Code HTML et CSS</h3>
+	<p>Ce gabarit est structuré de la manière suivante:</p>
+
+<pre><code>&lt;body>
+	&lt;header id="entete">...&lt;/header>
+	&lt;nav id="navigation">...&lt;/nav>
+	&lt;main id="contenu">...&lt;/main>
+	&lt;footer id="pied">...&lt;/footer>
+&lt;/body>
+</code></pre>
+
+	<p>
+		Il est mis en forme par deux feuilles de styles:
+	</p>
+	<ol>
+		<li>
+			<p><a href="styles/base.css">base.css</a> (commune à tous les gabarits)</p>
+		</li>
+		<li>
+			<p><strong><a href="styles/modele05.css">modele05.css</a></strong>, qui contient tous les styles propres à ce gabarit, et que je vous invite à consulter.</p>
+		</li>
+	</ol>
+	<p>
+		Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).
+	</p>
+
+	<h3>À noter</h3>
+	<ol>
+		<li>
+			<p>Le conteneur global est l'élément <code>body</code>. Sur un écran large, il est centré grâce à une <strong>largeur maximale</strong> et des <strong>marges automatiques</strong>.</p>
+		</li>
+		<li>
+			<p>Les enfants de <code>body</code> sont disposés les uns sous les autres par défaut, puis sur un écran large ils sont disposés dans les zones nomées d'une <strong>grille CSS</strong>.</p>
+		</li>
+		<li>
+			<p>Le contenu principal a aussi une décoration à gauche ressemblant à une ombre portée ou un effet de relief, avec un coin en diagonale. Cet effet est réalisé avec un pseudo-élément <code>::before</code> <strong>positionné en absolu</strong>, et le coin bisauté est réalisé avec <strong>la propriété CSS <code>clip-path</code></strong>.</p>
+		</li>
+	</ol>
+</main>
+
+<footer id="pied">
+	<p>
+		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
+	</p>
+</footer>
+
+</body>
+</html>
