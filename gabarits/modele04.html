@@ -4,24 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 04: minimaliste, menu vertical à gauche, largeur fluide
+		Gabarit 04: menu vertical à gauche, largeur fluide
 	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
 	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele04.css" media="screen">
 </head>
-
-<body>
-<div id="global">
+<body class="navigation-gauche">
 
 <header id="entete">
-	<h1>
-		<img alt="" width="60" height="60" src="picto/04.png">
-		Gabarit 04
-	</h1>
-	<p class="sous-titre">
-		<strong>Caractéristiques:</strong> minimaliste, menu vertical à gauche, largeur fluide
-	</p>
+	<img alt="" width="60" height="60" src="picto/04.png">
+	<div>
+		<h1>Gabarit 04</h1>
+		<p><strong>Caractéristiques:</strong> menu vertical à gauche, largeur fluide</p>
+	</div>
 </header>
 
 <nav id="navigation">
@@ -36,12 +34,12 @@
 	<h2>À propos du gabarit 04</h2>
 	<h3>Code HTML et CSS</h3>
 	<p>Ce gabarit est structuré de la manière suivante:</p>
-<pre><code>&lt;div id="global">
+<pre><code>&lt;body>
 	&lt;header id="entete">...&lt;/header>
 	&lt;nav id="navigation">...&lt;/nav>
 	&lt;main id="contenu">...&lt;/main>
 	&lt;footer id="pied">...&lt;/footer>
-&lt;/div></code></pre>
+&lt;/body></code></pre>
 	<p>Il est mis en forme par deux feuilles de styles:</p>
 	<ol>
 		<li><a href="styles/base.css">base.css</a> (mise en forme minimale
@@ -55,28 +53,26 @@
 	Code source de la page»).</p>
 	<h3>À noter</h3>
 	<ol>
-		<li><p>Dans ce gabarit, nous utilisons la propriété CSS
-		<code>float</code> pour placer deux blocs à la même hauteur plutôt
-		que l'un en dessous de l'autre. Voir les notes de la feuille de
-		style du gabarit pour en savoir plus.</p></li>
-		<li><p>Le bloc de droite n'utilise pas la propriété
-		<code>float</code>, mais une simple marge à gauche
-		(<code>margin-left</code>).</p>
-		<p>Pour mieux comprendre le fonctionnement du positionnement
-		flottant, vous pouvez, avec un outil tel que
-		<a href="https://addons.mozilla.org/fr/firefox/addon/1843">Firebug</a>,
-		désactiver la marge de gauche de <code>div#contenu</code>.</p></li>
+		<li>
+			<p>Dans ce gabarit, nous utilisons <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_grid_layout">une grille CSS (CSS Grid)</a> pour agencer les quatre principaux conteneurs: en-tête, navigation, contenu principal et pied de page. L'agencement est différent sur petits écrans (tous les blocs prennent la largeur de la page et apparaissent les uns sous les autres) et sur un écran plus large (mise en page en deux colonnes).</p>
+		</li>
+		<li>
+			<p>Pour mieux comprendre le fonctionnement des grilles CSS, vous pouvez utiliser les <a href="https://developer.mozilla.org/fr/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools">outils pour développeurs de votre navigateur</a> pour inspecter les styles de la page en sélectionnant l'élément <code>body</code> et en cliquant sur le bouton “grid” qui apparait à côté de cet élément dans l’arbre des éléments de la page.</p>
+		</li>
 	</ol>
+	<figure>
+		<img alt="Capture d’écran de l’outil Inspecteur des outils pour développeurs de Firefox, montrant un aperçu du code HTML de la page et un aperçu schématique de la grille de mise en page" width="900" src="meta/devtools-grid.png">
+		<figcaption>L’outil d’inspection de grilles CSS dans Firefox DevTools</figcaption>
+	</figure>
 </main>
 
 <footer id="pied">
-	<p id="copyright">
-		Mise en page © 2008
-		<a href="https://www.elephorm.com">Elephorm</a> et
-		<a href="https://www.alsacreations.com">Alsacréations</a>
+	<p>Le contenu de mon pied de page.</p>
+	<p>
+		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
 	</p>
 </footer>
 
-</div>
 </body>
 </html>
