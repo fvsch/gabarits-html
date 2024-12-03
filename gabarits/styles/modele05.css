@@ -1,0 +1,288 @@
+/* =======================================
+ * FEUILLE DE STYLES DES GABARITS HTML/CSS
+ * © Florens Verschelde pour Elephorm & Alsacreations.com
+ * Licence: https://creativecommons.org/licenses/by/2.0/fr/
+ * ======================================= */
+
+/*
+	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond (propriétés background-color)
+	et les couleurs du texte (propriété color).
+*/
+
+/* Général */
+
+html {
+	color: #f0e39e;
+	background-color: #2c2f22;
+}
+
+a {
+	color: #ff6533;
+}
+
+a:hover,
+a:focus {
+	color: #ff4c00;
+}
+
+strong {
+	color: #a1b55d;
+}
+
+/* Mise en page globale */
+
+body {
+	/* On crée un retrait entre la couleur de fond du conteneur principal (body)
+	et les bords de la page en utilisant des marges en haut et sur les côtés. */
+	margin-top: 30px;
+	margin-inline: 15px;
+	background-color: #181a12;
+
+	/* On souhaite aussi que ce conteneur remplisse l'espace vertical disponible
+	dans la page lorsque le contenu de la page est court. Pour cela on peut
+	utiliser 'min-height' (attention, ne pas utiliser 'height' qui ne permet
+	pas à l'élément d'augmenter sa hauteur quand le contenu est long!).
+	On utilise l'unité CSS 'dvh' ("dynamic viewport height"), et l'unité 'vh'
+	pour les navigateurs qui ne comprennent pas 'dvh'. Voir modele03.css pour
+	plus d'information sur ces unités.
+
+	À noter: vu que ce conteneur a un 'margin-top' de 30px, la hauteur minimale
+	ne doit pas être de '100dvh' (100% de la hauteur du viewport) mais de
+	'100dvh' moins 30px. On peut utiliser la fonction CSS 'calc()' pour gérer
+	cette contrainte. */
+	min-height: calc(100vh - 30px);
+
+	@supports (min-height: 100dvh) {
+		min-height: calc(100dvh - 30px);
+	}
+}
+
+@media (width >= 500px) {
+	body {
+		margin-inline: 30px;
+	}
+}
+
+@media (width >= 1000px) {
+	body {
+		/* Sur les écrans larges, on souhaite limiter la largeur du conteneur
+		et le centrer horizontalement. On veut également éviter que le conteneur
+	 	touche les bords de l'écran. Utiliser simplement 'max-width: 1040px'
+		n'aura pas le résultat attendu sur un écran de 1000px à 1100px de large.
+		Pour s'assurer que le conteneur ne touche pas les bords de l'écran dans
+		ce cas de figure, deux solutions possibles:
+		- on peut ajouter un 'padding-inline' sur l'élément parent (html);
+		- ou on peut définir la largeur de l'élément pour comporter un retrait.
+
+		Ici on a choisi la deuxième solution, en définissant la largeur avec
+		'width: calc(…)' pour retrancher une fraction de la largeur (60px).
+		Les marges automatiques feront le reste et distribueront cette fraction
+		de chaque côté (30px à gauche et 30px à droite).
+		Enfin, on utilise aussi 'max-width' pour limiter la largeur maximale.
+		Lorsque le calcul de la largeur de la propriété 'width' dépasse la valeur
+		de la propriété 'max-width', c'est cette dernière qui gagnera.
+
+		CSS est un langage qui permet de définir des règles ou contraintes de
+		mise en page, plutôt qu'une mise en page bien précise au pixel près.
+		Cela permet au navigateur d'appliquer ces règles et de les combiner
+		pour répondre à des situations changeantes (contenu variable, largeur
+		et hauteur d'écran variables). Ce n'est pas toujours simple à comprendre
+		quand on a plutôt l'habitude de mettre en forme un document A4 dans Word
+		ou LibreOffice, ou une image avec des dimensions en pixels fixes dans
+		Photoshop. Mais le Web, contrairement au papier, est protéiforme, et CSS
+		est un langage bien adapté à ses variations.
+		*/
+		width: calc(100% - 60px);
+		max-width: 1040px;
+		margin-inline: auto;
+
+		/* Pour la mise en page en deux colonnes, on utilise à nouveau les
+		grilles CSS, avec des zones nomées. Ici, on définit deux colonnes et
+		trois lignes. La ligne du milieu a pour instruction de prendre toute
+		la hauteur disponible (plutôt que simplement la hauteur de son contenu),
+		ce qui permet de pousser le pied de page (colonne de gauche, 3e ligne)
+		en bas de la page même si le contenu du menu de navigation est limité. */
+		display: grid;
+		grid-template-areas: "entete entete" "navigation contenu" "pied contenu";
+		grid-template-columns: 240px 1fr;
+		grid-template-rows: auto 1fr auto;
+		gap: 10px 20px;
+		padding-right: 20px;
+	}
+}
+
+#global {
+	grid-template-areas: "entete" "navigation" "contenu" "pied";
+	grid-template-columns: 1fr;
+	min-height: calc(100vh - 30px);
+	max-width: 1040px;
+	margin-inline: auto;
+
+	@supports (min-height: 100dvh) {
+		min-height: calc(100dvh - 30px);
+	}
+
+	@media (width >= 1000px) {
+		grid-template-areas: "entete entete" "navigation contenu" "pied contenu";
+		grid-template-columns: 240px 1fr;
+		grid-template-rows: auto 1fr auto;
+		gap: 10px 20px;
+		padding-right: 20px;
+	}
+}
+
+/* En-tête */
+
+#entete {
+	grid-area: entete;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+
+	@media (width >= 500px) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0008;
+}
+
+#entete h1 {
+	margin: 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 500px) {
+		font-size: 2.4rem;
+	}
+}
+
+#entete p {
+	margin: 4px 0;
+}
+
+/* Navigation */
+
+#navigation {
+	grid-area: navigation;
+	container-type: inline-size;
+}
+
+#navigation ul {
+	/* Pour l'explication de la mise en page de la navigation avec les
+	"container queries", voir les commentaires dans modele04.css */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 20px 10px;
+	list-style: none;
+
+	@container (width >= 300px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		padding-block: 10px;
+	}
+}
+
+#navigation a {
+	display: block;
+	padding: 8px 12px;
+	border-radius: 4px;
+	line-height: 1.5;
+	text-decoration: none;
+	color: #ff6533;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Contenu principal */
+
+#contenu {
+	grid-area: contenu;
+	position: relative;
+	padding: 20px;
+	color: #363b29;
+	background-color: #cbd888;
+}
+
+@media (width >= 1000px) {
+	/* On souhaite ajouter une décoration visuelle qui ressemble à un effet de
+	volume, comme si le bloc de contenu principal était un rectangle surélevé.
+
+	Ici, on utilise un pseudo-élément '::before' vide ('content: ""'),
+	positionné en absolu à gauche du conteneur, et avec une couleur de fond
+	intermédiaire entre '#contenu' et 'body'. En pratique, cela ressemble
+	beaucoup à ce qu'on obtiendrait avec une simple bordure sur '#contenu':
+	'border-left: solid 20px #545e30;'
+
+	Pourquoi utiliser cette technique plus compliquée, alors?
+
+	La réponse tient à l'effet graphique en haut à gauche de l'élément.
+	On souhaite que notre "bordure" soit coupée en diagonale, pour donner un
+	effet 3D isométrique plus convaincant. Ici, on va réaliser cette coupure
+	en utilisant la propriété CSS 'clip-path', pour couper le coin en haut à
+	gauche de l'élément.
+
+	D'autres techniques possibles:
+	- on pourrait utiliser une image PNG en image de fond;
+	- on pourrait utiliser un dégradé CSS en image de fond;
+	*/
+	#contenu::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -20px;
+		width: 20px;
+		background-color: #545e30;
+		clip-path: polygon(0% 20px, 20px 0%, 100% 0%, 100% 100%, 0% 100%);
+	}
+}
+
+#contenu > :first-child {
+	margin-top: 0;
+}
+
+#contenu p,
+#contenu li {
+	line-height: 1.5;
+}
+
+#contenu a {
+	color: #332510;
+}
+
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
+}
+
+#contenu strong {
+	color: #181a12;
+}
+
+/* Pied de page */
+
+#pied {
+	grid-area: pied;
+	padding: 15px 20px;
+	font-size: 0.85em;
+	color: #e6a948;
+	background-color: #181a12;
+}
+
+#pied p {
+	margin: 0.5em 0;
+}
