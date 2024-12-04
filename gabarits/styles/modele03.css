@@ -4,48 +4,77 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-/*
-	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond (propriétés background-color)
-	et les couleurs du texte (propriété color).
-*/
-
-/* Général */
+/* Page */
 
 html {
-	color: #f0e39e;
-	background: #2c2f22;
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond et de texte définies dans les
+	variables CSS (propriétés commençant par '--') suivantes.
+	(Pour des explications sur les variables CSS, voir modele01.css.)
+	*/
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
+
+	/*
+	Ces deux variables CSS nous permettent de gérer l'alignement du contenu
+	de l'en-tête avec les autres blocs de la page.
+	1. Par défaut, sur un petit écran, les principaux blocs de la page (en-tête,
+		navigation, contenu) vont toucher les bords de l'écran, et le padding
+		horizontal du body sera donc de zéro. L'en-tête a donc besoin d'un padding
+		horizontal pour que son contenu ne touche pas les bords directement.
+	2. Sur un écran plus large, tous les blocs de contenu seront affichés en
+		retrait des bords de la page, avec un padding sur le body. Dans ce cas,
+		le padding du header ne sera plus nécessaire, et on pourra le mettre à
+		zéro pour avoir un meilleur alignement visuel.
+	Les lignes suivantes définissent le premier cas de figure. Cherchez un peu
+	plus loin dans la feuille de styles l'endroit où ces deux variables sont
+	redéfinies pour le deuxième cas de figure.
+	*/
+	--padding-inline-body: 0;
+	--padding-inline-conteneur: 20px;
+
+	color: var(--texte-clair);
+	background-color: var(--fond-sombre);
 }
 
 body {
-	/* On utilise l'élément <body> comme le conteneur principal de la page,
+	/*
+	On utilise l'élément <body> comme le conteneur principal de la page,
 	et on utilise le mode de mise en page en grille ("CSS Grid") pour gérer
 	les espaces à l'intérieur de ce conteneur. En particulier, ce qui nous
 	intéresse ici c'est de s'assurer que le contenu principal aura une hauteur
 	dynamique qui va remplir 100% de l'espace vertical disponible.
 	On crée donc une grille CSS avec une seule colonne et 4 lignes.
 	Chaque ligne a une hauteur automatique ('auto'), sauf la troisième qui a une
-	hauteur de '1fr' (une fraction de l'espace disponible). */
+	hauteur de '1fr' (une fraction de l'espace disponible).
+	*/
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: auto auto 1fr auto;
 
-	/* Ce n'est pas indispensable ici, mais pour mieux controler l'insertion
+	/*
+	Ce n'est pas indispensable ici, mais pour mieux controler l'insertion
 	des blocs de contenu (enfants de <body>) dans la grille, on peut nommer
 	les différentes zones de la grille. Ici on donne un nom à 4 zones
 	correspondant à nos 4 lignes de contenu. On pourra spécifier dans quelle
-	zone un contenu doit s'insérer avec la propriété CSS 'grid-area'. */
+	zone un contenu doit s'insérer avec la propriété CSS 'grid-area'.
+	*/
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
+
+	padding-inline: var(--padding-inline-body);
 
 	/* L'unité CSS 'vh' représente 1% de la hauteur de la zone de visualisation
 	du navigateur ("viewport"). Donc '100vh' représente 100% de cette hauteur. */
 	min-height: 100vh;
 
-	/* Largeur maximale, et centrage horizontal avec les marges automatiques */
-	max-width: 760px;
-	margin-inline: auto;
-
-	/* Dans certains cas de figures, en particulier sur les navigateurs mobiles
+	/*
+	Dans certains cas de figures, en particulier sur les navigateurs mobiles
 	dont l'interface change lorsque l'on fait défiler une page, la hauteur de la
 	zone de visualisation du navigateur ("viewport") peut changer. Ces
 	navigateurs traitent alors '100vh' comme la plus petite hauteur possible.
@@ -66,17 +95,17 @@ body {
 	}
 }
 
-a {
-	color: #ff6533;
-}
-
-a:hover,
-a:focus {
-	color: #ff4c00;
-}
-
-strong {
-	color: #a1b55d;
+@media (width >= 800px) {
+	html {
+		--padding-inline-body: 20px;
+		--padding-inline-conteneur: 0;
+	}
+	body {
+		/* Largeur maximale, et centrage horizontal avec les marges automatiques */
+		max-width: 800px;
+		margin-inline: auto;
+		padding-block: 20px 40px;
+	}
 }
 
 /* En-tête */
@@ -87,12 +116,12 @@ strong {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding: 20px;
+	padding-block: 20px;
+	padding-inline: var(--padding-inline-conteneur);
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		flex-direction: row;
 		align-items: center;
-		padding-inline: 0;
 	}
 }
 
@@ -108,16 +137,20 @@ strong {
 	font-size: 2rem;
 	line-height: 1.2;
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		font-size: 2.4rem;
 	}
+}
+
+#entete p {
+	margin: 4px 0;
 }
 
 /* Navigation */
 
 #navigation {
 	grid-area: navigation;
-	background-color: #181a12;
+	background-color: var(--fond-plus-sombre);
 }
 
 #navigation ul {
@@ -142,12 +175,12 @@ strong {
 	border-radius: 4px;
 	line-height: 1.5;
 	text-decoration: none;
-	color: #ff6533;
+	color: var(--texte-clair-lien);
 }
 
 #navigation a:hover,
 #navigation a:focus {
-	background-color: #000000;
+	background-color: #000;
 }
 
 /* Contenu principal */
@@ -155,8 +188,8 @@ strong {
 #contenu {
 	grid-area: contenu;
 	padding: 20px;
-	color: #363b29;
-	background: #cbd888;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
 }
 
 #contenu details > summary {
@@ -171,26 +204,14 @@ strong {
 	line-height: 1.5;
 }
 
-#contenu a {
-	color: #332510;
-}
-
-#contenu a:hover,
-#contenu a:focus {
-	color: #6e5122;
-}
-
-#contenu strong {
-	color: #181a12;
-}
-
 /* Pied de page */
 
 #pied {
 	grid-area: pied;
-	padding: 15px 20px;
+	padding-block: 15px;
+	padding-inline: var(--padding-inline-conteneur);
 	font-size: 0.85em;
-	color: #e6a948;
+	color: var(--texte-clair-secondaire);
 }
 
 #pied p {

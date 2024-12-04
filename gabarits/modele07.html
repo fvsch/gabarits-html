@@ -4,91 +4,70 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 07: en-tête, corps et pied de page séparés, menu vertical à gauche, colonnes factices, largeur fixe 750px
+		Gabarit 07: menu horizontal, contenu principal à gauche, contenu secondaire à droite
 	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
 	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele07.css" media="screen">
 </head>
-
 <body>
-<div id="global">
 
 <header id="entete">
-	<h1>
-		<img alt="" width="60" height="60" src="picto/07.png">
-		<span>Gabarit 07</span>
-	</h1>
-	<p class="sous-titre">
-		<strong>Caractéristiques:</strong> en-tête, corps et pied de page séparés, menu vertical à gauche, colonnes factices, largeur fixe 750px
-	</p>
+	<img alt="" width="60" height="60" src="picto/07.svg">
+	<div>
+		<h1>Gabarit 07</h1>
+		<p>Menu horizontal, contenu principal à gauche, contenu secondaire à droite</p>
+	</div>
 </header>
 
-<div id="centre">
-	<nav id="navigation">
-		<ul>
-			<li><a href="index.html">Introduction</a></li>
-			<li><a href="liste.html">Tous les gabarits</a></li>
-			<li><a href="utiliser.html">Guide d’utilisation</a></li>
-		</ul>
-	</nav>
+<nav id="navigation">
+	<ul>
+		<li><a href="index.html">Introduction</a></li>
+		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li><a href="utiliser.html">Guide d’utilisation</a></li>
+	</ul>
+</nav>
 
-	<main id="contenu">
+<div id="centre">
+	<main id="principal">
 		<h2>À propos du gabarit 07</h2>
 		<h3>Code HTML et CSS</h3>
 		<p>Ce gabarit est structuré de la manière suivante:</p>
-<pre><code>&lt;div id="global">
-&lt;header id="entete">...&lt;/header>
-&lt;div id="centre">
+<pre><code>&lt;body>
+	&lt;header id="entete">...&lt;/header>
 	&lt;nav id="navigation">...&lt;/nav>
-	&lt;main id="contenu">...&lt;/main>
-&lt;/div>
+	&lt;div id="centre">
+		&lt;main id="principal">...&lt;/main>
+		&lt;aside id="secondaire">...&lt;/aside>
+	&lt;/div>
 &lt;/div></code></pre>
 		<p>Il est mis en forme par deux feuilles de styles:</p>
 		<ol>
-			<li><a href="styles/base.css">base.css</a> (mise en forme
-			minimale du texte, commune à tous les gabarits)</li>
-			<li><strong><a href="styles/modele07.css">modele07.css</a>
-			</strong>, qui contient tous les styles propres à ce gabarit,
-			et que je vous invite à consulter.</li>
+			<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits)</li>
+			<li><strong><a href="styles/modele07.css">modele07.css</a></strong>, qui contient tous les styles propres à ce gabarit, et que je vous invite à consulter.</li>
 		</ol>
-		<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
-		d'affichage de la source de votre navigateur web (ex: «Affichage >
-		Code source de la page»).</p>
+		<p>
+			Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).
+		</p>
 		<h3>À noter</h3>
 		<ol>
-			<li><p>Dans ce gabarit, nous utilisons la propriété CSS
-			<code>float</code> pour placer deux blocs à la même hauteur plutôt
-			que l'un en dessous de l'autre. Voir les notes de la feuille de
-			style du gabarit pour en savoir plus.</p>
-			<p>Le bloc de droite n'utilise pas la propriété
-			<code>float</code>, mais une simple marge à gauche
-			(<code>margin-left</code>).</p></li>
-			<li><p>Ce gabarit utilise la technique des <strong>colonnes
-			factices</strong> pour afficher deux colonnes de même hauteur
-			quelle que soit la hauteur des contenus. On utilise donc une
-			image de fond (<a href="styles/img/07-colonnes.png">07-colonnes.png</a>),
-			répétée en hauteur et appliquée au conteneur
-			<code>div#centre</code>.</p></li>
-			<li><p>Pour éviter que les colonnes ne «débordent» de leur
-			conteneur, il est nécessaire de gérer le
-			<a href="https://www.alsacreations.com/article/lire/7-depassement-flottants-css.html">
-			dépassement des flottants</a> (dans ce gabarit, on utilise
-			<code>div#centre</code> pour cela — voir les styles du
-			gabarit pour les détails).</p></li>
+			<li><p>Ce gabarit utilise une largeur maximale (<code>max-width</code>) avec deux valeurs différentes en fonction de la largeur de la page.</p></li>
+			<li><p>On utilise le conteneur <code>&lt;div id="centre">…&lt;/div></code> pour créer un affichage du contenu en deux colonnes sur les écrans larges.</p></li>
+			<li><p>Dans cet exemple, on a utilisé Flexbox (<code>display: flex</code>) plutôt que les grilles CSS (<code>display: grid</code>) pour créer cet affichage en colonnes. Les deux modes de mise en page peuvent être utilisés. Pour voir des exemples utilisant les grilles CSS, inspectez les gabarits <a href="modele04.html">04</a> et <a href="modele05.html">05</a>.</p></li>
 		</ol>
 	</main>
+	<aside id="secondaire">
+		<h3>Contenu secondaire</h3>
+		<p>Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat.</p>
+		<p>Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue.</p>
+		<p id="copyright">
+			Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+			Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
+		</p>
+	</aside>
 </div>
 
-<footer id="pied">
-	<p>Le contenu de mon pied de page. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.</p>
-	<p id="copyright">
-		Mise en page © 2008
-		<a href="https://www.elephorm.com">Elephorm</a> et
-		<a href="https://www.alsacreations.com">Alsacréations</a>
-	</p>
-</footer>
-
-</div>
 </body>
 </html>

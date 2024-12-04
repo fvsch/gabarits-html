@@ -4,39 +4,30 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-/*
-	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond (propriétés background-color)
-	et les couleurs du texte (propriété color).
-*/
-
-/* Général */
+/* Page */
 
 html {
-	/* Ces deux variables CSS nous permettent de gérer l'alignement du contenu
-	de l'en-tête avec les autres blocs de la page.
-	1. Par défaut, sur un petit écran, les principaux blocs de la page (en-tête,
-		navigation, contenu) vont toucher les bords de l'écran, et le padding
-		horizontal du body sera donc de zéro. L'en-tête a donc besoin d'un padding
-		horizontal pour que son contenu ne touche pas les bords directement.
-	2. Sur un écran plus large, tous les blocs de contenu seront affichés en
-		retrait des bords de la page, avec un padding sur le body. Dans ce cas,
-		le padding du header ne sera plus nécessaire, et on pourra le mettre à
-		zéro pour avoir un meilleur alignement visuel.
-	Les lignes suivantes définissent le premier cas de figure. Cherchez un peu
-	plus loin dans la feuille de styles l'endroit où ces deux variables sont
-	redéfinies pour le deuxième cas de figure.
-
-	À noter: le nom des variables CSS est libre, du moment qu'il commence par
-	un double tiret. On aurrait pu les appeller '--espace1' et '--espace2' ou
-	tout autre nom. Mais il vaut mieux choisir des noms explicites pour s'y
-	retrouver dans son propre code!
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond et de texte définies dans les
+	variables CSS (propriétés commençant par '--') suivantes.
+	(Pour des explications sur les variables CSS, voir modele01.css.)
 	*/
-	--body-padding-inline: 0;
-	--entete-padding-inline: 20px;
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
 
-	color: #f0e39e;
-	background-color: #2c2f22;
+	/* Gestion du padding du body et de l'en-tête:
+	voir les explications dans modele03.css */
+	--padding-inline-body: 0;
+	--padding-inline-entete: 20px;
+
+	color: var(--texte-clair);
+	background-color: var(--fond-sombre);
 }
 
 body {
@@ -55,8 +46,8 @@ body {
 
 @media (width >= 860px) {
 	html {
-		--body-padding-inline: 40px;
-		--entete-padding-inline: 0;
+		--padding-inline-body: 40px;
+		--padding-inline-entete: 0;
 	}
 
 	body {
@@ -64,8 +55,8 @@ body {
 		horizontalement avec des marges automatiques. */
 		max-width: 1200px;
 		margin-inline: auto;
-		padding-block: 20px;
-		padding-inline: var(--body-padding-inline);
+		padding-block: 20px 40px;
+		padding-inline: var(--padding-inline-body);
 	}
 
 	/* On continue la définition de notre grille de mise en page, mais cette
@@ -113,19 +104,6 @@ body {
 	}
 }
 
-a {
-	color: #ff6533;
-}
-
-a:hover,
-a:focus {
-	color: #ff4c00;
-}
-
-strong {
-	color: #a1b55d;
-}
-
 /* En-tête */
 
 #entete {
@@ -138,15 +116,12 @@ strong {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding: 20px;
+	padding-block: 20px;
+	padding-inline: var(--padding-inline-entete);
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		flex-direction: row;
 		align-items: center;
-	}
-
-	@media (width >= 860px) {
-		padding-inline: 0;
 	}
 }
 
@@ -162,7 +137,7 @@ strong {
 	font-size: 2rem;
 	line-height: 1.2;
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		font-size: 2.4rem;
 	}
 }
@@ -186,7 +161,7 @@ strong {
 	CSS 'container-type'. */
 	container-type: inline-size;
 
-	background-color: #181a12;
+	background-color: var(--fond-plus-sombre);
 }
 
 #navigation ul {
@@ -202,8 +177,8 @@ strong {
 	list-style: none;
 
 	/* Lorsque l'espace horizontal disponible pour la liste de liens et de au
-	moins 300px, on affiche les liens comme une liste horizontale. */
-	@container (width >= 300px) {
+	moins 320px, on affiche les liens comme une liste horizontale. */
+	@container (width >= 320px) {
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
@@ -217,12 +192,12 @@ strong {
 	border-radius: 4px;
 	line-height: 1.5;
 	text-decoration: none;
-	color: #ff6533;
+	color: var(--texte-clair-lien);
 }
 
 #navigation a:hover,
 #navigation a:focus {
-	background-color: #000000;
+	background-color: #000;
 }
 
 /* Contenu principal */
@@ -230,8 +205,8 @@ strong {
 #contenu {
 	grid-area: contenu;
 	padding: 20px;
-	color: #363b29;
-	background-color: #cbd888;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
 }
 
 #contenu > :first-child {
@@ -241,19 +216,6 @@ strong {
 #contenu p,
 #contenu li {
 	line-height: 1.5;
-}
-
-#contenu a {
-	color: #332510;
-}
-
-#contenu a:hover,
-#contenu a:focus {
-	color: #6e5122;
-}
-
-#contenu strong {
-	color: #181a12;
 }
 
 #contenu figure img {
@@ -271,8 +233,8 @@ strong {
 	grid-area: pied;
 	padding: 15px 20px;
 	font-size: 0.85em;
-	color: #e6a948;
-	background-color: #181a12;
+	color: var(--texte-clair-secondaire);
+	background-color: var(--fond-plus-sombre);
 }
 
 #pied p {

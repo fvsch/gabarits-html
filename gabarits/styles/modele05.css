@@ -4,40 +4,33 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-/*
-	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond (propriétés background-color)
-	et les couleurs du texte (propriété color).
-*/
-
-/* Général */
+/* Page */
 
 html {
-	color: #f0e39e;
-	background-color: #2c2f22;
-}
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond et de texte définies dans les
+	variables CSS (propriétés commençant par '--') suivantes.
+	(Pour des explications sur les variables CSS, voir modele01.css.)
+	*/
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
 
-a {
-	color: #ff6533;
+	color: var(--texte-clair);
+	background-color: var(--fond-sombre);
 }
-
-a:hover,
-a:focus {
-	color: #ff4c00;
-}
-
-strong {
-	color: #a1b55d;
-}
-
-/* Mise en page globale */
 
 body {
 	/* On crée un retrait entre la couleur de fond du conteneur principal (body)
 	et les bords de la page en utilisant des marges en haut et sur les côtés. */
 	margin-top: 30px;
 	margin-inline: 15px;
-	background-color: #181a12;
+	background-color: var(--fond-plus-sombre);
 
 	/* On souhaite aussi que ce conteneur remplisse l'espace vertical disponible
 	dans la page lorsque le contenu de la page est court. Pour cela on peut
@@ -58,7 +51,7 @@ body {
 	}
 }
 
-@media (width >= 500px) {
+@media (width >= 600px) {
 	body {
 		margin-inline: 30px;
 	}
@@ -141,7 +134,7 @@ body {
 	gap: 20px;
 	padding: 20px;
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		flex-direction: row;
 		align-items: center;
 	}
@@ -159,7 +152,7 @@ body {
 	font-size: 2rem;
 	line-height: 1.2;
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		font-size: 2.4rem;
 	}
 }
@@ -185,7 +178,7 @@ body {
 	padding: 20px 10px;
 	list-style: none;
 
-	@container (width >= 300px) {
+	@container (width >= 320px) {
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
@@ -199,12 +192,12 @@ body {
 	border-radius: 4px;
 	line-height: 1.5;
 	text-decoration: none;
-	color: #ff6533;
+	color: var(--texte-clair-lien);
 }
 
 #navigation a:hover,
 #navigation a:focus {
-	background-color: #000000;
+	background-color: #000;
 }
 
 /* Contenu principal */
@@ -213,8 +206,8 @@ body {
 	grid-area: contenu;
 	position: relative;
 	padding: 20px;
-	color: #363b29;
-	background-color: #cbd888;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
 }
 
 @media (width >= 1000px) {
@@ -246,7 +239,8 @@ body {
 		bottom: 0;
 		left: -20px;
 		width: 20px;
-		background-color: #545e30;
+		opacity: 0.35;
+		background-color: var(--fond-clair);
 		clip-path: polygon(0% 20px, 20px 0%, 100% 0%, 100% 100%, 0% 100%);
 	}
 }
@@ -260,27 +254,13 @@ body {
 	line-height: 1.5;
 }
 
-#contenu a {
-	color: #332510;
-}
-
-#contenu a:hover,
-#contenu a:focus {
-	color: #6e5122;
-}
-
-#contenu strong {
-	color: #181a12;
-}
-
 /* Pied de page */
 
 #pied {
 	grid-area: pied;
 	padding: 15px 20px;
 	font-size: 0.85em;
-	color: #e6a948;
-	background-color: #181a12;
+	color: var(--texte-clair-secondaire);
 }
 
 #pied p {

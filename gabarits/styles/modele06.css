@@ -1,0 +1,203 @@
+/* =======================================
+ * FEUILLE DE STYLES DES GABARITS HTML/CSS
+ * © Florens Verschelde pour Elephorm & Alsacreations.com
+ * Licence: https://creativecommons.org/licenses/by/2.0/fr/
+ * ======================================= */
+
+/* Page */
+
+html {
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond et de texte définies dans les
+	variables CSS (propriétés commençant par '--') suivantes.
+	(Pour des explications sur les variables CSS, voir modele01.css.)
+	*/
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
+
+	/* Gestion du padding du body et de l'en-tête:
+	voir les explications dans modele03.css */
+	--largeur-max-contenu: 600px;
+	--padding-inline-body: 0px;
+	--padding-inline-conteneur: 20px;
+
+	color: var(--texte-clair);
+	background-color: var(--fond-sombre);
+
+	@media (width >= 800px) {
+		--largeur-max-contenu: 760px;
+		--padding-inline-body: 20px;
+		--padding-inline-conteneur: 0px;
+	}
+}
+
+body {
+	/*
+	Centrage de la page avec 'max-width' et les marges automatiques.
+
+	On veut donner au contenu (en particulier à la ligne centrale avec
+	la navigation et le contenu principal) une largeur maximale définie
+	par la variable '--largeur-max-contenu'.
+
+	Comme le 'body' a également du padding à gauche et à droite, et que l'on
+	utilise le mode de calcul des dimensions 'box-sizing: border-box'
+	(voir base.css), on doit fixer la largeur maximale à
+	'--largeur-max-contenu' plus le padding horizontal.
+
+	Une autre approche serait de passer en 'box-sizing: content-box' pour
+	cet élément:
+		box-sizing: content-box;
+		max-width: var(--largeur-max-contenu);
+	*/
+	max-width: calc(
+		var(--largeur-max-contenu) + var(--padding-inline-body) * 2
+	);
+	margin-inline: auto;
+	padding-inline: var(--padding-inline-body);
+
+	/*
+	On utilise une grille CSS pour la mise en page globale de la page.
+	Pour commencer, sur petit écran on utilise une grille avec une seule
+	colonne de contenu de pleine largeur, et des zones nommées apparaissant
+	les unes sous les autres (chaque zone est dans une nouvelle ligne).
+	*/
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-areas: "entete" "navigation" "contenu" "pied";
+
+	@media (width >= 800px) {
+		/*
+		Sur un écran plus large, en passe en deux colonnes, une de largeur
+		fixe ('220px') et l'autre prenant tout l'espace restant ('1fr').
+
+		Les zones nommées "entete" et "pied" sont ensuite définies comme couvrant
+		les deux colonnes. De sorte que les colonnes de la grille sont utilisées
+		uniquement pour la mise en page de la navigation et du contenu principal.
+
+		Une autre option de mise en page serait d'avoir un conteneur regroupant
+		uniquement la navigation et le contenu principal, et d'utiliser une
+		grille CSS ou bien Flexbox ('display: flex') sur ce conteneur. Pour un
+		exemple de cette méthode alternative, voir le gabarit 07.
+		*/
+		grid-template-columns: 220px 1fr;
+		grid-template-areas: "entete entete" "navigation contenu" "pied pied";
+		gap: 0px 20px;
+		padding-block: 20px;
+	}
+}
+
+/* En-tête */
+
+#entete {
+	grid-area: entete;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding-block: 20px;
+	padding-inline: var(--padding-inline-conteneur);
+
+	@media (width >= 600px) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0008;
+}
+
+#entete h1 {
+	margin: 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 600px) {
+		font-size: 2.4rem;
+	}
+}
+
+#entete p {
+	margin: 4px 0;
+}
+
+/* Navigation */
+
+#navigation {
+	grid-area: navigation;
+	container-type: inline-size;
+	background-color: var(--fond-plus-sombre);
+}
+
+#navigation ul {
+	/* Pour l'explication de la mise en page de la navigation avec les
+	"container queries", voir les commentaires dans modele04.css */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 20px 10px;
+	list-style: none;
+
+	@container (width >= 320px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		padding-block: 10px;
+	}
+}
+
+#navigation a {
+	display: block;
+	padding: 8px 12px;
+	border-radius: 4px;
+	line-height: 1.5;
+	text-decoration: none;
+	color: var(--texte-clair-lien);
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000;
+}
+
+/* Contenu principal */
+
+#contenu {
+	grid-area: contenu;
+	position: relative;
+	padding: 20px;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
+}
+
+#contenu > :first-child {
+	margin-top: 0;
+}
+
+#contenu p,
+#contenu li {
+	line-height: 1.5;
+}
+
+/* Pied de page */
+
+#pied {
+	grid-area: pied;
+	padding-block: 15px;
+	padding-inline: var(--padding-inline-conteneur);
+	font-size: 0.85em;
+	color: var(--texte-clair-secondaire);
+}
+
+#pied p {
+	margin: 0.5em 0;
+}

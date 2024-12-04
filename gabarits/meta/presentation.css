@@ -47,7 +47,7 @@ strong {
 /* Navigation */
 #navigation {
 	padding: 12px;
-	color: #ff6533;
+	color: #f87246;
 	background-color: #181a12;
 }
 #navigation ul {
@@ -172,13 +172,13 @@ strong {
 	grid-template-areas: "titre description vignette";
 	grid-template-columns: 120px 1fr 60px;
 	gap: 16px;
-	margin: 15px 0;
+	margin: 20px 0;
 }
 @media (width < 550px) {
 	#contenu .liste-gabarits li {
-		gap: 6px 16px;
+		gap: 0 16px;
 		grid-template-columns: 60px 1fr;
-		grid-template-areas: "titre titre" "vignette description";
+		grid-template-areas: "vignette titre" "vignette description";
 	}
 }
 #contenu .liste-gabarits h4 {
@@ -186,6 +186,7 @@ strong {
 	margin: 0;
 	font-weight: bold;
 	font-size: 1rem;
+	line-height: 1.25;
 	font-variant: small-caps;
 	font-family: Georgia, serif;
 }
@@ -195,6 +196,9 @@ strong {
 #contenu .liste-gabarits h4 a:hover,
 #contenu .liste-gabarits h4 a:focus {
 	text-decoration: underline;
+}
+#contenu .liste-gabarits .vignette {
+	grid-area: vignette;
 }
 #contenu .liste-gabarits img {
 	display: block;
