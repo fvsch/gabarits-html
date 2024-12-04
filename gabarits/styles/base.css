@@ -231,23 +231,17 @@ figcaption {
 /* Liens */
 
 a {
-	color: mediumblue;
+	/* On change la couleur par défaut des liens pour qu'elle utilise la couleur
+	du texte parent. Cela facilite la définition d'un style plus précis pour les
+	liens dans différents contextes: menu de navigation, texte principal, etc. */
+	color: inherit;
+	/* Par contre, on garde le style souligné, pour que les liens restent
+	reconnaissables. Autrement, c'est un problème d'accessibilité et
+	d'utilisabilité! On pourra éventuellement retirer le soulignement des liens
+	avec 'text-decoration: none' dans certains cas de figure précis où la mise
+	en page permet de reconnaitre les liens sans trait de soulignement
+	(par exemple, dans un menu de navigation). */
 	text-decoration: underline;
-}
-a:hover,
-a:focus {
-	color: crimson;
-}
-
-/* Divers éléments de type en-ligne */
-
-em {
-	font-style: italic;
-}
-
-strong {
-	font-weight: bold;
-	color: dimgray;
 }
 
 /* Blocs de code */
@@ -267,11 +261,12 @@ pre {
 	padding: 12px;
 	white-space: pre-wrap;
 	tab-size: 4;
-	color: #555;
+	color: #444;
 	background-color: #eee;
 }
 
 pre strong {
 	font-weight: normal;
-	color: black;
+	color: #000;
+	background-color: #0002;
 }

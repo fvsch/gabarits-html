@@ -4,32 +4,40 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-/*
-	Note: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond (propriétés background-color)
-	et les couleurs du texte (propriété color).
- */
-
-/* Général */
+/* Page */
 
 html {
-	color: #f0e39e;
-	background-color: #2c2f22;
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
+	modifiant uniquement les couleurs de fond et de texte définies dans les
+	variables CSS (propriétés commençant par '--') suivantes.
+	(Pour des explications sur les variables CSS, voir modele01.css.)
+	*/
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
+
+	color: var(--texte-clair);
+	background-color: var(--fond-sombre);
 }
 
 /* On utilise l'élément body comme conteneur principal de la page, et on limite
 sa largeur maximale. Ce style n'est nécessaire que sur des écrans suffisament
 larges. Sur des écrans plus étroits, les blocs de contenus peuvent prendre
 toute la largeur et toucher les bords de l'écran. */
-@media (width >= 500px) {
+@media (width >= 600px) {
 	body {
 		/* Ici on souhaite une largeur maximale de 760px pour les blocs de contenu
-		de la page, mais le body a aussi un padding de 20px à gauche et à droite,
+		de la page, mais le body a aussi un padding de 40px à gauche et à droite,
 		donc on a besoin d'une largeur maximale text-decoration:
-		760 + 20 + 20 = 800px. */
-		max-width: 800px;
+		760 + 40 + 40 = 840px. */
+		max-width: 840px;
 		/* Réserve un espace entre les bords de la fenêtre et le contenu. */
-		padding: 20px;
+		padding: 20px 40px 40px;
 	}
 
 	/* On aligne le conteneur horizontalement avec les marges automatiques.
@@ -54,19 +62,6 @@ toute la largeur et toucher les bords de l'écran. */
 	}
 }
 
-a {
-	color: #ff6533;
-}
-
-a:hover,
-a:focus {
-	color: #ff4c00;
-}
-
-strong {
-	color: #a1b55d;
-}
-
 /* En-tête */
 
 #entete {
@@ -76,10 +71,8 @@ strong {
 	flex-direction: column;
 	gap: 20px;
 	padding: 20px;
-}
 
-@media (width >= 500px) {
-	#entete {
+	@media (width >= 600px) {
 		flex-direction: row;
 		align-items: center;
 		padding-inline: 0;
@@ -98,7 +91,7 @@ strong {
 	font-size: 2rem;
 	line-height: 1.2;
 
-	@media (width >= 500px) {
+	@media (width >= 600px) {
 		font-size: 2.4rem;
 	}
 }
@@ -110,7 +103,7 @@ strong {
 /* Navigation */
 
 #navigation {
-	background-color: #181a12;
+	background-color: var(--fond-plus-sombre);
 }
 
 #navigation ul {
@@ -141,20 +134,20 @@ strong {
 	border-radius: 4px;
 	line-height: 1.5;
 	text-decoration: none;
-	color: #ff6533;
+	color: var(--texte-clair-lien);
 }
 
 #navigation a:hover,
 #navigation a:focus {
-	background-color: #000000;
+	background-color: #000;
 }
 
 /* Contenu principal */
 
 #contenu {
 	padding: 20px;
-	color: #363b29;
-	background-color: #cbd888;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
 }
 
 #contenu > :first-child {
@@ -166,26 +159,13 @@ strong {
 	line-height: 1.5;
 }
 
-#contenu a {
-	color: #332510;
-}
-
-#contenu a:hover,
-#contenu a:focus {
-	color: #6e5122;
-}
-
-#contenu strong {
-	color: #181a12;
-}
-
 /* Pied de page */
 
 #pied {
 	padding: 15px 20px;
 	font-size: 0.85em;
-	color: #e6a948;
-	background-color: #181a12;
+	color: var(--texte-clair-secondaire);
+	background-color: var(--fond-plus-sombre);
 }
 
 #pied p {
