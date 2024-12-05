@@ -6,20 +6,9 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-	(Pour des explications sur les variables CSS, voir modele01.css.)
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
+body {
+	/* Gestion de la largeur maximale du contenu */
+	--largeur-max-body: 600px;
 
 	/*
 	Ces deux variables CSS nous permettent de gérer l'alignement du contenu
@@ -36,14 +25,19 @@ html {
 	plus loin dans la feuille de styles l'endroit où ces deux variables sont
 	redéfinies pour le deuxième cas de figure.
 	*/
-	--padding-inline-body: 0;
+	--padding-inline-body: 0px;
 	--padding-inline-conteneur: 20px;
 
-	color: var(--texte-clair);
-	background-color: var(--fond-sombre);
-}
+	/* Largeur maximale, et centrage horizontal avec les marges automatiques */
+	max-width: var(--largeur-max-body);
+	margin-inline: auto;
+	padding-inline: var(--padding-inline-body);
 
-body {
+	/* Hauteur minimale de la page. L'unité CSS 'vh' représente 1% de la hauteur
+	de la zone de visualisation du navigateur ("viewport"). Donc '100vh'
+	représente 100% de cette hauteur. */
+	min-height: 100vh;
+
 	/*
 	On utilise l'élément <body> comme le conteneur principal de la page,
 	et on utilise le mode de mise en page en grille ("CSS Grid") pour gérer
@@ -66,44 +60,36 @@ body {
 	zone un contenu doit s'insérer avec la propriété CSS 'grid-area'.
 	*/
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
+}
 
-	padding-inline: var(--padding-inline-body);
+/*
+Dans certains cas de figures, en particulier sur les navigateurs mobiles
+dont l'interface change lorsque l'on fait défiler une page, la hauteur de la
+zone de visualisation du navigateur ("viewport") peut changer. Ces
+navigateurs traitent alors '100vh' comme la plus petite hauteur possible.
+Cela pose un problème lorsqu'un contenu a une hauteur fixée à '100vh': cette
+hauteur peut être plus courte que l'espace disponible dans certains cas.
+Pour répondre à ce problème, les spécifications CSS ont créé l'unité 'dvh'
+("dynamic viewport height"), qui n'est pas fixe mais se met à jour lorsque
+l'interface du navigateur change.
 
-	/* L'unité CSS 'vh' représente 1% de la hauteur de la zone de visualisation
-	du navigateur ("viewport"). Donc '100vh' représente 100% de cette hauteur. */
-	min-height: 100vh;
-
-	/*
-	Dans certains cas de figures, en particulier sur les navigateurs mobiles
-	dont l'interface change lorsque l'on fait défiler une page, la hauteur de la
-	zone de visualisation du navigateur ("viewport") peut changer. Ces
-	navigateurs traitent alors '100vh' comme la plus petite hauteur possible.
-	Cela pose un problème lorsqu'un contenu a une hauteur fixée à '100vh': cette
-	hauteur peut être plus courte que l'espace disponible dans certains cas.
-	Pour répondre à ce problème, les spécifications CSS ont créé l'unité 'dvh'
-	("dynamic viewport height"), qui n'est pas fixe mais se met à jour lorsque
-	l'interface du navigateur change.
-
-	Il vaut donc mieux utiliser 'min-height: 100dvh' que 'min-height: 100vh'
-	pour un résultat exact. Ici, pour gérer le cas de figure où un ancien
-	navigateur ne connait pas la nouvelle unité 'dvh', on utilise la règle
-	CSS '@supports', qui permet d'appliquer un style lorsque la déclaration CSS
-	entre parenthèses est comprise par le navigateur.
-	*/
-	@supports (min-height: 100dvh) {
+Il vaut donc mieux utiliser 'min-height: 100dvh' que 'min-height: 100vh'
+pour un résultat exact. Ici, pour gérer le cas de figure où un ancien
+navigateur ne connait pas la nouvelle unité 'dvh', on utilise la règle
+CSS '@supports', qui permet d'appliquer un style lorsque la déclaration CSS
+entre parenthèses est comprise par le navigateur.
+*/
+@supports (min-height: 100dvh) {
+	body {
 		min-height: 100dvh;
 	}
 }
 
 @media (width >= 800px) {
-	html {
-		--padding-inline-body: 20px;
-		--padding-inline-conteneur: 0;
-	}
 	body {
-		/* Largeur maximale, et centrage horizontal avec les marges automatiques */
-		max-width: 800px;
-		margin-inline: auto;
+		--largeur-max-body: 800px;
+		--padding-inline-body: 20px;
+		--padding-inline-conteneur: 0px;
 		padding-block: 20px 40px;
 	}
 }

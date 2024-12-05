@@ -6,38 +6,13 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-	(Pour des explications sur les variables CSS, voir modele01.css.)
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
-
+body {
 	/* Gestion du padding du body et de l'en-tête:
 	voir les explications dans modele03.css */
 	--largeur-max-contenu: 600px;
 	--padding-inline-body: 0px;
 	--padding-inline-conteneur: 20px;
 
-	color: var(--texte-clair);
-	background-color: var(--fond-sombre);
-
-	@media (width >= 800px) {
-		--largeur-max-contenu: 760px;
-		--padding-inline-body: 20px;
-		--padding-inline-conteneur: 0px;
-	}
-}
-
-body {
 	/*
 	Centrage de la page avec 'max-width' et les marges automatiques.
 
@@ -70,8 +45,14 @@ body {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
+}
 
-	@media (width >= 800px) {
+@media (width >= 800px) {
+	body {
+		--largeur-max-contenu: 760px;
+		--padding-inline-body: 20px;
+		--padding-inline-conteneur: 0px;
+
 		/*
 		Sur un écran plus large, en passe en deux colonnes, une de largeur
 		fixe ('220px') et l'autre prenant tout l'espace restant ('1fr').

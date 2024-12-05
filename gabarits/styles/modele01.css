@@ -6,40 +6,9 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-
-	À noter:
-	1. Contrairement aux autres propriétés CSS, le nom des variables CSS est
-		libre. Il doit juste commencer par '--' et utiliser des caractères
-		alphanumériques sans espaces.
-	2. Les variables CSS bénéficient de l'héritage des propriétés, c'est-à-dire
-		qu'une variable définie sur un conteneur sera utilisable dans tous les
-		styles de ce conteneur et de ses éléments descendants.
-	3. Par convention, on définit les variables CSS sur l'élément racine
-		(avec le sélecteur 'html' ou ':root'). Mais on peut aussi les définir
-		ou redéfinir sur un élément plus profond dans la page, que ce soit 'body'
-		ou un conteneur ou élément particulier.
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
-
-	/* Autres variables, utilisées pour la mise en page: */
+body {
+	/* Variable utilisée pour la mise en page: */
 	--largeur-contenu-centre: 860px;
-
-	/* La couleur de fond s'applique sur toute la page. Mais comme plusieurs
-	conteneurs de la page ont leur propre couleur de fond, celle-ci se verra
-	surtout en bas de page. */
-	color: var(--texte-clair);
-	background-color: var(--fond-plus-sombre);
 }
 
 .centre {
@@ -49,8 +18,7 @@ html {
 	pour que ces conteneurs puissent prendre une largeur plus réduite sur
 	de petits écrans (tablettes ou smartphones par exemples). */
 	max-width: var(--largeur-contenu-centre);
-	margin-left: auto;
-	margin-right: auto;
+	margin-inline: auto;
 }
 
 /* En-tête */
@@ -145,7 +113,8 @@ html {
 	la largeur maximale de la liste de liens, en rajoutant la largeur du padding
 	des liens. C'est aussi l'occasion de montrer la fonction CSS 'calc'! */
 	max-width: calc(var(--largeur-contenu-centre) + 20px);
-	margin: 0 auto;
+	margin-block: 0;
+	margin-inline: auto;
 	list-style: none;
 }
 

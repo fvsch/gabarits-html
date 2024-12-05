@@ -22,15 +22,48 @@
 /* Page */
 
 html {
-	/* Quand on modifie la couleur de texte ou la couleur de fond d'une page,
+	/*
+	Astuce: vous pouvez modifier simplement les couleurs des gabarits en
+	modifiant uniquement les couleurs de fond et de texte définies dans
+	les variables CSS (propriétés commençant par '--') suivantes.
+
+	À noter:
+	1. Contrairement aux autres propriétés CSS, le nom des variables CSS est
+		libre. Il doit juste commencer par '--' et utiliser des caractères
+		alphanumériques sans espaces.
+	2. Les variables CSS bénéficient de l'héritage des propriétés, c'est-à-dire
+		qu'une variable définie sur un conteneur sera utilisable dans tous les
+		styles de ce conteneur et de ses éléments descendants.
+	3. Par convention, on définit les variables CSS sur l'élément racine
+		(avec le sélecteur 'html' ou ':root'). Mais on peut aussi les définir
+		ou redéfinir sur un élément plus profond dans la page, que ce soit 'body'
+		ou un conteneur ou élément particulier.
+	*/
+	--texte-clair: #f0e39e;
+	--texte-clair-secondaire: #a09864;
+	--texte-clair-lien: #f87246;
+	--texte-sombre: #363b29;
+	--fond-clair: #cbd888;
+	--fond-sombre: #2c2f22;
+	--fond-plus-sombre: #181a12;
+
+	/*
+	On utilise ici les valeurs des variables CSS définies un peu plus
+	haut, avec la fonction CSS 'var()'. Celle-ci accepte aussi une valeur de
+	repli ("fallback") en deuxième position, qui sera utilisée si la variable
+	CSS demandée n'est pas définie.
+	*/
+	color: var(--texte-clair, #eee);
+	/*
+	Quand on modifie la couleur de texte ou la couleur de fond d'une page,
 	il est préférable de préciser ces deux couleurs à la fois. Si on ne le fait
 	pas, on peut se retrouver dans une situation où une de ces couleurs est
 	définie par nos styles, et l'autre par les préférences du navigateur ou de
 	l'utilisateur. Par exemple, on peut définir une couleur de texte noire, mais
 	si le style par défaut était d'avoir du texte blanc sur fond noir, on aura
-	comme résultat: du texte noir sur fond noir, ce qui est illisible. */
-	color: black;
-	background-color: white;
+	comme résultat: du texte noir sur fond noir, ce qui est illisible.
+	*/
+	background-color: var(--fond-sombre, #333);
 }
 
 body {
