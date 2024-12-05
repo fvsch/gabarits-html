@@ -6,30 +6,21 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-	(Pour des explications sur les variables CSS, voir modele01.css.)
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
-
-	color: var(--texte-clair);
-	background-color: var(--fond-sombre);
-}
-
 body {
+	/* Gestion de la largeur maximale du contenu */
+	--largeur-max-body: 600px;
+
 	/* On crée un retrait entre la couleur de fond du conteneur principal (body)
-	et les bords de la page en utilisant des marges en haut et sur les côtés. */
+	et les bords de la page en utilisant une marge en haut, et une largeur
+	inférieure à 100% (avec la fonction CSS 'calc()'). */
+	width: calc(100% - 30px);
 	margin-top: 30px;
-	margin-inline: 15px;
+
+	/* Centrage horizontal du contenu avec une largeur maximale
+	et des marges automatiques */
+	max-width: var(--largeur-max-body);
+	margin-inline: auto;
+
 	background-color: var(--fond-plus-sombre);
 
 	/* On souhaite aussi que ce conteneur remplisse l'espace vertical disponible
@@ -37,8 +28,8 @@ body {
 	utiliser 'min-height' (attention, ne pas utiliser 'height' qui ne permet
 	pas à l'élément d'augmenter sa hauteur quand le contenu est long!).
 	On utilise l'unité CSS 'dvh' ("dynamic viewport height"), et l'unité 'vh'
-	pour les navigateurs qui ne comprennent pas 'dvh'. Voir modele03.css pour
-	plus d'information sur ces unités.
+	pour les navigateurs qui ne comprennent pas 'dvh'.
+	Voir modele03.css pour plus d'information sur ces unités.
 
 	À noter: vu que ce conteneur a un 'margin-top' de 30px, la hauteur minimale
 	ne doit pas être de '100dvh' (100% de la hauteur du viewport) mais de
@@ -51,44 +42,9 @@ body {
 	}
 }
 
-@media (width >= 600px) {
-	body {
-		margin-inline: 30px;
-	}
-}
-
 @media (width >= 1000px) {
 	body {
-		/* Sur les écrans larges, on souhaite limiter la largeur du conteneur
-		et le centrer horizontalement. On veut également éviter que le conteneur
-	 	touche les bords de l'écran. Utiliser simplement 'max-width: 1040px'
-		n'aura pas le résultat attendu sur un écran de 1000px à 1100px de large.
-		Pour s'assurer que le conteneur ne touche pas les bords de l'écran dans
-		ce cas de figure, deux solutions possibles:
-		- on peut ajouter un 'padding-inline' sur l'élément parent (html);
-		- ou on peut définir la largeur de l'élément pour comporter un retrait.
-
-		Ici on a choisi la deuxième solution, en définissant la largeur avec
-		'width: calc(…)' pour retrancher une fraction de la largeur (60px).
-		Les marges automatiques feront le reste et distribueront cette fraction
-		de chaque côté (30px à gauche et 30px à droite).
-		Enfin, on utilise aussi 'max-width' pour limiter la largeur maximale.
-		Lorsque le calcul de la largeur de la propriété 'width' dépasse la valeur
-		de la propriété 'max-width', c'est cette dernière qui gagnera.
-
-		CSS est un langage qui permet de définir des règles ou contraintes de
-		mise en page, plutôt qu'une mise en page bien précise au pixel près.
-		Cela permet au navigateur d'appliquer ces règles et de les combiner
-		pour répondre à des situations changeantes (contenu variable, largeur
-		et hauteur d'écran variables). Ce n'est pas toujours simple à comprendre
-		quand on a plutôt l'habitude de mettre en forme un document A4 dans Word
-		ou LibreOffice, ou une image avec des dimensions en pixels fixes dans
-		Photoshop. Mais le Web, contrairement au papier, est protéiforme, et CSS
-		est un langage bien adapté à ses variations.
-		*/
-		width: calc(100% - 60px);
-		max-width: 1040px;
-		margin-inline: auto;
+		--largeur-max-body: 1040px;
 
 		/* Pour la mise en page en deux colonnes, on utilise à nouveau les
 		grilles CSS, avec des zones nomées. Ici, on définit deux colonnes et
@@ -101,26 +57,12 @@ body {
 		grid-template-columns: 240px 1fr;
 		grid-template-rows: auto 1fr auto;
 		gap: 10px 20px;
-		padding-right: 20px;
-	}
-}
 
-#global {
-	grid-template-areas: "entete" "navigation" "contenu" "pied";
-	grid-template-columns: 1fr;
-	min-height: calc(100vh - 30px);
-	max-width: 1040px;
-	margin-inline: auto;
+		/* On augmente le retrait entre les bords de l'écran et ce conteneur
+		en augmentant la dimensions soustraite à la largeur. */
+		width: calc(100% - 60px);
 
-	@supports (min-height: 100dvh) {
-		min-height: calc(100dvh - 30px);
-	}
-
-	@media (width >= 1000px) {
-		grid-template-areas: "entete entete" "navigation contenu" "pied contenu";
-		grid-template-columns: 240px 1fr;
-		grid-template-rows: auto 1fr auto;
-		gap: 10px 20px;
+		/* Retrait entre le bord de droite ce ce conteneur et #contenu */
 		padding-right: 20px;
 	}
 }

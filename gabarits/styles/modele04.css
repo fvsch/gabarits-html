@@ -6,57 +6,42 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-	(Pour des explications sur les variables CSS, voir modele01.css.)
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
+body {
+	/* Gestion de la largeur maximale du contenu */
+	--largeur-max-body: 600px;
 
-	/* Gestion du padding du body et de l'en-tête:
-	voir les explications dans modele03.css */
-	--padding-inline-body: 0;
+	/* Gestion du padding du body et de l'en-tête.
+	(Voir les explications détaillées dans modele03.css.) */
+	--padding-inline-body: 0px;
 	--padding-inline-entete: 20px;
 
-	color: var(--texte-clair);
-	background-color: var(--fond-sombre);
-}
+	/* Centrage horizontal du contenu avec une largeur maximale
+	et des marges automatiques */
+	max-width: var(--largeur-max-body);
+	margin-inline: auto;
+	padding-inline: var(--padding-inline-body);
 
-body {
-	/* Nous allons réaliser la mise en page principale avec une grille CSS, et
+	/*
+	Nous allons réaliser la mise en page principale avec une grille CSS, et
 	quatre zones nommées ("entete", "navigation", "contenu" et "pied").
 	Par défaut, on commence par définir ces zones et les règles de création des
 	lignes et colonnes. Par convention on commence par les styles les plus
 	simples, qui sont souvent ceux pour les mobiles et autres petits écrans.
 	Ici, on définit une seule colonne de pleine largeur ('1fr'), et quatre
 	zones nommées dans 4 lignes séparées. Les contenus s'afficheront donc
-	les uns sous les autres. */
+	les uns sous les autres.
+	*/
 	display: grid;
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
 	grid-template-columns: 1fr;
 }
 
 @media (width >= 860px) {
-	html {
-		--padding-inline-body: 40px;
-		--padding-inline-entete: 0;
-	}
-
 	body {
-		/* On limite la largeur totale du conteneur et on le centre
-		horizontalement avec des marges automatiques. */
-		max-width: 1200px;
-		margin-inline: auto;
+		--largeur-max-body: 1200px;
+		--padding-inline-body: 40px;
+		--padding-inline-entete: 0px;
 		padding-block: 20px 40px;
-		padding-inline: var(--padding-inline-body);
 	}
 
 	/* On continue la définition de notre grille de mise en page, mais cette

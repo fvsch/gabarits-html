@@ -6,30 +6,13 @@
 
 /* Page */
 
-html {
-	/*
-	Astuce: vous pouvez modifier simplement les couleurs de ce gabarit en
-	modifiant uniquement les couleurs de fond et de texte définies dans les
-	variables CSS (propriétés commençant par '--') suivantes.
-	(Pour des explications sur les variables CSS, voir modele01.css.)
-	*/
-	--texte-clair: #f0e39e;
-	--texte-clair-secondaire: #a09864;
-	--texte-clair-lien: #f87246;
-	--texte-sombre: #363b29;
-	--fond-clair: #cbd888;
-	--fond-sombre: #2c2f22;
-	--fond-plus-sombre: #181a12;
-
-	color: var(--texte-clair);
-	background-color: var(--fond-sombre);
-}
-
-/* On utilise l'élément body comme conteneur principal de la page, et on limite
-sa largeur maximale. Ce style n'est nécessaire que sur des écrans suffisament
-larges. Sur des écrans plus étroits, les blocs de contenus peuvent prendre
-toute la largeur et toucher les bords de l'écran. */
 @media (width >= 600px) {
+	/*
+	On utilise l'élément body comme conteneur principal de la page, et on limite
+	sa largeur maximale. Ce style n'est nécessaire que sur des écrans suffisament
+	larges. Sur des écrans plus étroits, les blocs de contenus peuvent prendre
+	toute la largeur et toucher les bords de l'écran.
+	*/
 	body {
 		/* Ici on souhaite une largeur maximale de 760px pour les blocs de contenu
 		de la page, mais le body a aussi un padding de 40px à gauche et à droite,
@@ -37,7 +20,8 @@ toute la largeur et toucher les bords de l'écran. */
 		760 + 40 + 40 = 840px. */
 		max-width: 840px;
 		/* Réserve un espace entre les bords de la fenêtre et le contenu. */
-		padding: 20px 40px 40px;
+		padding-block: 20px 40px;
+		padding-inline: 40px;
 	}
 
 	/* On aligne le conteneur horizontalement avec les marges automatiques.
