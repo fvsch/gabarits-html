@@ -7,52 +7,65 @@
 /* Page */
 
 body {
-	/* Gestion du padding du body et de l'en-tête:
-	voir les explications dans modele03.css */
+	/* Gestion de la largeur maximale du contenu */
 	--largeur-max-body: 600px;
-	--padding-body: 20px 0px;
-	--padding-entete: 0px 20px;
-	--padding-pied: 0px 20px;
 
-	/* Centrage de la page avec 'max-width' et les marges automatiques */
+	/* On crée un retrait entre la couleur de fond du conteneur principal (body)
+	et les bords de la page en utilisant une marge en haut, et une largeur
+	inférieure à 100% (avec la fonction CSS 'calc()'). */
+	width: calc(100% - 30px);
+	margin-top: 30px;
+
+	/* Centrage horizontal du contenu avec une largeur maximale
+	et des marges automatiques */
 	max-width: var(--largeur-max-body);
 	margin-inline: auto;
-	padding: var(--padding-body);
 
-	/*
-	On utilise une grille CSS pour la mise en page globale de la page.
-	Pour commencer, sur petit écran on utilise une grille avec une seule
-	colonne de contenu de pleine largeur, et des zones nommées apparaissant
-	les unes sous les autres (chaque zone est dans une nouvelle ligne).
-	*/
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-areas: "entete" "navigation" "contenu" "pied";
-	gap: 20px;
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
+	background-color: var(--fond-plus-sombre);
+
+	/* On souhaite aussi que ce conteneur remplisse l'espace vertical disponible
+	dans la page lorsque le contenu de la page est court. Pour cela on peut
+	utiliser 'min-height' (attention, ne pas utiliser 'height' qui ne permet
+	pas à l'élément d'augmenter sa hauteur quand le contenu est long!).
+	On utilise l'unité CSS 'dvh' ("dynamic viewport height"), et l'unité 'vh'
+	pour les navigateurs qui ne comprennent pas 'dvh'.
+	Voir modele03.css pour plus d'information sur ces unités.
+
+	À noter: vu que ce conteneur a un 'margin-top' de 30px, la hauteur minimale
+	ne doit pas être de '100dvh' (100% de la hauteur du viewport) mais de
+	'100dvh' moins 30px. On peut utiliser la fonction CSS 'calc()' pour gérer
+	cette contrainte. */
+	min-height: calc(100vh - 30px);
+
+	@supports (min-height: 100dvh) {
+		min-height: calc(100dvh - 30px);
+	}
 }
 
-@media (width >= 750px) {
+@media (width >= 1000px) {
 	body {
-		--largeur-max-body: 840px;
-		--padding-body: 20px;
-		--padding-entete: 0px;
-		--padding-pied: 0px;
+		--largeur-max-body: 1040px;
 
-		/*
-		Sur un écran plus large, en passe en deux colonnes, une de largeur
-		fixe ('220px') et l'autre prenant tout l'espace restant ('1fr').
+		/* Pour la mise en page en deux colonnes, on utilise à nouveau les
+		grilles CSS, avec des zones nomées. Ici, on définit deux colonnes et
+		trois lignes. La ligne du milieu a pour instruction de prendre toute
+		la hauteur disponible (plutôt que simplement la hauteur de son contenu),
+		ce qui permet de pousser le pied de page (colonne de gauche, 3e ligne)
+		en bas de la page même si le contenu du menu de navigation est limité. */
+		display: grid;
+		grid-template-areas: "entete entete" "navigation contenu" "pied contenu";
+		grid-template-columns: 240px 1fr;
+		grid-template-rows: auto 1fr auto;
+		gap: 10px 20px;
 
-		Les zones nommées "entete" et "pied" sont ensuite définies comme couvrant
-		les deux colonnes. De sorte que les colonnes de la grille sont utilisées
-		uniquement pour la mise en page de la navigation et du contenu principal.
+		/* On augmente le retrait entre les bords de l'écran et ce conteneur
+		en augmentant la dimensions soustraite à la largeur. */
+		width: calc(100% - 60px);
 
-		Une autre option de mise en page serait d'avoir un conteneur regroupant
-		uniquement la navigation et le contenu principal, et d'utiliser une
-		grille CSS ou bien Flexbox ('display: flex') sur ce conteneur. Pour un
-		exemple de cette méthode alternative, voir le gabarit 07.
-		*/
-		grid-template-columns: 220px 1fr;
-		grid-template-areas: "entete entete" "navigation contenu" "pied pied";
+		/* Retrait entre le bord de droite ce ce conteneur et #contenu */
+		padding-right: 20px;
 	}
 }
 
@@ -63,7 +76,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding: var(--padding-entete);
+	padding: 20px;
 
 	@media (width >= 600px) {
 		flex-direction: row;
@@ -97,10 +110,6 @@ body {
 #navigation {
 	grid-area: navigation;
 	container-type: inline-size;
-
-	/* Les variables CSS de couleur utilisées dans cette mise en page sont
-	définies dans base.css */
-	background-color: var(--fond-plus-sombre);
 }
 
 #navigation ul {
@@ -145,6 +154,41 @@ body {
 	background-color: var(--fond-clair);
 }
 
+@media (width >= 1000px) {
+	/* On souhaite ajouter une décoration visuelle qui ressemble à un effet de
+	volume, comme si le bloc de contenu principal était un rectangle surélevé.
+
+	Ici, on utilise un pseudo-élément '::before' vide ('content: ""'),
+	positionné en absolu à gauche du conteneur, et avec une couleur de fond
+	intermédiaire entre '#contenu' et 'body'. En pratique, cela ressemble
+	beaucoup à ce qu'on obtiendrait avec une simple bordure sur '#contenu':
+	'border-left: solid 20px #545e30;'
+
+	Pourquoi utiliser cette technique plus compliquée, alors?
+
+	La réponse tient à l'effet graphique en haut à gauche de l'élément.
+	On souhaite que notre "bordure" soit coupée en diagonale, pour donner un
+	effet 3D isométrique plus convaincant. Ici, on va réaliser cette coupure
+	en utilisant la propriété CSS 'clip-path', pour couper le coin en haut à
+	gauche de l'élément.
+
+	D'autres techniques possibles:
+	- on pourrait utiliser une image PNG en image de fond;
+	- on pourrait utiliser un dégradé CSS en image de fond;
+	*/
+	#contenu::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -20px;
+		width: 20px;
+		opacity: 0.35;
+		background-color: var(--fond-clair);
+		clip-path: polygon(0% 20px, 20px 0%, 100% 0%, 100% 100%, 0% 100%);
+	}
+}
+
 #contenu > :first-child {
 	margin-top: 0;
 }
@@ -158,7 +202,7 @@ body {
 
 #pied {
 	grid-area: pied;
-	padding: var(--padding-pied);
+	padding: 15px 20px;
 	font-size: 0.85em;
 	color: var(--texte-clair-secondaire);
 }

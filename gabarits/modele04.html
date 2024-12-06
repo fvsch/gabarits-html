@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 04: menu vertical à gauche, largeur fluide
+		Gabarit 04: en-tête, corps et pied de page séparés, menu vertical à gauche, largeur fixe
 	</title>
 	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
 	<meta name="viewport" content="width=device-width">
@@ -12,13 +12,13 @@
 	<link rel="stylesheet" href="styles/base.css" media="all">
 	<link rel="stylesheet" href="styles/modele04.css" media="screen">
 </head>
-<body class="navigation-gauche">
+<body>
 
 <header id="entete">
 	<img alt="" width="60" height="60" src="picto/04.svg">
 	<div>
 		<h1>Gabarit 04</h1>
-		<p>Menu vertical à gauche, largeur fluide</p>
+		<p>En-tête, corps et pied de page séparés, menu vertical à gauche, largeur fixe</p>
 	</div>
 </header>
 
@@ -39,35 +39,30 @@
 	&lt;nav id="navigation">...&lt;/nav>
 	&lt;main id="contenu">...&lt;/main>
 	&lt;footer id="pied">...&lt;/footer>
-&lt;/body></code></pre>
+&lt;/body>
+</code></pre>
 	<p>Il est mis en forme par deux feuilles de styles:</p>
 	<ol>
-		<li><a href="styles/base.css">base.css</a> (mise en forme minimale
-		du texte, commune à tous les gabarits)</li>
-		<li><strong><a href="styles/modele04.css">modele04.css</a></strong>,
-		qui contient tous les styles propres à ce gabarit, et que je vous
-		invite à consulter.</li>
+		<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits);</li>
+		<li><strong><a href="styles/modele04.css">modele04.css</a></strong>, qui contient tous les styles propres à ce gabarit.</li>
 	</ol>
-	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
-	d'affichage de la source de votre navigateur web (ex: «Affichage >
-	Code source de la page»).</p>
+	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).</p>
+
 	<h3>À noter</h3>
-	<ol>
-		<li>
-			<p>Dans ce gabarit, nous utilisons <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_grid_layout">une grille CSS (CSS Grid)</a> pour agencer les quatre principaux conteneurs: en-tête, navigation, contenu principal et pied de page. L'agencement est différent sur petits écrans (tous les blocs prennent la largeur de la page et apparaissent les uns sous les autres) et sur un écran plus large (mise en page en deux colonnes).</p>
-		</li>
-		<li>
-			<p>Pour mieux comprendre le fonctionnement des grilles CSS, vous pouvez utiliser les <a href="https://developer.mozilla.org/fr/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools">outils pour développeurs de votre navigateur</a> pour inspecter les styles de la page en sélectionnant l'élément <code>body</code> et en cliquant sur le bouton “grid” qui apparait à côté de cet élément dans l’arbre des éléments de la page.</p>
-		</li>
-	</ol>
-	<figure>
-		<img alt="Capture d’écran de l’outil Inspecteur des outils pour développeurs de Firefox, montrant un aperçu du code HTML de la page et un aperçu schématique de la grille de mise en page avec 2 colonnes" width="900" height="420" src="meta/04-devtools-grid.png">
-		<figcaption>L’outil d’inspection de grilles CSS dans Firefox DevTools</figcaption>
-	</figure>
+		<ol>
+			<li>
+				<p>Le conteneur global est l'élément <code>body</code>. Sur un écran large, il est centré grâce à une <strong>largeur maximale</strong> et des <strong>marges automatiques</strong>.</p>
+			</li>
+			<li>
+				<p>Les enfants de <code>body</code> sont disposés les uns sous les autres par défaut, puis sur un écran large ils sont disposés dans les zones nomées d'une <strong>grille CSS</strong>.</p>
+			</li>
+			<li>
+				Les écarts visibles entre les principaux blocs de contenu proviennent soit de la propriété CSS <code>gap</code> utilisée sur le conteneur principal, soit du padding vertical (en particulier la propriété CSS <code>padding-block</code>) sur les conteneurs eux-mêmes.
+			</li>
+		</ol>
 </main>
 
 <footer id="pied">
-	<p>Le contenu de mon pied de page.</p>
 	<p>
 		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
 		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.

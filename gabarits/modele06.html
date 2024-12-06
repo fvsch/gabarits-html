@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>
-		Gabarit 06: en-tête, corps et pied de page séparés, menu vertical à gauche, largeur fixe
+		Gabarit 06: menu vertical et pied de page à gauche, contenu à droite
 	</title>
 	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
 	<meta name="viewport" content="width=device-width">
@@ -18,7 +18,7 @@
 	<img alt="" width="60" height="60" src="picto/06.svg">
 	<div>
 		<h1>Gabarit 06</h1>
-		<p>En-tête, corps et pied de page séparés, menu vertical à gauche, largeur fixe</p>
+		<p>Menu vertical et pied de page à gauche, contenu à droite</p>
 	</div>
 </header>
 
@@ -32,8 +32,10 @@
 
 <main id="contenu">
 	<h2>À propos du gabarit 06</h2>
+
 	<h3>Code HTML et CSS</h3>
 	<p>Ce gabarit est structuré de la manière suivante:</p>
+
 <pre><code>&lt;body>
 	&lt;header id="entete">...&lt;/header>
 	&lt;nav id="navigation">...&lt;/nav>
@@ -41,25 +43,34 @@
 	&lt;footer id="pied">...&lt;/footer>
 &lt;/body>
 </code></pre>
-	<p>Il est mis en forme par deux feuilles de styles:</p>
+
+	<p>
+		Il est mis en forme par deux feuilles de styles:
+	</p>
 	<ol>
-		<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits);</li>
-		<li><strong><a href="styles/modele06.css">modele06.css</a></strong>, qui contient tous les styles propres à ce gabarit.</li>
+		<li>
+			<p><a href="styles/base.css">base.css</a> (commune à tous les gabarits)</p>
+		</li>
+		<li>
+			<p><strong><a href="styles/modele06.css">modele06.css</a></strong>, qui contient tous les styles propres à ce gabarit, et que je vous invite à consulter.</p>
+		</li>
 	</ol>
-	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).</p>
+	<p>
+		Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).
+	</p>
 
 	<h3>À noter</h3>
-		<ol>
-			<li>
-				<p>Le conteneur global est l'élément <code>body</code>. Sur un écran large, il est centré grâce à une <strong>largeur maximale</strong> et des <strong>marges automatiques</strong>.</p>
-			</li>
-			<li>
-				<p>Les enfants de <code>body</code> sont disposés les uns sous les autres par défaut, puis sur un écran large ils sont disposés dans les zones nomées d'une <strong>grille CSS</strong>.</p>
-			</li>
-			<li>
-				Les écarts visibles entre les principaux blocs de contenu proviennent soit de la propriété CSS <code>gap</code> utilisée sur le conteneur principal, soit du padding vertical (en particulier la propriété CSS <code>padding-block</code>) sur les conteneurs eux-mêmes.
-			</li>
-		</ol>
+	<ol>
+		<li>
+			<p>Le conteneur global est l'élément <code>body</code>. Sur un écran large, il est centré grâce à une <strong>largeur maximale</strong> et des <strong>marges automatiques</strong>.</p>
+		</li>
+		<li>
+			<p>Les enfants de <code>body</code> sont disposés les uns sous les autres par défaut, puis sur un écran large ils sont disposés dans les zones nomées d'une <strong>grille CSS</strong>.</p>
+		</li>
+		<li>
+			<p>Le contenu principal a aussi une décoration à gauche ressemblant à une ombre portée ou un effet de relief, avec un coin en diagonale. Cet effet est réalisé avec un pseudo-élément <code>::before</code> <strong>positionné en absolu</strong>, et le coin bisauté est réalisé avec <strong>la propriété CSS <code>clip-path</code></strong>.</p>
+		</li>
+	</ol>
 </main>
 
 <footer id="pied">
