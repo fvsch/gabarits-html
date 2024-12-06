@@ -25,6 +25,8 @@ body {
 
 #entete {
 	padding: 20px;
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
 	background-color: var(--fond-sombre);
 }
 

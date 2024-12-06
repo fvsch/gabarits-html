@@ -1,0 +1,201 @@
+/* =======================================
+ * FEUILLE DE STYLES DES GABARITS HTML/CSS
+ * © Florens Verschelde pour Elephorm & Alsacreations.com
+ * Licence: https://creativecommons.org/licenses/by/2.0/fr/
+ * ======================================= */
+
+/* Page */
+
+body {
+	/* Gestion de la largeur maximale du contenu */
+	--largeur-max-body: 600px;
+	/* Gestion des retraits horizontaux et verticaux dans certains conteneurs,
+	pour obtenir un alignement du texte optimal */
+	--padding-body: 0px;
+	--padding-entete: 20px;
+	--padding-pied: 20px;
+
+	/* Centrage horizontal du contenu avec une largeur maximale
+	et des marges automatiques */
+	max-width: var(--largeur-max-body);
+	margin-inline: auto;
+	padding: var(--padding-body);
+}
+
+@media (width >= 800px) {
+	body {
+		--largeur-max-body: 900px;
+		--padding-body: 20px;
+		--padding-entete: 0px;
+		--padding-pied: 0px;
+
+		/* Sur un écran suffisamment large (ici, 800px et plus), on passe à une
+		mise en page à deux colonnes avec une grille CSS afin d'utiliser l'espace
+		disponible au mieux. Sur les écrans plus larges encore, on pourra passer
+		en trois colonnes. */
+		display: grid;
+		/* La plupart des conteneurs enfants prendront toute la largeur de la
+		grille (c'est-à-dire, les deux colonnes), et on utilise les deux colonnes
+		uniquement sur la troisième ligne de la grille, pour les contenus
+		principaux et secondaires. */
+		grid-template-areas: "entete entete" "navigation navigation" "principal secondaire" "pied pied";
+		/* On utiliser deux tiers de la largeur pour le contenu principal,
+		et un tiers pour le contenu secondaire. On peut définir ces dimensions
+		en pourcentages, ou en fractions de l'espace disponible avec 'fr'. */
+		grid-template-columns: 2fr 1fr;
+		gap: 20px;
+	}
+}
+
+@media (width >= 1100px) {
+	body {
+		--largeur-max-body: 1120px;
+		--padding-body: 20px 30px 40px;
+		--padding-entete: 10px 0px;
+		--padding-pied: 0px;
+
+		/* On passe maintenant à une mise en page en trois colonnes */
+		grid-template-areas:
+			/* L'en-tête prend toute la largeur de la grille (3 colonnes) */
+			"entete entete entete"
+			/* Une colonne pour la navigation, une pour le contenu principal et
+			une dernière pour le contenu secondaire */
+			"navigation principal secondaire"
+			/* Enfin, on affiche le pied de page dans la colonne centrale
+			uniquement, pour l'aligner avec le contenu principal. Pour les
+			cellules de la grille que l'on souhaite laisser vide, on peut choisir
+			n'importe quel nom, par exemple "vide" ou "-", mais attention à ne
+			pas utiliser deux fois le même nom sur des cellules qui ne se touchent
+			pas, ou bien la valeur de la propriété 'grid-template-areas' serait
+		 	considérée comme invalide et ignorée. */
+			"vide-1 pied vide-2";
+		grid-template-columns: 200px 1fr 240px;
+	}
+}
+
+/* En-tête */
+
+#entete {
+	grid-area: entete;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: var(--padding-entete);
+
+	@media (width >= 600px) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0008;
+}
+
+#entete h1 {
+	margin: 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 600px) {
+		font-size: 2.4rem;
+	}
+}
+
+#entete p {
+	margin: 4px 0;
+}
+
+/* Navigation */
+
+#navigation {
+	grid-area: navigation;
+	container-type: inline-size;
+
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
+	background-color: var(--fond-plus-sombre);
+}
+
+#navigation ul {
+	/* Pour l'explication de la mise en page de la navigation avec les
+	"container queries", voir les commentaires dans modele04.css */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 20px 10px;
+	list-style: none;
+
+	@container (width >= 320px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		padding-block: 10px;
+	}
+}
+
+#navigation a {
+	display: block;
+	padding: 8px 12px;
+	border-radius: 4px;
+	line-height: 1.5;
+	text-decoration: none;
+	color: var(--texte-clair-lien);
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000;
+}
+
+/* Contenu principal */
+
+#principal {
+	grid-area: principal;
+	padding: 20px;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
+}
+
+#principal > :first-child {
+	margin-top: 0;
+}
+
+#principal p,
+#principal li {
+	line-height: 1.5;
+}
+
+/* Contenu secondaire */
+
+#secondaire {
+	grid-area: secondaire;
+	padding: 20px;
+	background-color: var(--fond-plus-sombre);
+}
+
+#secondaire > :first-child {
+	margin-top: 6px;
+}
+
+#secondaire p,
+#secondaire li {
+	line-height: 1.5;
+}
+
+/* Pied de page */
+
+#pied {
+	grid-area: pied;
+	padding: var(--padding-pied);
+	font-size: 0.85em;
+	color: var(--texte-clair-secondaire);
+}
+
+#pied p {
+	margin: 0.5em 0;
+}

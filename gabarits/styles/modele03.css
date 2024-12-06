@@ -136,6 +136,8 @@ entre parenthèses est comprise par le navigateur.
 
 #navigation {
 	grid-area: navigation;
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
 	background-color: var(--fond-plus-sombre);
 }
 

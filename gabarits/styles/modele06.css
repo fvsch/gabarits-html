@@ -9,32 +9,15 @@
 body {
 	/* Gestion du padding du body et de l'en-tête:
 	voir les explications dans modele03.css */
-	--largeur-max-contenu: 600px;
-	--padding-inline-body: 0px;
-	--padding-inline-conteneur: 20px;
+	--largeur-max-body: 600px;
+	--padding-body: 20px 0px;
+	--padding-entete: 0px 20px;
+	--padding-pied: 0px 20px;
 
-	/*
-	Centrage de la page avec 'max-width' et les marges automatiques.
-
-	On veut donner au contenu (en particulier à la ligne centrale avec
-	la navigation et le contenu principal) une largeur maximale définie
-	par la variable '--largeur-max-contenu'.
-
-	Comme le 'body' a également du padding à gauche et à droite, et que l'on
-	utilise le mode de calcul des dimensions 'box-sizing: border-box'
-	(voir base.css), on doit fixer la largeur maximale à
-	'--largeur-max-contenu' plus le padding horizontal.
-
-	Une autre approche serait de passer en 'box-sizing: content-box' pour
-	cet élément:
-		box-sizing: content-box;
-		max-width: var(--largeur-max-contenu);
-	*/
-	max-width: calc(
-		var(--largeur-max-contenu) + var(--padding-inline-body) * 2
-	);
+	/* Centrage de la page avec 'max-width' et les marges automatiques */
+	max-width: var(--largeur-max-body);
 	margin-inline: auto;
-	padding-inline: var(--padding-inline-body);
+	padding: var(--padding-body);
 
 	/*
 	On utilise une grille CSS pour la mise en page globale de la page.
@@ -45,13 +28,15 @@ body {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
+	gap: 20px;
 }
 
-@media (width >= 800px) {
+@media (width >= 750px) {
 	body {
-		--largeur-max-contenu: 760px;
-		--padding-inline-body: 20px;
-		--padding-inline-conteneur: 0px;
+		--largeur-max-body: 840px;
+		--padding-body: 20px;
+		--padding-entete: 0px;
+		--padding-pied: 0px;
 
 		/*
 		Sur un écran plus large, en passe en deux colonnes, une de largeur
@@ -68,8 +53,6 @@ body {
 		*/
 		grid-template-columns: 220px 1fr;
 		grid-template-areas: "entete entete" "navigation contenu" "pied pied";
-		gap: 0px 20px;
-		padding-block: 20px;
 	}
 }
 
@@ -80,8 +63,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding-block: 20px;
-	padding-inline: var(--padding-inline-conteneur);
+	padding: var(--padding-entete);
 
 	@media (width >= 600px) {
 		flex-direction: row;
@@ -115,6 +97,9 @@ body {
 #navigation {
 	grid-area: navigation;
 	container-type: inline-size;
+
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
 	background-color: var(--fond-plus-sombre);
 }
 
@@ -173,8 +158,7 @@ body {
 
 #pied {
 	grid-area: pied;
-	padding-block: 15px;
-	padding-inline: var(--padding-inline-conteneur);
+	padding: var(--padding-pied);
 	font-size: 0.85em;
 	color: var(--texte-clair-secondaire);
 }

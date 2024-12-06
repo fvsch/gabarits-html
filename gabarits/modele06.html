@@ -34,46 +34,32 @@
 	<h2>À propos du gabarit 06</h2>
 	<h3>Code HTML et CSS</h3>
 	<p>Ce gabarit est structuré de la manière suivante:</p>
-<pre><code>&lt;div id="global">
-&lt;header id="entete">...&lt;/header>
-&lt;div id="centre">
+<pre><code>&lt;body>
+	&lt;header id="entete">...&lt;/header>
 	&lt;nav id="navigation">...&lt;/nav>
 	&lt;main id="contenu">...&lt;/main>
-&lt;/div>
-&lt;/div></code></pre>
+	&lt;footer id="pied">...&lt;/footer>
+&lt;/body>
+</code></pre>
 	<p>Il est mis en forme par deux feuilles de styles:</p>
 	<ol>
-		<li><a href="styles/base.css">base.css</a> (mise en forme
-		minimale du texte, commune à tous les gabarits)</li>
-		<li><strong><a href="styles/modele06.css">modele06.css</a>
-		</strong>, qui contient tous les styles propres à ce gabarit,
-		et que je vous invite à consulter.</li>
+		<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits);</li>
+		<li><strong><a href="styles/modele06.css">modele06.css</a></strong>, qui contient tous les styles propres à ce gabarit.</li>
 	</ol>
-	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
-	d'affichage de la source de votre navigateur web (ex: «Affichage >
-	Code source de la page»).</p>
+	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).</p>
+
 	<h3>À noter</h3>
-	<ol>
-		<li><p>Dans ce gabarit, nous utilisons la propriété CSS
-		<code>float</code> pour placer deux blocs à la même hauteur plutôt
-		que l'un en dessous de l'autre. Voir les notes de la feuille de
-		style du gabarit pour en savoir plus.</p>
-		<p>Le bloc de droite n'utilise pas la propriété
-		<code>float</code>, mais une simple marge à gauche
-		(<code>margin-left</code>).</p></li>
-		<li><p>Ce gabarit utilise la technique des <strong>colonnes
-		factices</strong> pour afficher deux colonnes de même hauteur
-		quelle que soit la hauteur des contenus. On utilise donc une
-		image de fond (<a href="styles/img/07-colonnes.png">07-colonnes.png</a>),
-		répétée en hauteur et appliquée au conteneur
-		<code>div#centre</code>.</p></li>
-		<li><p>Pour éviter que les colonnes ne «débordent» de leur
-		conteneur, il est nécessaire de gérer le
-		<a href="https://www.alsacreations.com/article/lire/7-depassement-flottants-css.html">
-		dépassement des flottants</a> (dans ce gabarit, on utilise
-		<code>div#centre</code> pour cela — voir les styles du
-		gabarit pour les détails).</p></li>
-	</ol>
+		<ol>
+			<li>
+				<p>Le conteneur global est l'élément <code>body</code>. Sur un écran large, il est centré grâce à une <strong>largeur maximale</strong> et des <strong>marges automatiques</strong>.</p>
+			</li>
+			<li>
+				<p>Les enfants de <code>body</code> sont disposés les uns sous les autres par défaut, puis sur un écran large ils sont disposés dans les zones nomées d'une <strong>grille CSS</strong>.</p>
+			</li>
+			<li>
+				Les écarts visibles entre les principaux blocs de contenu proviennent soit de la propriété CSS <code>gap</code> utilisée sur le conteneur principal, soit du padding vertical (en particulier la propriété CSS <code>padding-block</code>) sur les conteneurs eux-mêmes.
+			</li>
+		</ol>
 </main>
 
 <footer id="pied">

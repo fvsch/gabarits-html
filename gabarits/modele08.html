@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Gabarit 08: grille CSS adaptable en deux et trois colonnes, largeur maximale
+	</title>
+	<!-- La balise META "viewport" est requise pour la mise en page "responsive". -->
+	<meta name="viewport" content="width=device-width">
+	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
+	<link rel="stylesheet" href="styles/base.css" media="all">
+	<link rel="stylesheet" href="styles/modele08.css" media="screen">
+</head>
+<body>
+
+<header id="entete">
+	<img alt="" width="60" height="60" src="picto/08.svg">
+	<div>
+		<h1>Gabarit 08</h1>
+		<p>Grille CSS adaptable en deux et trois colonnes, largeur maximale</p>
+	</div>
+</header>
+
+<nav id="navigation">
+	<ul>
+		<li><a href="index.html">Introduction</a></li>
+		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li><a href="utiliser.html">Guide d’utilisation</a></li>
+	</ul>
+</nav>
+
+<main id="principal">
+	<h2>À propos du gabarit 08</h2>
+	<h3>Code HTML et CSS</h3>
+	<p>Ce gabarit est structuré de la manière suivante:</p>
+<pre><code>&lt;body>
+	&lt;header id="entete">...&lt;/header>
+	&lt;nav id="navigation">...&lt;/nav>
+	&lt;main id="principal">...&lt;/main>
+	&lt;aside id="secondaire">...&lt;/aside>
+	&lt;footer id="pied">...&lt;/footer>
+&lt;/body></code></pre>
+	<p>Il est mis en forme par deux feuilles de styles:</p>
+	<ol>
+		<li><a href="styles/base.css">base.css</a> (mise en forme minimale du texte, commune à tous les gabarits)</li>
+		<li><strong><a href="styles/modele08.css">modele08.css</a></strong>, qui contient tous les styles propres à ce gabarit, et que je vous invite à consulter.</li>
+	</ol>
+	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction d'affichage de la source de votre navigateur web (ex: «Affichage > Code source de la page»).</p>
+	<h3>À noter</h3>
+	<ol>
+		<li>
+			<p>Ce gabarit <strong>adapte sa mise en page à la largeur de l’écran</strong>. Sur des écrans étroits, tous les blocs de contenu sont affichés les uns sous les autres en pleine largeur. Pour les largeurs intermédiaires, on passe en deux colonnes pour les contenus principaux et secondaires. Et enfin, <strong>sur des écrans plus larges, on passe en trois colonnes</strong>.</p>
+		</li>
+		<li>
+			On utilise aussi les propriétés <code>max-width</code> et des marges automatiques sur le conteneur principal (<code>body</code>) pour limiter la largeur de la mise en page (afin de limiter la longueur maximale du texte) et centrer le tout.
+		</li>
+		<li>
+			<p>Pour mieux comprendre le fonctionnement des grilles CSS, vous pouvez utiliser les <a href="https://developer.mozilla.org/fr/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools">outils pour développeurs de votre navigateur</a> pour inspecter les styles de la page en sélectionnant l'élément <code>body</code> et en cliquant sur le bouton “grid” qui apparait à côté de cet élément dans l’arbre des éléments de la page.</p>
+		</li>
+	</ol>
+	<figure>
+		<img alt="Capture d’écran de l’outil Inspecteur des outils pour développeurs de Firefox, montrant un aperçu du code HTML de la page et un aperçu schématique de la grille de mise en page avec 3 colonnes" width="900" height="420" src="meta/08-devtools-grid.png">
+		<figcaption>L’outil d’inspection de grilles CSS dans Firefox DevTools</figcaption>
+	</figure>
+</main>
+
+<aside id="secondaire">
+	<h3>Contenu secondaire</h3>
+	<p>Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat.</p>
+	<p>Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue.</p>
+</aside>
+
+<footer id="pied">
+	<p>
+		Le contenu de mon pied de page.
+	</p>
+	<p>
+		Mise en page par <a href="https://fvsch.com">Florens Verschelde</a>.
+		Mise à jour en 2024; créée en 2008 pour Elephorm et Alsacréations.com.
+	</p>
+</footer>
+
+</body>
+</html>

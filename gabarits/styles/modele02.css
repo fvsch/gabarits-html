@@ -87,6 +87,8 @@
 /* Navigation */
 
 #navigation {
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
 	background-color: var(--fond-plus-sombre);
 }
 
