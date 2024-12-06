@@ -7,102 +7,63 @@
 /* Page */
 
 body {
-	/* Gestion de la largeur maximale du contenu */
+	/* Gestion du padding du body et de l'en-tête:
+	voir les explications dans modele03.css */
 	--largeur-max-body: 600px;
+	--padding-body: 20px 0px;
+	--padding-entete: 0px 20px;
+	--padding-pied: 0px 20px;
 
-	/* Gestion du padding du body et de l'en-tête.
-	(Voir les explications détaillées dans modele03.css.) */
-	--padding-inline-body: 0px;
-	--padding-inline-entete: 20px;
-
-	/* Centrage horizontal du contenu avec une largeur maximale
-	et des marges automatiques */
+	/* Centrage de la page avec 'max-width' et les marges automatiques */
 	max-width: var(--largeur-max-body);
 	margin-inline: auto;
-	padding-inline: var(--padding-inline-body);
+	padding: var(--padding-body);
 
 	/*
-	Nous allons réaliser la mise en page principale avec une grille CSS, et
-	quatre zones nommées ("entete", "navigation", "contenu" et "pied").
-	Par défaut, on commence par définir ces zones et les règles de création des
-	lignes et colonnes. Par convention on commence par les styles les plus
-	simples, qui sont souvent ceux pour les mobiles et autres petits écrans.
-	Ici, on définit une seule colonne de pleine largeur ('1fr'), et quatre
-	zones nommées dans 4 lignes séparées. Les contenus s'afficheront donc
-	les uns sous les autres.
+	On utilise une grille CSS pour la mise en page globale de la page.
+	Pour commencer, sur petit écran on utilise une grille avec une seule
+	colonne de contenu de pleine largeur, et des zones nommées apparaissant
+	les unes sous les autres (chaque zone est dans une nouvelle ligne).
 	*/
 	display: grid;
-	grid-template-areas: "entete" "navigation" "contenu" "pied";
 	grid-template-columns: 1fr;
+	grid-template-areas: "entete" "navigation" "contenu" "pied";
+	gap: 20px;
 }
 
-@media (width >= 860px) {
+@media (width >= 750px) {
 	body {
-		--largeur-max-body: 1200px;
-		--padding-inline-body: 40px;
-		--padding-inline-entete: 0px;
-		padding-block: 20px 40px;
-	}
+		--largeur-max-body: 840px;
+		--padding-body: 20px;
+		--padding-entete: 0px;
+		--padding-pied: 0px;
 
-	/* On continue la définition de notre grille de mise en page, mais cette
-	fois pour les écrans plus larges (860px et plus). */
-	body.navigation-gauche {
-		/* On souhaite une mise en page en deux colonnes, avec une première
-		colonne de largeur fixe une autre de largeur variable: */
-		grid-template-columns: 240px 1fr;
-		/* On rédéfinit aussi nos 4 zones nommées, en gardant les mêmes noms
-		(afin que les contenus placés avec 'grid-area' trouvent automatiquement
-		leur place dans la grille redéfinie).
-		- Chaque chaine de caractères placée entre guillemets correspond à une
-			ligne de la grille.
-		- On remarquera que deux zones sont sont définies comme occupant plusieurs
-			"cellules" de la grille: "entete" sur deux colonnes, et "navigation"
-			sur deux lignes.
+		/*
+		Sur un écran plus large, en passe en deux colonnes, une de largeur
+		fixe ('220px') et l'autre prenant tout l'espace restant ('1fr').
+
+		Les zones nommées "entete" et "pied" sont ensuite définies comme couvrant
+		les deux colonnes. De sorte que les colonnes de la grille sont utilisées
+		uniquement pour la mise en page de la navigation et du contenu principal.
+
+		Une autre option de mise en page serait d'avoir un conteneur regroupant
+		uniquement la navigation et le contenu principal, et d'utiliser une
+		grille CSS ou bien Flexbox ('display: flex') sur ce conteneur. Pour un
+		exemple de cette méthode alternative, voir le gabarit 07.
 		*/
-		grid-template-areas:
-			/* Première ligne: zone "entete" sur 2 colonnes */
-			"entete entete"
-			/* Deuxième ligne: zone "navigation" sur la première colonne, et "contenu" sur la seconde */
-			"navigation contenu"
-			/* Troisième ligne: zone "navigation" (à nouveau) sur la
-				première colonne, et zone "pied" sur la seconde */
-			"navigation pied";
-		/* On souhaite que chaque ligne prenne la hauteur de son contenu, sauf la
-	 	ligne du milieu ("navigation contenu") qui peut s'étendre en hauteur.
-		Ce sera surtout utile si la navigation est haute et le contenu court. */
-		grid-template-rows: auto 1fr auto;
-
-		/* On ajoute une goutière de 20px entre colonnes uniquement */
-		gap: 0px 20px;
-	}
-
-	/* Style similaire aux lignes ci-dessus, mais avec la zone "navigation"
-	placée à droite */
-	body.navigation-droite {
-		grid-template-columns: 1fr 240px;
-		grid-template-areas:
-			"entete entete"
-			"contenu navigation"
-			"pied navigation";
-		grid-template-rows: auto 1fr auto;
-		gap: 0px 20px;
+		grid-template-columns: 220px 1fr;
+		grid-template-areas: "entete entete" "navigation contenu" "pied pied";
 	}
 }
 
 /* En-tête */
 
 #entete {
-	/* Un conteneur peut être à la fois enfant d'une grille CSS… */
 	grid-area: entete;
-
-	/* … et aussi définir une mise en page en grille ou flexbox pour ses
-	propres enfants. (Pour la mise en page de cet en-tête avec "flexbox",
-	voir les explications dans modele01.css.) */
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding-block: 20px;
-	padding-inline: var(--padding-inline-entete);
+	padding: var(--padding-entete);
 
 	@media (width >= 600px) {
 		flex-direction: row;
@@ -134,16 +95,7 @@ body {
 /* Navigation */
 
 #navigation {
-	/* Ce conteneur doit être affiché dans la zone "navigation" de la grille
-	CSS parente (définie avec 'grid-template-areas', 'grid-template-columns'
-	et 'grid-template-rows'). */
 	grid-area: navigation;
-
-	/* Pour la mise en page de la liste des liens, nous allons utiliser les
-	"container queries". Pour cela, nous devons définir ce conteneur comme
-	étant l'espace de référence pour les conditions de dimensions (hauteur et
-	largeur) de ses enfants et descendants. Pour cela on utilise la propriété
-	CSS 'container-type'. */
 	container-type: inline-size;
 
 	/* Les variables CSS de couleur utilisées dans cette mise en page sont
@@ -152,10 +104,8 @@ body {
 }
 
 #navigation ul {
-	/* Par défaut, on affiche les liens en colonne, c'est à dire les uns sous
-	les autres. (On pourrait réaliser le même affichage avec 'display: block',
-	mais passer directement en Flexbox nous permet de faire varier l'affichage
-	en changeant juste la valeur de 'flex-direction'.) */
+	/* Pour l'explication de la mise en page de la navigation avec les
+	"container queries", voir les commentaires dans modele04.css */
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
@@ -163,8 +113,6 @@ body {
 	padding: 20px 10px;
 	list-style: none;
 
-	/* Lorsque l'espace horizontal disponible pour la liste de liens et de au
-	moins 320px, on affiche les liens comme une liste horizontale. */
 	@container (width >= 320px) {
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -191,6 +139,7 @@ body {
 
 #contenu {
 	grid-area: contenu;
+	position: relative;
 	padding: 20px;
 	color: var(--texte-sombre);
 	background-color: var(--fond-clair);
@@ -205,23 +154,13 @@ body {
 	line-height: 1.5;
 }
 
-#contenu figure img {
-	border-radius: 4px;
-}
-
-#contenu figcaption {
-	font-size: 90%;
-	text-align: center;
-}
-
 /* Pied de page */
 
 #pied {
 	grid-area: pied;
-	padding: 15px 20px;
+	padding: var(--padding-pied);
 	font-size: 0.85em;
 	color: var(--texte-clair-secondaire);
-	background-color: var(--fond-plus-sombre);
 }
 
 #pied p {
