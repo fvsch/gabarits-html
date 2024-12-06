@@ -21,6 +21,8 @@ body {
 	max-width: var(--largeur-max-body);
 	margin-inline: auto;
 
+	/* Les variables CSS de couleur utilisées dans cette mise en page sont
+	définies dans base.css */
 	background-color: var(--fond-plus-sombre);
 
 	/* On souhaite aussi que ce conteneur remplisse l'espace vertical disponible
