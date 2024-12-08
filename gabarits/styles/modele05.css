@@ -12,14 +12,14 @@ body {
 
 	/* Gestion du padding du body et de l'en-tête.
 	(Voir les explications détaillées dans modele03.css.) */
-	--padding-inline-body: 0px;
-	--padding-inline-entete: 20px;
+	--padding-body: 0px;
+	--padding-entete: 20px;
 
 	/* Centrage horizontal du contenu avec une largeur maximale
 	et des marges automatiques */
 	max-width: var(--largeur-max-body);
 	margin-inline: auto;
-	padding-inline: var(--padding-inline-body);
+	padding: var(--padding-body);
 
 	/*
 	Nous allons réaliser la mise en page principale avec une grille CSS, et
@@ -39,9 +39,8 @@ body {
 @media (width >= 860px) {
 	body {
 		--largeur-max-body: 1200px;
-		--padding-inline-body: 40px;
-		--padding-inline-entete: 0px;
-		padding-block: 20px 40px;
+		--padding-body: 0px 40px 40px;
+		--padding-entete: 30px 0px;
 	}
 
 	/* On continue la définition de notre grille de mise en page, mais cette
@@ -101,8 +100,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding-block: 20px;
-	padding-inline: var(--padding-inline-entete);
+	padding: var(--padding-entete);
 
 	@media (width >= 600px) {
 		flex-direction: row;
@@ -218,12 +216,17 @@ body {
 
 #pied {
 	grid-area: pied;
-	padding: 15px 20px;
-	font-size: 0.85em;
+	padding: 20px;
+	font-size: 0.75rem;
+	line-height: 1.5;
 	color: var(--texte-clair-secondaire);
 	background-color: var(--fond-plus-sombre);
 }
 
-#pied p {
-	margin: 0.5em 0;
+#pied > * {
+	margin-block: 0;
+}
+
+#pied > * + * {
+	margin-top: 0.5em;
 }

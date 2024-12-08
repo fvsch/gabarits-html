@@ -7,12 +7,11 @@
 /* Page */
 
 body {
-	/* Gestion du padding du body et de l'en-tête:
-	voir les explications dans modele03.css */
-	--largeur-max-body: 600px;
-	--padding-body: 20px 0px;
-	--padding-entete: 0px 20px;
-	--padding-pied: 0px 20px;
+	/* Gestion du padding du body et de certains conteneurs  */
+	--largeur-max-body: 640px;
+	--padding-body: 0px;
+	--padding-entete: 20px;
+	--padding-pied: 20px;
 
 	/* Centrage de la page avec 'max-width' et les marges automatiques */
 	max-width: var(--largeur-max-body);
@@ -28,15 +27,22 @@ body {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-areas: "entete" "navigation" "contenu" "pied";
-	gap: 20px;
 }
 
-@media (width >= 750px) {
+@media (width >= 600px) {
 	body {
-		--largeur-max-body: 840px;
-		--padding-body: 20px;
-		--padding-entete: 0px;
-		--padding-pied: 0px;
+		--padding-body: 0px 20px;
+		--padding-entete: 20px 0px;
+		--padding-pied: 20px 0px;
+	}
+}
+
+@media (width >= 900px) {
+	body {
+		--largeur-max-body: 960px;
+		--padding-body: 0px 40px;
+		--padding-entete: 30px 0px;
+		--padding-pied: 20px 0px;
 
 		/*
 		Sur un écran plus large, en passe en deux colonnes, une de largeur
@@ -53,6 +59,7 @@ body {
 		*/
 		grid-template-columns: 220px 1fr;
 		grid-template-areas: "entete entete" "navigation contenu" "pied pied";
+		gap: 0 20px;
 	}
 }
 
@@ -101,6 +108,10 @@ body {
 	/* Les variables CSS de couleur utilisées dans cette mise en page sont
 	définies dans base.css */
 	background-color: var(--fond-plus-sombre);
+
+	@media (width < 900px) {
+		margin-bottom: 20px;
+	}
 }
 
 #navigation ul {
@@ -159,10 +170,15 @@ body {
 #pied {
 	grid-area: pied;
 	padding: var(--padding-pied);
-	font-size: 0.85em;
+	font-size: 0.75rem;
+	line-height: 1.5;
 	color: var(--texte-clair-secondaire);
 }
 
-#pied p {
-	margin: 0.5em 0;
+#pied > * {
+	margin-block: 0;
+}
+
+#pied > * + * {
+	margin-top: 0.5em;
 }

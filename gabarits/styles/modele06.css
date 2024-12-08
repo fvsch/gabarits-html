@@ -202,11 +202,16 @@ body {
 
 #pied {
 	grid-area: pied;
-	padding: 15px 20px;
-	font-size: 0.85em;
+	padding: 20px;
+	font-size: 0.75rem;
+	line-height: 1.5;
 	color: var(--texte-clair-secondaire);
 }
 
-#pied p {
-	margin: 0.5em 0;
+#pied > * {
+	margin-block: 0;
+}
+
+#pied > * + * {
+	margin-top: 0.5em;
 }
