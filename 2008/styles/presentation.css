@@ -14,7 +14,7 @@ html {
 body {
 	max-width: 550px;
 	margin: 0 auto;
-	padding: 30px 0;
+	padding: 0px 0px 30px 0px;
 }
 a {
 	color: #ff6533;
@@ -29,19 +29,22 @@ strong {
 
 /* En-tête */
 #entete {
-	padding: 30px 0;
+	padding: 40px 20px;
+	text-align: center;
 }
 #entete h1 {
 	margin: 0 0 24px 0;
-	line-height: 1;
-	text-align: center;
+	line-height: 1.15;
 	font-size: 1.75rem;
 	font-style: normal;
 	text-shadow: 0 1px 4px black;
 }
 #entete p {
-	margin: 0 24px;
+	margin: 0;
 	line-height: 1.4;
+}
+#entete a {
+	color: inherit;
 }
 
 /* Navigation */

@@ -4,44 +4,46 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-/* --- STYLES SPÉCIFIQUES AUX PAGES D'INFORMATION SUR LES GABARITS --- */
+/* Page */
 
-/* Global */
-html {
-	color: #f0e39e;
-	background-color: #2c2f22;
-}
 body {
 	max-width: 550px;
 	margin: 0 auto;
-	padding: 30px 0;
+	padding-bottom: 30px;
 }
+
 a {
 	color: #ff6533;
 }
+
 a:hover,
 a:focus {
 	color: #ff4c00;
 }
+
 strong {
 	color: #a1b55d;
 }
 
 /* En-tête */
+
 #entete {
-	padding: 30px 0;
-}
-#entete h1 {
-	margin: 0 0 24px 0;
-	line-height: 1;
+	padding: 40px 20px;
 	text-align: center;
+}
+
+#entete h1 {
+	margin-block: 0 24px;
+	line-height: 1.15;
 	font-size: 1.75rem;
 	font-style: normal;
 	text-shadow: 0 1px 4px black;
 }
+
 #entete p {
-	margin: 0 24px;
+	margin: 0;
 	line-height: 1.4;
+	text-wrap: balance;
 }
 
 /* Navigation */

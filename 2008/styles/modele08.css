@@ -41,7 +41,7 @@ strong {
 
 /* Bloc central */
 #centre {
-	background: url(img/08-colonnes.png) repeat-y; /* Voir -> Note 1 */
+	background: url("../img/08-colonnes.png") repeat-y; /* Voir -> Note 1 */
 }
 
 /* Contenu principal */
