@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Gabarit 02: conteneur global aligné à gauche, largeur fixe 750px
+	</title>
+	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
+	<link rel="stylesheet" href="styles/base.css" media="all">
+	<link rel="stylesheet" href="styles/modele02.css" media="screen">
+</head>
+
+<body>
+<div id="global">
+
+<header id="entete">
+	<h1>
+		<img alt="" width="60" height="60" src="picto/02.png">
+		Gabarit 02
+	</h1>
+	<p class="sous-titre">
+		<strong>Caractéristiques:</strong> conteneur global aligné à gauche, largeur fixe 750px
+	</p>
+</header>
+
+<nav id="navigation">
+	<ul>
+		<li><a href="index.html">Introduction</a></li>
+		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li><a href="utiliser.html">Guide d’utilisation</a></li>
+	</ul>
+</nav>
+
+<main id="contenu">
+	<h2>À propos du gabarit 02</h2>
+	<h3>Code HTML et CSS</h3>
+	<p>Ce gabarit est structuré de la manière suivante:</p>
+<pre><code>&lt;div id="global">
+	&lt;header id="entete">...&lt;/header>
+	&lt;nav id="navigation">...&lt;/nav>
+	&lt;main id="contenu">...&lt;/main>
+	&lt;footer id="pied">...&lt;/footer>
+&lt;/div></code></pre>
+	<p>Il est mis en forme par deux feuilles de styles:</p>
+	<ol>
+		<li><a href="styles/base.css">base.css</a> (mise en forme minimale
+		du texte, commune à tous les gabarits)</li>
+		<li><strong><a href="styles/modele02.css">modele02.css</a></strong>,
+		qui contient tous les styles propres à ce gabarit, et que nous vous
+		invitons à consulter.</li>
+	</ol>
+	<p>Pour voir le détail du code HTML de cette page, utilisez la fonction
+	d'affichage de la source de votre navigateur web (ex: «Affichage >
+	Code source de la page»).</p>
+	<h3>À noter</h3>
+	<ol>
+		<li>
+			<p>Le conteneur global (<code>div#global</code>) a une largeur
+			fixe de 750px. Nous n'avons pas besoin de propriétés
+			spécifiques pour <strong>le placer à gauche de la page</strong>:
+			ce sera en effet son comportement par défaut.</p>
+		</li>
+		<li>
+			<p>La <strong>largeur fixe</strong> résoud le problème du
+			gabarit 01 avec les lignes de texte trop longues pour les
+			grandes résolutions d'écran. Par contre, sur un très grand
+			écran un site de 750px de large peut sembler étriqué. Le revers
+			de la médaille, en quelques sortes.</p>
+		</li>
+		<li>
+			<p>Nous avons à nouveau un <strong>menu de navigation
+			horizontal</strong>, mais cette fois il est réalisé grâce à la
+			propriété CSS <code>float</code>. Nous nous sommes permis
+			quelques <strong>subtilités</strong> pour ce menu, alors
+			n'oubliez pas d'observer le code HTML et le code CSS
+			correspondant!</p>
+		</li>
+	</ol>
+</main>
+
+<footer id="pied">
+	<p>
+		Le contenu de mon pied de page. Nulla tincidunt tincidunt mi.
+		Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum
+		augue, et ultricies lacus lorem varius purus. Curabitur eu amet.
+	</p>
+	<p id="copyright">
+		Mise en page © 2008
+		<a href="https://www.elephorm.com">Elephorm</a> et
+		<a href="https://www.alsacreations.com">Alsacréations</a>
+	</p>
+</footer>
+
+</div>
+</body>
+</html>
