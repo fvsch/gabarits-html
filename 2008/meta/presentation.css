@@ -1,0 +1,225 @@
+/* =======================================
+ * FEUILLE DE STYLES DES GABARITS HTML/CSS
+ * © Florens Verschelde pour Elephorm & Alsacreations.com
+ * Licence: https://creativecommons.org/licenses/by/2.0/fr/
+ * ======================================= */
+
+/* --- STYLES SPÉCIFIQUES AUX PAGES D'INFORMATION SUR LES GABARITS --- */
+
+/* Global */
+html {
+	color: #f0e39e;
+	background-color: #2c2f22;
+}
+body {
+	max-width: 550px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+a {
+	color: #ff6533;
+}
+a:hover,
+a:focus {
+	color: #ff4c00;
+}
+strong {
+	color: #a1b55d;
+}
+
+/* En-tête */
+#entete {
+	padding: 30px 0;
+}
+#entete h1 {
+	margin: 0 0 24px 0;
+	line-height: 1;
+	text-align: center;
+	font-size: 1.75rem;
+	font-style: normal;
+	text-shadow: 0 1px 4px black;
+}
+#entete p {
+	margin: 0 24px;
+	line-height: 1.4;
+}
+
+/* Navigation */
+#navigation {
+	padding: 12px;
+	color: #ff6533;
+	background-color: #181a12;
+}
+#navigation ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	text-align: center;
+}
+#navigation li {
+	display: inline;
+	margin: 0 5px 0 0;
+}
+#navigation a {
+	display: block;
+	padding: 6px 8px;
+	border-radius: 4px;
+	text-decoration: none;
+	color: inherit;
+}
+#navigation a[aria-current] {
+	color: #848f63;
+}
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000000;
+}
+
+/* Navigation: page d'accueil */
+#resume {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px 24px;
+	margin: 12px 0 40px;
+	padding-bottom: 40px;
+	border-bottom: dashed 1px #848f63;
+	list-style: none;
+}
+#resume a {
+	color: #332510;
+}
+#resume a:hover,
+#resume a:focus {
+	color: #6e5122;
+	text-decoration: underline;
+}
+#resume li {
+	margin: 0;
+}
+#resume h2 {
+	margin-top: 0;
+	margin-bottom: 6px;
+}
+#resume h2 a {
+	display: block;
+	margin: 0 -6px;
+	padding: 0 6px;
+	border-radius: 6px;
+	text-decoration: underline;
+	text-decoration-color: #33251080;
+	text-underline-offset: 4px;
+	color: inherit;
+}
+#resume h2 a:hover,
+#resume h2 a:focus {
+	text-decoration: none;
+	color: black;
+	background-color: #a1b55d;
+}
+#resume p {
+	margin: 0;
+}
+#resume p a {
+	text-decoration: none;
+}
+#resume p a:hover,
+#resume p a:focus {
+	background: none;
+}
+
+/* Contenu */
+#contenu {
+	overflow: hidden;
+	padding: 16px 24px 20px;
+	color: #363b29;
+	background-color: #cbd888;
+	color: hsl(77, 18%, 20%);
+	background-color: hsl(70, 50%, 69%);
+	background-repeat: repeat-x;
+	background-image: linear-gradient(to bottom, #0006, transparent);
+	background-size: 30px 8px;
+}
+#contenu h2 {
+	font-size: 1.5rem;
+}
+#contenu > h2:first-child {
+	margin-top: 15px;
+}
+#contenu h3 {
+	margin-top: 1.5em;
+	margin-bottom: 0.75em;
+}
+#contenu a {
+	color: #332510;
+}
+#contenu a:hover,
+#contenu a:focus {
+	color: #6e5122;
+}
+#contenu p,
+#contenu li {
+	line-height: 1.5;
+}
+
+#contenu .liste-gabarits {
+	margin: 20px 0;
+	list-style: none;
+}
+#contenu .liste-gabarits li {
+	display: grid;
+	grid-template-areas: "titre description vignette";
+	grid-template-columns: 120px 1fr 60px;
+	gap: 16px;
+	overflow: hidden;
+	margin: 15px 0;
+}
+@media (width < 550px) {
+	#contenu .liste-gabarits li {
+		gap: 6px 16px;
+		grid-template-columns: 60px 1fr;
+		grid-template-areas: "titre titre" "vignette description";
+	}
+}
+#contenu .liste-gabarits h4 {
+	grid-area: titre;
+	margin: 0;
+	font-weight: bold;
+	font-size: 1rem;
+	font-variant: small-caps;
+	font-family: Georgia, serif;
+}
+#contenu .liste-gabarits h4 a {
+	text-decoration: none;
+}
+#contenu .liste-gabarits h4 a:hover,
+#contenu .liste-gabarits h4 a:focus {
+	text-decoration: underline;
+}
+#contenu .liste-gabarits img {
+	display: block;
+}
+#contenu .liste-gabarits p {
+	grid-area: description;
+	margin: 4px 10px 4px 0;
+	line-height: 1.4;
+	font-size: 0.75rem;
+}
+
+/* Copyright */
+#copyright {
+	margin: 0;
+	padding: 20px 0 10px;
+	text-align: right;
+	font-size: 0.75rem;
+	text-align: center;
+	color: #8f9b6a;
+}
+#copyright a {
+	color: inherit;
+}
+#copyright a:hover,
+#copyright a:focus {
+	color: white;
+}

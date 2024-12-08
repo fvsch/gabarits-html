@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Informations techniques — Gabarits HTML-CSS</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="styles/base.css" media="all">
+	<link rel="stylesheet" href="meta/presentation.css" media="screen">
+</head>
+
+<body>
+
+<header id="entete">
+	<h1>Gabarits HTML et CSS simples</h1>
+	<p>
+		Une série de gabarits de <strong>mise en page</strong> HTML et CSS créée <strong>en 2008</strong> avec les techniques de l’époque.
+	</p>
+</header>
+
+<nav id="navigation">
+	<ul>
+		<li><a href="index.html">Introduction</a></li>
+		<li><a href="liste.html">Tous les gabarits</a></li>
+		<li><a aria-current="page" href="utiliser.html">Guide d’utilisation</a></li>
+	</ul>
+</nav>
+
+<main id="contenu">
+	<h2>Utiliser les gabarits pour vos projets</h2>
+	<ul>
+		<li>
+			<a href="#licence">Conditions d’utilisation</a>
+		</li>
+		<li>
+			<a href="#telecharger">Télécharger les gabarits</a>
+		</li>
+		<li>
+			<a href="#fichiers">Fichiers d'un gabarit</a>
+		</li>
+		<li>
+			<a href="#adapter">Adapter un gabarit</a>
+		</li>
+	</ul>
+
+	<h3 id="licence">Conditions d’utilisation</h3>
+	<p>
+		<a href="https://creativecommons.org/licenses/by/2.0/fr/"><img style="vertical-align: middle" alt="Creative Commons BY" width="66" height="30" src="meta/cc-by.svg"></a>
+	</p>
+	<p>
+		Les gabarits HTML-CSS présentés ici peuvent être utilisés pour vos projets personnels ou professionnels, commerciaux ou non, selon les termes du contrat <a href="https://creativecommons.org/licenses/by/2.0/fr/">Creative Commons Attribution 2.0 FR</a>.
+	</p>
+
+	<h3 id="telecharger">Télécharger les gabarits</h3>
+	<p>
+		Vous pouvez <a href="https://github.com/fvsch/gabarits-html">explorer le code des gabarits sur GitHub</a>,
+		ou <a href="https://github.com/fvsch/gabarits-html/archive/refs/heads/main.zip">télécharger une archive zip directement</a>.
+	</p>
+
+	<h3 id="fichiers">Fichiers d'un gabarit</h3>
+	<p>Chaque gabarit est organisé de la manière suivante:</p>
+<pre><code><strong>modele##.html</strong>
+styles/
+   <strong>base.css</strong>
+   <strong>modele##.css</strong>
+   img/
+      ##-une-image.jpg
+      ##-une-autre-image.png</code></pre>
+	<p>
+		Les ## correspondent au numéro de gabarit.<br>
+		Tout gabarit comprend un fichier HTML et un fichier CSS qui lui sont propres. Tous les gabarits utilisent également la même feuille de styles de base, nommée <code>base.css</code>.<br>
+		Certains gabarits utilisent des images de fond, placées dans le répertoire <code>styles/img/</code>. Ce n'est pas le cas de tous les gabarits.
+	</p>
+
+	<h3 id="adapter">Adapter un gabarit</h3>
+	<p>
+		Voici quelques repères si vous souhaitez adapter un gabarit pour
+	créer vos pages:
+	</p>
+	<ol>
+		<li>
+			<p>Tout d'abord, il est indispensable de comprendre le fonctionnement du gabarit, du moins dans les grandes lignes. Pensez à lire les explications données sur la page du gabarit, ainsi que dans les fichiers CSS eux-mêmes.</p>
+		</li>
+		<li>
+			<p>Ensuite, faites une copie des fichiers du gabarit choisi, et placez-les dans un répertoire de travail. En ouvrant le fichier HTML avec un navigateur, vérifiez que tout marche bien. Vous pouvez maintenant travaillez sur ces fichiers, en gardant la copie d'origine pour vérifier le fonctionnement du code de départ (pratique si vous «cassez» quelque chose).</p>
+		</li>
+		<li>
+			<p>Modifiez l'en-tête, le pied de page (s'il existe), et le ou les menus de navigation, pour refléter l'identité et les contenus de votre site.</p>
+			<p>Modifiez le code HTML dans <code>div#contenu</code> pour placer le contenu de votre page.</p>
+			<p>Évitez de toucher aux balises qui ouvrent et ferment les principaux blocs de la mise en page, si vous n'êtes pas sûr de ce que vous faites! Ces balises ressemblent en général à ceci:</p>
+<pre><code><strong>&lt;div id="un-identifiant"></strong>
+Ici le contenu de mon bloc.
+<strong>&lt;/div></strong></code></pre>
+		</li>
+		<li>
+			<p>Pour modifier les polices de caractères et le rendu du texte pour tous les éléments de la page, modifiez <code>base.css</code>.</p>
+			<p>Pour modifier les couleurs du texte et des principaux conteneurs, modifiez la première partie du fichier <code>modele##.css</code>.</p>
+			<p>Pour modifier le positionnement des principaux conteneurs, modifiez la deuxième partie du fichier <code>modele##.css</code>.</p>
+		</li>
+	</ol>
+</main>
+
+<footer id="copyright">
+	© 2008 / Gabarits HTML et CSS proposés par
+	<a href="https://www.elephorm.com">Elephorm</a> et
+	<a href="https://www.alsacreations.com">Alsacréations</a>
+</footer>
+
+</body>
+</html>
