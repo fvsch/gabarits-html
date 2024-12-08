@@ -30,7 +30,7 @@ strong {
 
 /* Conteneur central */
 #centre {
-	background: url(img/10-colonnes.png) repeat-y;
+	background: url("../img/10-colonnes.png") repeat-y;
 }
 
 /* Navigation */
