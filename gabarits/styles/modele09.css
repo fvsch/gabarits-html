@@ -4,150 +4,285 @@
  * Licence: https://creativecommons.org/licenses/by/2.0/fr/
  * ======================================= */
 
-
-/* --- COULEURS --- */
-
-/* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
-   uniquement les couleurs de fond (propriétés background) et les couleurs
-   du texte (propriété color).
-   Pour modifier la disposition des blocs, voir plus bas dans la feuille de
-   styles la partie «positionnement». */
-
-/* Général */
-html {
-	color: #F0E39E;
-	background: #2C2F22;
-}
-a {
-	color: #FF6533;
-}
-a:hover, a:focus {
-	color: #FF4C00;
-}
-strong {
-	color: #A1B55D;
-}
-
-/* Conteneur central */
-#centre {
-	background: url(img/10-colonnes.png) repeat-y;
-}
-
-/* Navigation */
-#navigation {
-	background: #181A12;
-}
-#navigation a {
-	color: #FF6533;
-}
-#navigation a:hover, #navigation a:focus {
-	background: #000000;
-}
-
-/* Contenu principal */
-#principal {
-	color: #181A12;
-	background: #cbd888;
-}
-#principal a {
-	color: #332510;
-}
-#principal a:hover, #principal a:focus {
-	color: #6E5122;
-}
-#principal strong {
-	color: #181A12;
-}
-
-/* Contenu secondaire */
-#secondaire {
-	background: #181A12;
-}
-
-
-
-/* --- POSITIONNEMENT --- */
-
 /* Page */
+
 body {
-	padding: 20px 5px;
+	/* On définit quelques variables CSS qui vont nous permettre d'ajuster
+	le padding ou la couleur de fond de certains blocs, en particulier quand
+	la largeur de l'écran change. */
+	--padding-entete: 20px;
+	--padding-pied: 20px;
+	--couleur-fond1: transparent;
+	--couleur-fond2: transparent;
+
+	/*
+	On utilise une grille CSS pour agebcer les principaux conteneurs.
+	On commence par définir une grille à une seule colonne, avec une zone
+	nommée par ligne.
+	*/
+	display: grid;
+	grid-template-areas: "entete" "navigation" "principal" "secondaire" "pied";
+	/*
+	On définit une seule colonne, et on lui donne une largeur fluide avec la
+	fonction 'minmax()'. Ici, cette colonne aura une largeur maximale de 600px.
+	*/
+	grid-template-columns: minmax(200px, 600px);
+	/*
+	Avec la propriété 'justify-content', on peut centrer horizontalement tout
+	le contenu de la grille (donc notre colonne unique). On arrive au même type
+	de résultat que si on avait utilisé 'max-width: 600px' et des marges
+	automatiques sur le 'body'.
+	*/
+	justify-content: center;
 }
-#global {
-	width: 900px;
-	margin-left: auto;
-	margin-right: auto;
+
+/* Style for the main layout grid for screen widths between 1000px and 1500px. */
+@media (900px <= width < 1200px) {
+	body {
+		--padding-entete: 40px 20px;
+		--padding-pied: 20px 0 40px;
+		/* Les variables CSS de couleur utilisées dans cette mise en page sont
+		définies dans base.css */
+		--couleur-fond1: var(--fond-plus-sombre);
+		--couleur-fond2: var(--fond-clair);
+
+		/*
+		Sur des écrans de taille moyenne, on souhaite afficher le contenu sur
+		deux colonnes, avec une largeur maximale, et le tout centré
+		horizontalement.
+
+		Mais on souhaite aussi réaliser un effet visuel où la couleur de fond des
+		contenus de la colonne de gauche s'étend jusqu'au bord gauche de l'écran,
+		et où la couleur de fond des contenus de la colonne de droite s'étend
+		jusqu'au bord droit de l'écran.
+
+		Pour cela, on peut utiliser une grille à 4 colonnes, et utiliser la
+		première et la dernière colonnes:
+		1. comme mécanisme pour centrer les deux colonnes centrales, en utilisant
+			une largeur de '1fr' pour les colonnes des bords;
+		2. et comme cellules de grille dans lesquelles on peut venir positionner
+	 		des éléments qui ont pour but de peindre une couleur de fond
+			identique à celle des contenus adjacents.
+
+		L’effet obtenu est une sorte de trompe-l'oeil. Sa définition est un peu
+		complexe, donc n'hésitez pas à utiliser les outils pour développeurs de
+		votre navigateur pour inspecter la grille CSS sur l'élément 'body'
+		(en dimensionant la page à une largeur d'environ 1000px).
+		*/
+		grid-template-areas:
+			"vide1  entete      entete      vide2"
+			"fond1  navigation  principal   fond2"
+			"fond1  secondaire  principal   fond2"
+			"vide3  vide3       pied        vide4";
+
+		grid-template-columns:
+			/* Largeur de la colonne vide de gauche (doit être identique à celle de droite) */
+			minmax(20px, 1fr)
+			/* Largeur de la colonne centrale de gauche (navigation + secondaire) */
+			240px
+			/* Largeur de la colonne centrale de droite (contenu principal) */
+			minmax(500px, 680px)
+			/* Largeur de la colonne vide de droite (doit être identique à celle de gauche) */
+			minmax(20px, 1fr);
+
+		/*
+		Hauteurs des lignes de la grille. On veut étendre la 3e ligne,
+		qui héberge le contenu secondaire et une partie du contenu principal.
+		(Vous pouvez remplacer la valeur '1fr' par 'auto' pour voir l'effet sur
+		la hauteur de la navigation et du contenu secondaire.)
+		*/
+		grid-template-rows: auto auto 1fr auto;
+	}
+}
+
+@media (width >= 1200px) {
+	body {
+		--padding-entete: 40px 20px;
+		--padding-pied: 20px 0 40px;
+		--couleur-fond1: var(--fond-plus-sombre);
+		--couleur-fond2: var(--fond-plus-sombre);
+
+		/*
+		Pour une page plus large, on utilise la même technique de grille CSS
+		avec une première et dernière colonne destinées à centrer les contenus
+		et à afficher une couleur de fond jusqu'au bord de la page.
+
+		Cette fois-ci, on a trois colonnes centrales pour le contenu,
+		et donc 5 colonnes en tout.
+		*/
+		grid-template-areas:
+			"vide1  entete      entete     entete      vide2"
+			"fond1  navigation  principal  secondaire  fond2"
+			"vide3  vide3       pied       vide4       vide4";
+
+		grid-template-columns:
+			/* Largeur de la colonne vide de gauche (doit être identique à celle de droite) */
+			minmax(20px, 1fr)
+			/* Largeur de la colonne centrale de gauche (navigation) */
+			240px
+			/* Largeur de la colonne centrale (contenu principal) */
+			minmax(500px, 680px)
+			/* Largeur de la colonne centrale de droite (secondaire) */
+			280px
+			/* Largeur de la colonne vide de droite (doit être identique à celle de gauche) */
+			minmax(20px, 1fr);
+	}
+}
+
+/* Éléments utilisés comme remplissage de la première et dernière colonnes */
+
+@media (width >= 900px) {
+	#fond-gauche {
+		grid-area: fond1;
+		background-color: var(--couleur-fond1);
+	}
+	#fond-droite {
+		grid-area: fond2;
+		background-color: var(--couleur-fond2);
+	}
 }
 
 /* En-tête */
+
 #entete {
-	padding: 20px 0;
+	grid-area: entete;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: var(--padding-entete);
+
+	@media (width >= 600px) {
+		flex-direction: row;
+		align-items: center;
+	}
 }
+
+#entete img {
+	display: block;
+	flex-shrink: 0;
+	background-color: #fff;
+	box-shadow: 0 1px 4px #0008;
+}
+
 #entete h1 {
 	margin: 0;
-}
-#entete h1 img {
-	float: left;
-	margin: 7px 20px 10px 0;
-}
-#entete .sous-titre {
-	margin: 4px 0 15px 0;
+	font-size: 2rem;
+	line-height: 1.2;
+
+	@media (width >= 600px) {
+		font-size: 2.4rem;
+	}
 }
 
-/* Bloc central */
-#centre {
-	width: 100%;
-	overflow: hidden;
+#entete p {
+	margin: 4px 0;
 }
 
-/* Menu de navigation */
+/* Navigation */
+
 #navigation {
-	float: left;
-	width: 180px;
+	grid-area: navigation;
+	container-type: inline-size;
+	background-color: var(--fond-plus-sombre);
 }
+
 #navigation ul {
+	/* Pour l'explication de la mise en page de la navigation avec les
+	"container queries", voir les commentaires dans modele04.css */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	margin: 0;
-	padding: 20px 10px 20px 10px;
+	padding: 20px 10px;
 	list-style: none;
+
+	@container (width >= 320px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		padding-block: 10px;
+	}
 }
+
 #navigation a {
 	display: block;
-	height: 1%;
-	padding: 6px 10px 6px 10px;
+	padding: 8px 12px;
+	border-radius: 4px;
 	line-height: 1.5;
-	font-size: .9em;
 	text-decoration: none;
+	color: var(--texte-clair-lien);
+}
+
+#navigation a:hover,
+#navigation a:focus {
+	background-color: #000;
 }
 
 /* Contenu principal */
+
 #principal {
-	float: left;
-	width: 460px;
-	padding: 10px 20px;
+	grid-area: principal;
+	padding: 20px;
+	color: var(--texte-sombre);
+	background-color: var(--fond-clair);
 }
+
 #principal > :first-child {
-	margin-top: 10px;
+	margin-top: 0;
 }
-#principal p, #principal li {
+
+#principal p,
+#principal li {
 	line-height: 1.5;
 }
 
 /* Contenu secondaire */
+
 #secondaire {
-	margin-left: 700px;
-	margin-right: 20px;
-	padding: 12px 0;
+	grid-area: secondaire;
+	padding: 20px;
+	background-color: var(--fond-plus-sombre);
+}
+
+@media (900px <= width < 1200px) {
+	/* Lorsqu'on est en affichage sur deux colonnes, avec la navigation et le
+	contenu secondaire dans la colonne de gauche, on utilise un pseudo-élément
+	::before pour créer un séparateur visuel entre la navigation et le contenu
+	secondaire. */
+	#secondaire::before {
+		content: "";
+		display: block;
+		height: 2px;
+		background-color: currentColor;
+		margin-right: 20px;
+		margin-bottom: 40px;
+		opacity: 0.2;
+	}
+}
+
+#secondaire > :first-child {
+	margin-top: 6px;
+}
+
+#secondaire p,
+#secondaire li {
+	line-height: 1.5;
 }
 
 /* Pied de page */
+
 #pied {
-	margin: 0;
-	padding: 15px 20px 10px 0;
-	font-size: .85em;
+	grid-area: pied;
+	padding: var(--padding-pied);
+	font-size: 0.75rem;
+	line-height: 1.5;
+	color: var(--texte-clair-secondaire);
 }
 
-/* Mention de copyright */
-#copyright {
-	margin: 8px 0 0 0;
-	font-size: 1em;
-	text-align: left;
+#pied > * {
+	margin-block: 0;
+}
+
+#pied > * + * {
+	margin-top: 0.5em;
 }

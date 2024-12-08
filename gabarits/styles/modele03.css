@@ -25,13 +25,14 @@ body {
 	plus loin dans la feuille de styles l'endroit où ces deux variables sont
 	redéfinies pour le deuxième cas de figure.
 	*/
-	--padding-inline-body: 0px;
-	--padding-inline-conteneur: 20px;
+	--padding-body: 0px;
+	--padding-entete: 20px;
+	--padding-pied: 20px;
 
 	/* Largeur maximale, et centrage horizontal avec les marges automatiques */
 	max-width: var(--largeur-max-body);
 	margin-inline: auto;
-	padding-inline: var(--padding-inline-body);
+	padding: var(--padding-body);
 
 	/* Hauteur minimale de la page. L'unité CSS 'vh' représente 1% de la hauteur
 	de la zone de visualisation du navigateur ("viewport"). Donc '100vh'
@@ -87,10 +88,10 @@ entre parenthèses est comprise par le navigateur.
 
 @media (width >= 800px) {
 	body {
-		--largeur-max-body: 800px;
-		--padding-inline-body: 20px;
-		--padding-inline-conteneur: 0px;
-		padding-block: 20px 40px;
+		--largeur-max-body: 840px;
+		--padding-body: 0px 40px;
+		--padding-entete: 30px 0px;
+		--padding-pied: 20px 0px;
 	}
 }
 
@@ -102,8 +103,7 @@ entre parenthèses est comprise par le navigateur.
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	padding-block: 20px;
-	padding-inline: var(--padding-inline-conteneur);
+	padding: var(--padding-entete);
 
 	@media (width >= 600px) {
 		flex-direction: row;
@@ -144,7 +144,6 @@ entre parenthèses est comprise par le navigateur.
 #navigation ul {
 	/* Pour la mise en page de ce menu avec "flexbox",
 	voir les explications dans modele01.css */
-	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
@@ -152,6 +151,7 @@ entre parenthèses est comprise par le navigateur.
 	les enfants de ce conteneur. */
 	justify-content: center;
 	margin: 0;
+	display: flex;
 	padding: 12px 10px;
 	gap: 4px;
 	list-style: none;
@@ -196,12 +196,16 @@ entre parenthèses est comprise par le navigateur.
 
 #pied {
 	grid-area: pied;
-	padding-block: 15px;
-	padding-inline: var(--padding-inline-conteneur);
-	font-size: 0.85em;
+	padding: var(--padding-pied);
+	font-size: 0.75rem;
+	line-height: 1.5;
 	color: var(--texte-clair-secondaire);
 }
 
-#pied p {
-	margin: 0.5em 0;
+#pied > * {
+	margin-block: 0;
+}
+
+#pied > * + * {
+	margin-top: 0.5em;
 }
