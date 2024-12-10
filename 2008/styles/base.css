@@ -136,7 +136,8 @@ pre {
 }
 pre strong {
 	font-weight: normal;
-	color: black;
+	color: #000;
+	background-color: #0002;
 }
 
 /* --- NOTES ---
